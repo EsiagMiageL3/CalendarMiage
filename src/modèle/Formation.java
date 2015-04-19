@@ -1,4 +1,4 @@
-package modle;
+package modèle;
 import java.util.ArrayList;
 
 public class Formation {

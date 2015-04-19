@@ -1,4 +1,4 @@
-package modle;
+package modèle;
 
 import java.io.*;
 
