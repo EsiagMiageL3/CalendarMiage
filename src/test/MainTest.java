@@ -1,6 +1,6 @@
 package test;
 
-import vue.Fenetre;
+import vue.*;
 
 public class MainTest {
 
@@ -8,9 +8,9 @@ public class MainTest {
 		// TODO Auto-generated method stub
 		// mise a jour du Panel 
 		
-		Fenetre fenetreTest = new Fenetre();
-		fenetreTest.accueil();
-		fenetreTest.setVisible(true);
+		NewJFrame fenetreTest = new NewJFrame();
+		
+		
 		
 	}
 

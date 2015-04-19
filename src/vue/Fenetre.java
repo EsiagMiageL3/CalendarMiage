@@ -1,6 +1,5 @@
 package vue;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -20,7 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 @SuppressWarnings("serial")
-public class Fenetre extends JFrame {
+public class Fenetre extends JFrame implements MouseListener{
 	
 	//Menu Creation
 	private JMenu fichier;
@@ -43,31 +44,27 @@ public class Fenetre extends JFrame {
     private JMenuItem collerItem;
     private JMenuItem suprimerItem;
  
+    private Mois moisAcceuil;
     private JMenuItem apropos;
-	
 	
 	private JPanel panel = new JPanel();
 	private Dimension size;
 	
-	
-	
-	
 	public Fenetre(){
 		//Structure de Fenetre 
+		//this.moisAcceuil = moisCourant;
 		
 		this.setTitle("CalendarMiage");
 	    this.setSize(5000,5000);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setLocationRelativeTo(null);
 	    this.size = new Dimension(this.getWidth(), this.getHeight());
-	    
-	    
-	    
-	    
+	   
 	    addWindowListener (new WindowAdapter () 
         {
         public void windowClosing (WindowEvent e)
         {
+        	JOptionPane.showMessageDialog(null, "Just testing");
             System.exit(0);
         }
 
@@ -81,7 +78,7 @@ public class Fenetre extends JFrame {
 	    
 	    
 	    //////////////////////////////////////////////////////////////
-	    /////////////////cr�ation de la barre de menu////////////////
+	    /////////////////Création de la barre de menu////////////////
 	    //////////////////////////////////////////////////////////////
 	    
         JMenuBar Menu = new JMenuBar();
@@ -105,12 +102,14 @@ public class Fenetre extends JFrame {
         
         nouvelleItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
+				//JOptionPane.showMessageDialog(null, "bouh");
 				panel.removeAll();
 				CreationEmploi c = new CreationEmploi(size);
 				panel.add(c.getPanel(), BorderLayout.CENTER);
 				//panel.revalidate();
 			}	    	
 	    });
+       
         fichier.add(nouvelleItem);
         
         //////////////////////////////////////////////////////////////
@@ -126,8 +125,9 @@ public class Fenetre extends JFrame {
 				//panel.revalidate();
 			}	    	
 	    });
+ 	   
         fichier.add(ouvrirItem);
-        
+  
         //////////////////////////////////////////////////////////////
         
         fermerItem = new JMenuItem("Fermer");
@@ -258,14 +258,8 @@ public class Fenetre extends JFrame {
 			}	    	
 	    });
         editMenu.add(suprimerItem);
+        
         //////////////////////////////////////////////////////////////
-
-	    
-        
-        
-        
-        
-        
         //////////////////////////////////////////////////////////////
 
         aide = new JMenu("Aide");
@@ -289,17 +283,56 @@ public class Fenetre extends JFrame {
         //////////////////////////////////////////////////////////////
 
 	    //Aceuil 
+	    
 	    this.panel.setPreferredSize(this.size);
 	    this.panel.setBackground(Color.white);
 	    this.panel.add(new PlanningAcceuil(this.size).getPanel());
+	    //Cnew CréationMois());
 	    this.setContentPane(this.panel);
-	    
+	    this.getContentPane().add(new Mois(), null);
+	   
 	    
 	}
+	
 	public void accueil(){
 		panel.removeAll();
 		panel.add(new PlanningAcceuil(size).getPanel());
 		panel.revalidate();
-		}
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		JOptionPane.showMessageDialog(null, "Je hais le Java");
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

@@ -17,7 +17,7 @@ public class PlanningAcceuil extends PlanningContainer{
 		}
 
 		public void initPanel(){
-			JLabel titre = new JLabel("Bienvenu");
+			JLabel titre = new JLabel("Bienvenue");
 			titre.setHorizontalAlignment(SwingConstants.CENTER);
 			titre.setFont(comics30);
 			this.conteneur.add(titre, BorderLayout.SOUTH);
