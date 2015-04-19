@@ -1,4 +1,6 @@
-package modèle;
+
+package mod√®le;
+
 import java.util.ArrayList;
 
 public class Formation {
