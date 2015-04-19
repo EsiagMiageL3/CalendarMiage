@@ -1,7 +1,5 @@
 
 package modele;
-
-
 import java.io.*;
 
 public class Module implements Serializable{
@@ -17,12 +15,6 @@ public class Module implements Serializable{
 		this.nb_heures = nb_heures;
 	}
 	 
-	
-	
-	
-	
-	
-	
 	
 	public String getNom() {
 		return nom_m;

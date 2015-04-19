@@ -15,11 +15,6 @@ public class Formation {
 		this.liste_modules = liste_modules;
 	}
 	
-	
-	 
-	 
-	 
-	 
 	 	public String getNom_f() {
 			return nom_f;
 		}

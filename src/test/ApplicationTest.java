@@ -5,8 +5,6 @@ import modele.Formation;
 
 import modele.Module;
 import modele.Formation;
-
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -18,8 +16,8 @@ public class ApplicationTest {
 		// TODO Auto-generated method stub
 
 		Module m1 = new Module("Java" , "m1", "rouge", 10, 12);
-		Module m2 = new Module("Base de donn�es" , "m2", "bleu", 5, 7);
-		Module m3 = new Module("Comptabilit�" , "m3", "vert", 10, 11);
+		Module m2 = new Module("Base de donnees" , "m2", "bleu", 5, 7);
+		Module m3 = new Module("Comptabilite" , "m3", "vert", 10, 11);
 		
 		ArrayList<Module> l1= new ArrayList<Module>();
 		l1.add(m1);
@@ -40,7 +38,7 @@ public class ApplicationTest {
         try {
             // Creation du fichier 
             fichier.createNewFile();
-            // creation d'un writer (un �crivain)
+            // creation d'un writer (un ecrivain)
             final FileWriter writer = new FileWriter(fichier);
             try {
                 writer.write("Modules\r\n"+m1.nom_m+" "+m1.abreviation+" "+m1.couleur+" "+m1.nb_seances+"\r\n");
@@ -52,7 +50,7 @@ public class ApplicationTest {
                 writer.close();
             }
         } catch (Exception e) {
-            System.out.println("Impossible de cr�er le fichier");
+            System.out.println("Impossible de creer le fichier");
         }
           //testttt
     }
