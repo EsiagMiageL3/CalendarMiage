@@ -30,7 +30,7 @@ public class ApplicationTest {
 		int duree_totale = m1.getNb_heures()+m2.getNb_heures()+m3.getNb_heures();
 		System.out.println("La durée totale de la formation est de "+duree_totale+" heures");
 		
-		final String chemin = "D:/tmp.txt";
+		final String chemin = "D:/workspace/CalendarMiage/file/modules.txt";
 	    final File fichier =new File(chemin); 
         try {
             // Creation du fichier 
