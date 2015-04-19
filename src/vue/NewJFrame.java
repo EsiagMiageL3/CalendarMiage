@@ -262,7 +262,7 @@ public class NewJFrame extends javax.swing.JFrame implements ActionListener {
 		jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		jScrollPane1.setLocation(0,300);
 		jScrollPane1.setSize(hauteurEcran(), largeurEcran());
-///
+		
 		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel de test"));
 		jPanel1.setAutoscrolls(true);
 		jPanel1.setName("panelPlanning"); // NOI18N
