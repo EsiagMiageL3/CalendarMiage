@@ -1,6 +1,6 @@
 package test;
-import modËle.Module;
-import modËle.Formation;
+import modèle.Module;
+import modèle.Formation;
 
 import java.io.File;
 import java.io.FileWriter;
