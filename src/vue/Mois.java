@@ -12,8 +12,7 @@ public class Mois extends JPanel {
 		Janvier.setSize(100, 200);
 		Janvier.setBackground(Color.orange);
 		this.setVisible(false);
-		////pappapa
-		
+		////blablabla
 	}
-
+ 
 }
