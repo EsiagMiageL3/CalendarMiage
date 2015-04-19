@@ -85,8 +85,20 @@ public class NewJFrame extends javax.swing.JFrame implements ActionListener {
 		vraiDateduJour = dateDuJour.getTime();
 		String DateduJour = format1.format(vraiDateduJour);
 
-		////this.lstMois.get(0).setBackground(Color.red);
-
+		//Attribution des noms de mois aux Labels correspondants
+        this.jLabel1.setText("Septembre " + annee);
+        this.jLabel2.setText("Octobre " + annee);
+        this.jLabel3.setText("Novembre " + annee);
+        this.jLabel4.setText("DŽcembre " + annee);
+        this.jLabel5.setText("Janvier " + ( annee + 1 ));
+        this.jLabel6.setText("FŽvrier " + ( annee + 1 ));
+        this.jLabel7.setText("Mars " + ( annee + 1 ));
+        this.jLabel8.setText("Avril " + ( annee + 1 ));
+        this.jLabel9.setText("Mai " + ( annee + 1 ));
+        this.jLabel10.setText("Juin " + ( annee + 1 ));
+        this.jLabel11.setText("Juillet " + ( annee + 1 ));
+        this.jLabel12.setText("Aožt " + ( annee + 1 ));
+        
 		for (int j = 0; j < lstMois.size(); j++) {
 
 			if (isTooLong(annee, k)) {
