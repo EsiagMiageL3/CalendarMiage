@@ -217,51 +217,51 @@ public class NewJFrame extends javax.swing.JFrame implements ActionListener {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jPanel1 = new javax.swing.JPanel();
-		jPanel2 = new javax.swing.JPanel();
-		jLabel1 = new javax.swing.JLabel();
-		jPanel4 = new javax.swing.JPanel();
-		jPanel5 = new javax.swing.JPanel();
-		jLabel2 = new javax.swing.JLabel();
-		jPanel6 = new javax.swing.JPanel();
-		jPanel7 = new javax.swing.JPanel();
-		jLabel3 = new javax.swing.JLabel();
-		jPanel8 = new javax.swing.JPanel();
-		jPanel9 = new javax.swing.JPanel();
-		jLabel4 = new javax.swing.JLabel();
-		jPanel10 = new javax.swing.JPanel();
-		jPanel11 = new javax.swing.JPanel();
-		jLabel5 = new javax.swing.JLabel();
-		jPanel12 = new javax.swing.JPanel();
-		jPanel13 = new javax.swing.JPanel();
-		jLabel6 = new javax.swing.JLabel();
-		jPanel14 = new javax.swing.JPanel();
-		jPanel15 = new javax.swing.JPanel();
-		jLabel7 = new javax.swing.JLabel();
-		jPanel16 = new javax.swing.JPanel();
-		jPanel17 = new javax.swing.JPanel();
-		jLabel8 = new javax.swing.JLabel();
-		jPanel18 = new javax.swing.JPanel();
-		jPanel19 = new javax.swing.JPanel();
-		jLabel9 = new javax.swing.JLabel();
-		jPanel20 = new javax.swing.JPanel();
-		jPanel21 = new javax.swing.JPanel();
-		jLabel10 = new javax.swing.JLabel();
-		jPanel22 = new javax.swing.JPanel();
-		jPanel23 = new javax.swing.JPanel();
-		jLabel11 = new javax.swing.JLabel();
-		jPanel24 = new javax.swing.JPanel();
-		jPanel25 = new javax.swing.JPanel();
-		jLabel12 = new javax.swing.JLabel();
-		jPanel26 = new javax.swing.JPanel();
+		jScrollPane1 = new JScrollPane();
+		jPanel1 = new JPanel();
+		jPanel2 = new JPanel();
+		jLabel1 = new JLabel();
+		jPanel4 = new JPanel();
+		jPanel5 = new JPanel();
+		jLabel2 = new JLabel();
+		jPanel6 = new JPanel();
+		jPanel7 = new JPanel();
+		jLabel3 = new JLabel();
+		jPanel8 = new JPanel();
+		jPanel9 = new JPanel();
+		jLabel4 = new JLabel();
+		jPanel10 = new JPanel();
+		jPanel11 = new JPanel();
+		jLabel5 = new JLabel();
+		jPanel12 = new JPanel();
+		jPanel13 = new JPanel();
+		jLabel6 = new JLabel();
+		jPanel14 = new JPanel();
+		jPanel15 = new JPanel();
+		jLabel7 = new JLabel();
+		jPanel16 = new JPanel();
+		jPanel17 = new JPanel();
+		jLabel8 = new JLabel();
+		jPanel18 = new JPanel();
+		jPanel19 = new JPanel();
+		jLabel9 = new JLabel();
+		jPanel20 = new JPanel();
+		jPanel21 = new JPanel();
+		jLabel10 = new JLabel();
+		jPanel22 = new JPanel();
+		jPanel23 = new JPanel();
+		jLabel11 = new JLabel();
+		jPanel24 = new JPanel();
+		jPanel25 = new JPanel();
+		jLabel12 = new JLabel();
+		jPanel26 = new JPanel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		jScrollPane1.setLocation(500, 250);
-		jScrollPane1.setSize(new java.awt.Dimension(500, 500));
+		jScrollPane1.setLocation(0,300);
+		jScrollPane1.setSize(hauteurEcran(), largeurEcran());
 
 		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel de test"));
 		jPanel1.setAutoscrolls(true);
@@ -292,14 +292,7 @@ public class NewJFrame extends javax.swing.JFrame implements ActionListener {
 			}
 		});
 
-		javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-		jPanel4.setLayout(jPanel4Layout);
-		jPanel4Layout.setHorizontalGroup(
-		jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGap(0, 0, Short.MAX_VALUE));
-		jPanel4Layout.setVerticalGroup(
-		jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGap(0, 0, Short.MAX_VALUE));
+
 
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
 		jPanel2.setLayout(jPanel2Layout);
@@ -310,16 +303,17 @@ public class NewJFrame extends javax.swing.JFrame implements ActionListener {
 			.addContainerGap()
 			.addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 			.addContainerGap()));
+		
 		jPanel2Layout.setVerticalGroup(
 		jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 			.addGroup(jPanel2Layout.createSequentialGroup()
 			.addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
 			.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 			.addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-			.addContainerGap()));
+			.addContainerGap()));                                                                   
 
 		jPanel1.add(jPanel2);
-
+		
 		jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 		jPanel5.setName("pnlJanvier"); // NOI18N
 
@@ -917,15 +911,15 @@ public class NewJFrame extends javax.swing.JFrame implements ActionListener {
 		layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 			.addGroup(layout.createSequentialGroup()
 			.addContainerGap()
-			.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1127, Short.MAX_VALUE)
-			.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+			.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE,largeurEcran() - 50, Short.MAX_VALUE)
+			));
 		layout.setVerticalGroup(
 		layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 			.addGroup(layout.createSequentialGroup()
 			.addContainerGap()
-			.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
-			.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-
+			.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE,  ( hauteurEcran() / 2 ) + ( hauteurEcran() / 4 )  , javax.swing.GroupLayout.PREFERRED_SIZE)
+			));
+		//jScrollPane1.setSize(hauteurEcran() + 300, largeurEcran() + 300);
 		pack();
 	} // </editor-fold>//GEN-END:initComponents
 
