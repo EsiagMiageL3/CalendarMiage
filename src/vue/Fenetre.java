@@ -78,11 +78,10 @@ public class Fenetre extends JFrame implements MouseListener{
 	    
 	    
 	    //////////////////////////////////////////////////////////////
-<<<<<<< Updated upstream
+///Updated upstream
 	    /////////////////Création de la barre de menu////////////////
-=======
-	    /////////////////création de la barre de menu////////////////
->>>>>>> Stashed changes
+
+	    /////////////////création de la barre de menu////////////////Stashed changes
 	    //////////////////////////////////////////////////////////////
 	    
         JMenuBar Menu = new JMenuBar();
