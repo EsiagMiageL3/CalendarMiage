@@ -1,10 +1,10 @@
 package test;
 
-import modèle.Module;
-import modèle.Formation;
+import modele.Module;
+import modele.Formation;
 
-import modèle.Module;
-import modèle.Formation;
+import modele.Module;
+import modele.Formation;
 
 
 import java.io.File;
