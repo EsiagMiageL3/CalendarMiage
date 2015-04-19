@@ -1,6 +1,6 @@
 package test;
-import modËle.Module;
-import modËle.Formation;
+import modèle.Module;
+import modèle.Formation;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -49,7 +49,7 @@ public class ApplicationTest {
         } catch (Exception e) {
             System.out.println("Impossible de crÈer le fichier");
         }
-          
+          //test
     }
 	
 
