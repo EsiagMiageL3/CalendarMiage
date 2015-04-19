@@ -85,7 +85,7 @@ public class NewJFrame extends javax.swing.JFrame implements ActionListener {
 		vraiDateduJour = dateDuJour.getTime();
 		String DateduJour = format1.format(vraiDateduJour);
 
-		//this.lstMois.get(0).setBackground(Color.red);
+		///this.lstMois.get(0).setBackground(Color.red);
 
 		for (int j = 0; j < lstMois.size(); j++) {
 
