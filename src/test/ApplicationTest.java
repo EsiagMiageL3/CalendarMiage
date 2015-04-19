@@ -1,6 +1,11 @@
 package test;
-import modèle.Module;
-import modèle.Formation;
+
+import modele.Module;
+import modele.Formation;
+
+import modele.Module;
+import modele.Formation;
+
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,8 +18,8 @@ public class ApplicationTest {
 		// TODO Auto-generated method stub
 
 		Module m1 = new Module("Java" , "m1", "rouge", 10, 12);
-		Module m2 = new Module("Base de donnÈes" , "m2", "bleu", 5, 7);
-		Module m3 = new Module("ComptabilitÈ" , "m3", "vert", 10, 11);
+		Module m2 = new Module("Base de donnÔøΩes" , "m2", "bleu", 5, 7);
+		Module m3 = new Module("ComptabilitÔøΩ" , "m3", "vert", 10, 11);
 		
 		ArrayList<Module> l1= new ArrayList<Module>();
 		l1.add(m1);
@@ -24,18 +29,18 @@ public class ApplicationTest {
 		Formation f1 = new Formation("f1", 3, l1);
 		
 		for (Module m : l1){
-			System.out.println("La durÈe du module "+m.getNom()+" est de "+m.getNb_heures()+" heures");
+			System.out.println("La durÔøΩe du module "+m.getNom()+" est de "+m.getNb_heures()+" heures");
 		}
 		
 		int duree_totale = m1.getNb_heures()+m2.getNb_heures()+m3.getNb_heures();
-		System.out.println("La durÈe totale de la formation est de "+duree_totale+" heures");
+		System.out.println("La durÔøΩe totale de la formation est de "+duree_totale+" heures");
 		
 		final String chemin = "D:/workspace/CalendarMiage/file/modules.txt";
 	    final File fichier =new File(chemin); 
         try {
             // Creation du fichier 
             fichier.createNewFile();
-            // creation d'un writer (un Ècrivain)
+            // creation d'un writer (un ÔøΩcrivain)
             final FileWriter writer = new FileWriter(fichier);
             try {
                 writer.write("Modules\r\n"+m1.nom_m+" "+m1.abreviation+" "+m1.couleur+" "+m1.nb_seances+"\r\n");
@@ -47,7 +52,7 @@ public class ApplicationTest {
                 writer.close();
             }
         } catch (Exception e) {
-            System.out.println("Impossible de crÈer le fichier");
+            System.out.println("Impossible de crÔøΩer le fichier");
         }
           //test
     }
