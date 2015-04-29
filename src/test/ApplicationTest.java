@@ -2,12 +2,15 @@ package test;
 
 import modele.Module;
 import modele.Formation;
-
 import modele.Module;
 import modele.Formation;
+
+import java.awt.Color;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+
+import javax.swing.*;
 
 
 public class ApplicationTest {
@@ -15,9 +18,9 @@ public class ApplicationTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Module m1 = new Module("Java" , "m1", "rouge", 10, 12);
-		Module m2 = new Module("Base de donnees" , "m2", "bleu", 5, 7);
-		Module m3 = new Module("Comptabilite" , "m3", "vert", 10, 11);
+		Module m1 = new Module("Java" ,  Color.red);
+		Module m2 = new Module("Base de donnees" ,  Color.red);
+		Module m3 = new Module("Comptabilite" , Color.red);
 		
 		ArrayList<Module> l1= new ArrayList<Module>();
 		l1.add(m1);
@@ -41,7 +44,7 @@ public class ApplicationTest {
             // creation d'un writer (un ecrivain)
             final FileWriter writer = new FileWriter(fichier);
             try {
-                writer.write("Modules\r\n"+m1.nom_m+" "+m1.abreviation+" "+m1.couleur+" "+m1.nb_seances+"\r\n");
+                writer.write("Modules\r\n"+ m1.nom_m +" "+m1.abreviation+" "+m1.couleur+" "+m1.nb_seances+"\r\n");
                 writer.write(m2.nom_m+" "+m2.abreviation+" "+m2.couleur+" "+m2.nb_seances+"\r\n");
                 writer.write(m3.nom_m+" "+m3.abreviation+" "+m3.couleur+" "+m3.nb_seances+"\r\n");
                 
@@ -52,8 +55,8 @@ public class ApplicationTest {
         } catch (Exception e) {
             System.out.println("Impossible de creer le fichier");
         }
-          //testttt
-    }
+	 //test   
+	}
 	
 
 }

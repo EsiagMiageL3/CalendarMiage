@@ -1,21 +1,36 @@
 
 package modele;
+import java.awt.Color;
 import java.io.*;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 public class Module implements Serializable{
 
 	public String nom_m, abreviation, couleur;
+	public Color couleurModule;
 	public int nb_seances, nb_heures;
+	public ArrayList<Seance> lst_Seance;
 	
-	public Module (String nom_m, String abreviation, String couleur, int nb_seances, int nb_heures){
+	public Module (){
+		this.nom_m = "Module par défaut";
+		this.abreviation = "MD";
+		this.couleur = "WHITE";
+		this.nb_seances = 0;
+		this.nb_heures = 0;
+	}
+	
+	public Module (String nom_m,  Color couleur){
 		this.nom_m = nom_m;
-		this.abreviation = abreviation;
-		this.couleur = couleur;
-		this.nb_seances = nb_seances;
-		this.nb_heures = nb_heures;
+		this.couleurModule = couleur;
 	}
 	 
-	
+ 	public void addSeance(Seance nouvelleSeance) {
+		this.lst_Seance.add(nouvelleSeance);
+		JOptionPane.showMessageDialog(null, "La nouvelle " + nouvelleSeance.nom + " a été ajouté avec succès au module " + this.nom_m);
+	}
+ 	
 	public String getNom() {
 		return nom_m;
 	}
