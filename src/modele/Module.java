@@ -25,12 +25,12 @@ public class Module implements Serializable{
 		this.nom_m = nom_m;
 		this.couleurModule = couleur;
 	}
-	 
+	 /*
  	public void addSeance(Seance nouvelleSeance) {
 		this.lst_Seance.add(nouvelleSeance);
 		JOptionPane.showMessageDialog(null, "La nouvelle " + nouvelleSeance.nom + " a été ajouté avec succès au module " + this.nom_m);
 	}
- 	
+ 	*/
 	public String getNom() {
 		return nom_m;
 	}
