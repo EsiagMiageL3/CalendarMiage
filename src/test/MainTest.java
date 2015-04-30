@@ -13,6 +13,7 @@ public class MainTest {
 		//vueAcceuil acc = new vueAcceuil(controleur);
 		
 		vueAcceuil2 acc2 = new vueAcceuil2(controleur);
+		//hahahahahahaha//
 	}
 
 }
