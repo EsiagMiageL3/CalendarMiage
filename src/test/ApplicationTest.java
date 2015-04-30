@@ -2,6 +2,11 @@ package test;
 
 import modele.Module;
 import modele.Formation;
+<<<<<<< Updated upstream
+=======
+import modele.Seance;
+
+>>>>>>> Stashed changes
 import modele.Module;
 import modele.Formation;
 
@@ -29,14 +34,25 @@ public class ApplicationTest {
 		
 		Formation f1 = new Formation("f1", 3, l1);
 		
+		
+		Seance coursJava = new Seance(m1.getNom(),m1.getAbreviation(),m1.getCouleur(),m1.getNb_heures(),m1.nb_seances,10);
+		
+		
+		
+		
+		
+		
+		
+		
 		for (Module m : l1){
 			System.out.println("La dur�e du module "+m.getNom()+" est de "+m.getNb_heures()+" heures");
 		}
 		
 		int duree_totale = m1.getNb_heures()+m2.getNb_heures()+m3.getNb_heures();
-		System.out.println("La dur�e totale de la formation est de "+duree_totale+" heures");
+		System.out.println("La dur�e totale de la formation est de "+ duree_totale+" heures");
 		
-		final String chemin = "D:/workspace/CalendarMiage/file/modules.txt";
+		//final String chemin = "D:/workspace/CalendarMiage/file/modules.txt";
+		final String chemin = "/Users/cyriellemintombou/Documents/workspace/CalendarMiage/file/modules.txt";
 	    final File fichier =new File(chemin); 
         try {
             // Creation du fichier 
@@ -58,5 +74,4 @@ public class ApplicationTest {
 	    
 	}
 	
-
 }
