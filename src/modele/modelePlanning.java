@@ -1,8 +1,6 @@
 package modele;
 
 import java.awt.Color;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,6 +16,7 @@ import javax.swing.JOptionPane;
 
 import vue.vuePlanning;
 
+@SuppressWarnings("serial")
 public class modelePlanning implements Serializable{
 	private vuePlanning nouveauPlanning; 
 	private Formation formationPlanning;

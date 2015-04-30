@@ -1,25 +1,32 @@
 package modele;
 
+import java.awt.Color;
 import java.io.Serializable;
 
 import exception.RechercheSeanceException;
 import modele.Module;
 
+@SuppressWarnings("serial")
 public class Seance extends Module implements Serializable{
-	public int rang_seances;
+	public int rang_seances,nb_seances;
 	
-	public Seance (String nom_m, String abreviation, String couleur,int nb_seances,int nb_heures){
-		super(nom_m, abreviation, couleur, nb_seances, nb_heures);	
+	public Seance (int n,int m){
+		super();
+		this.rang_seances = n;
+		this.nb_seances = m;
 	}
 
 	
-	public Seance (String nom_m, String abreviation, String couleur,int nb_seances,int nb_heures, int n){
-					super(nom_m, abreviation, couleur, nb_seances, nb_heures);	
+	public Seance (String nom_m, String abreviation, Color couleur,int n,int m){
+					super(nom_m, couleur);	
 					this.rang_seances = n;
+					this.nb_seances = m;
 	}
+
+	
 	
 	public void AjoutSeance(String nom_module, int n) throws RechercheSeanceException {
-		if super.nom_m.equals(nom_module);
+		if (super.nom_m.equals(nom_module));
 		if (n > m.getNb_Seance()) throw new RechercheSeanceException();
 			else{
 				this.nb_heures = nb_seances;

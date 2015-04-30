@@ -2,20 +2,14 @@ package test;
 
 import modele.Module;
 import modele.Formation;
-<<<<<<< Updated upstream
-=======
+//<<<<<<< Updated upstream
+//=======
 import modele.Seance;
-
->>>>>>> Stashed changes
-import modele.Module;
-import modele.Formation;
 
 import java.awt.Color;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
-
-import javax.swing.*;
 
 
 public class ApplicationTest {
