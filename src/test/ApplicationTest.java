@@ -2,11 +2,11 @@ package test;
 
 import modele.Module;
 import modele.Formation;
-<<<<<<< Updated upstream
-=======
+//<<<<<<< Updated upstream
+//=======
 import modele.Seance;
 
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 import modele.Module;
 import modele.Formation;
 
@@ -35,7 +35,7 @@ public class ApplicationTest {
 		Formation f1 = new Formation("f1", 3, l1);
 		
 		
-		Seance coursJava = new Seance(m1.getNom(),m1.getAbreviation(),m1.getCouleur(),m1.getNb_heures(),m1.nb_seances,10);
+		//Seance coursJava = new Seance(m1.getNom(),m1.getAbreviation(),m1.getCouleur(),m1.getNb_heures(),m1.nb_seances,10);
 		
 		
 		
