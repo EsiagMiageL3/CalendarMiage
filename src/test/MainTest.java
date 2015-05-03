@@ -19,20 +19,20 @@ public class MainTest {
 		controleurPlanning controleur = new controleurPlanning(modele);
 
 		vueAcceuil2 acc2 = new vueAcceuil2(controleur);
-		//hahahahahahaha//
+
 	}
 
 
-		// Test Seance 
-		Seance seance1 = new Seance("Mathématique",Color.CYAN,10,10);
+		/*
+		Seance seance1 = new Seance(10,10);
 		try {
-						seance1.AjoutSeance(1,10);
-						seance1.AjoutSeance(2,10);
-						seance1.AjoutSeance(12,10);
+						seance1.AjoutSeance("test",10);
+						seance1.AjoutSeance("test",152);
+						seance1.AjoutSeance("test",10);
 			}
 					catch (RechercheSeanceException e){}
 				
 			
-
+*/
 }
 

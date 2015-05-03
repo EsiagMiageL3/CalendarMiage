@@ -10,19 +10,9 @@ import src.modele.Module;
 public class Seance extends Module implements Serializable{
 	public int rang_seances,nb_seances;
 	
-	public Seance (int n,int m){
-		super();
-		this.rang_seances = n;
-		this.nb_seances = m;
-	}
 
-	
-	public Seance (String nom_m, String abreviation, Color couleur,int n,int m){
-					//super(nom_m, couleur);	
-					this.rang_seances = n;
-					this.nb_seances = m;
 
-	public int nb_seances,rang_seances;
+
 	
 	public Seance (int n,int m){
 		super();
@@ -31,10 +21,9 @@ public class Seance extends Module implements Serializable{
 	}
 
 	
-	public Seance (String nom_m,Color couleur,int n,int m){
-					super(nom_m,couleur);	
-					this.nb_seances = n;
-					this.rang_seances = m;
+	public Seance (String nom_m, String abrev, Color couleur,int m){
+					super(nom_m, abrev, couleur, m);	
+					this.nb_seances = m;
 
 	}
 
