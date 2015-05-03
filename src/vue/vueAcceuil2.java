@@ -1,4 +1,4 @@
-package src.vue;
+package vue;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -11,11 +11,8 @@ import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -25,9 +22,9 @@ import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import src.controleur.controleurPlanning;
-import src.modele.Module;
-import src.modele.modelePlanning;
+import controleur.controleurPlanning;
+import modele.Module;
+import modele.modelePlanning;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -39,12 +36,11 @@ import javax.swing.border.MatteBorder;
  *
  * @author nounoursmoelleux
  */
-public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener, MouseListener {
+public class vueAcceuil2 extends JFrame implements ActionListener {
 
 	/* Tableau des couleurs disponnibles pour les modules */
 	private Color[] tblCouleurs = {
-		new Color(25, 25, 25), new Color(198, 61, 15), new Color(0, 90, 49), new Color(85, 140, 137), new Color(222, 27, 27), new Color(125, 25, 53), new Color(88, 88, 88), new Color(255, 240, 86), new Color(126, 143, 124),
-		new Color(235, 101, 160), new Color(63, 40, 96), new Color(52, 40, 0)		
+		Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.PINK, Color.CYAN, Color.ORANGE, Color.BLACK, Color.MAGENTA
 	};
 
 	private Color couleur; /* Couleur du cercle permettant de choisir la couleur du module */
@@ -82,15 +78,9 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	private JPanel lblCurrentColor; /* Label permettant de choisir la couleur du module */
 	private JPanel pnlCouleur; /* Panel proposant les couleurs disponibles pour le module */
 
-	private JLabel lblNbSeances; /* Label juxtaposé à la saisie du nombre de séances */
-	private JTextField txtNbSeances; /* Zone de texte permettant de saisir le nombre de séances maximal du module */
-	
 	private JPanel listeModules; /* Panel affichant les modules enregistrés sous forme de Labels */
 	private JLabel lblSavedModules; /* Label situé au dessus de la liste des modules enregistrés */
-	
 	private JScrollPane scrollModules; /* JScrollPane contenant le panel des modules enregsitrés */
-	private JScrollPane scrollColors; /* JScrollPane contenant le panel des couleurs à choisir */
-	
 	private JButton btnSaveModule; /* Permet d'enregistrer le module */
 
 	/*
@@ -105,52 +95,19 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 
 		this.setVisible(true); /* Affichage de la fenêtre */
 
-	    this.txtModule.addMouseListener(this); /* Ajout du Listener de focus à la zone de saisie du nom de module */
-	    this.txtModule.addFocusListener(this);
+		this.btnSaveFormation.addActionListener(this); /* Ajout des Listeners aux boutons */
+
 	}
 
-	@Override
-	public void focusLost(FocusEvent e) {
-
-		
-	}
-	
-	@Override
-	public void focusGained(FocusEvent e){ 
-		validate();
-		repaint();
-	}
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		if(e.getSource() == this.txtModule){
-			if( this.controleur.getModele().getFormation() == null ){
-				JOptionPane.showMessageDialog(null, "Veillez à créer une formation en premier lieu.");
-				this.txtFormation.requestFocus();
-			}
-		}
-	}
-	
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == this.btnSaveFormation) {
-			
-			/* Cas où le nom de la formation est incorrect */
-			if( !this.controleur.nouvelleFormation(this.txtFormation) ){
 
-				this.txtFormation.setBorder(new MatteBorder(1, 1, 1, 1, Color.RED));
-				this.txtFormation.setOpaque(true);
-				
-			}
-			
-			this.btnSaveFormation.setText("Modifier"); /* Le bouton permet désormais de modifier le nom de la formation et non d'en créer une nouvelle */
-			this.btnSaveModule.setEnabled(true); /* On 	active le bouton permettant d'enregistrer les modules */
-			
+			this.controleur.nouvelleFormation(this.txtFormation);
+
 		} else if (evt.getSource() == this.btnOpenPlanning) {
-			
+
 			try {
 				this.controleur.openPlanning();
-				
-				this.initSaisie();
 				this.txtFormation.setText(this.controleur.getModele().getFormation().nom_f);
 				repaint();
 				this.lblPath.setText(this.controleur.getChemin());
@@ -165,34 +122,18 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 					JLabel supprModule = new JLabel("Supprimer", JLabel.CENTER);
 					module.addMouseListener(new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
+
 							txtModule.setText(controleur.getModele().getFormation().getModules().get((String) pair.getKey()).nom_m);
-							txtAbrev.setText(controleur.getModele().getFormation().getModules().get((String) pair.getKey()).abreviation);
 							couleur = controleur.getModele().getFormation().getModules().get((String) pair.getKey()).couleurModule;
-							txtNbSeances.setText( Integer.toString( controleur.getModele().getFormation().getModules().get((String) pair.getKey()).nb_seances ) );
 							repaint();
 						}
 					});
-					
 					supprModule.addMouseListener(new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Hashtable supprModules = new Hashtable();
-							
-							if( controleur.supprModule( (String) pair.getKey() ) ){
-								
-								Component[] tblSupprModules = listeModules.getComponents();
-								
-								for (int i = 0; i < tblSupprModules.length; ++i) {
-									supprModules.put(((String) tblSupprModules[i].getName()), tblSupprModules[i]);
-								}
-								
-								removeBTN(supprModules, (Component) e.getSource(), (String) pair.getKey() );
-								
-							}
-							
-							
+
+
 						}
 					});
-					
 					supprModule.setName("Supprimer");
 					module.setText((String) pair.getKey());
 					module.setName((String) pair.getKey());
@@ -202,11 +143,11 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 					supprModule.setPreferredSize(new Dimension(0, (int)(hauteurConteneur * 0.1)));
 
 					if (o == 0) {
-						module.setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK));
-						supprModule.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK));
+						module.setBorder(new MatteBorder(1, 1, 0, 1, Color.BLACK));
+						supprModule.setBorder(new MatteBorder(1, 0, 0, 0, Color.BLACK));
 					} else if (o == (this.controleur.getModele().getFormation().getModules().size() * 2) - 2) {
-						module.setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK));
-						supprModule.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK));
+						module.setBorder(new MatteBorder(0, 1, 1, 1, Color.BLACK));
+						supprModule.setBorder(new MatteBorder(0, 0, 1, 0, Color.BLACK));
 					} else {
 						module.setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK));
 						supprModule.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK));
@@ -215,8 +156,6 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 					this.listeModules.add(supprModule);
 					o += 2;
 				}
-				
-				this.btnSaveModule.setEnabled(true);
 
 				if (this.controleur.getModele().getFormation().getModules().size() > 1) {
 					this.scrollModules.setBounds((int)(largeurConteneur * 0.52), (int)(hauteurConteneur * 0.575), (int)(largeurConteneur * 0.36), (int)(hauteurConteneur * 0.1) * 2);
@@ -231,28 +170,78 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 			System.exit(0);
 		} else if (evt.getSource() == this.btnSaveModule) {
 			
-			if( !this.txtModule.getText().trim().equals("") ){
-				
-				if( this.controleur.checkNomModule( this.txtModule.getText().trim() ) ){
-					this.nouveauModule();
-					this.txtModule.setText("");
-				}
-				else{
-					int reponse = JOptionPane.showConfirmDialog(null,"Ce nom de module exite déjà.\n" + "Les données concernant ce module seront modifiés.\n" + "Souhaitez-vous continuer ?", "Module existant", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-					
-					if( reponse == JOptionPane.YES_NO_OPTION){
-						this.controleur.nouveauModule( this.txtModule.getText(), this.txtAbrev.getText(), couleur, Integer.parseInt(this.txtNbSeances.getText()) );
-						JOptionPane.showMessageDialog(null, "Modifications enregistrés.");
+			this.controleur.nouveauModule(this.txtModule.getText(), couleur);
+			Hashtable hashModules = new Hashtable();
+			Iterator it = this.controleur.getModele().getFormation().getModules().entrySet().iterator();
+
+			int o = 0;
+			while (it.hasNext()) {
+				Map.Entry pair = (Map.Entry) it.next();
+
+				if (this.listeModules.getComponentCount() == 0) {
+
+
+					JLabel module = new JLabel((String) pair.getKey(), JLabel.CENTER);
+					module.setName((String) pair.getKey());
+
+					JLabel supprModule = new JLabel("Supprimer", JLabel.CENTER);
+					supprModule.setName("Supprimer");
+					module.setPreferredSize(new Dimension(50, (int)(50)));
+					supprModule.setPreferredSize(new Dimension(50, (int)(50)));
+
+
+					this.listeModules.add(module);
+					this.listeModules.add(supprModule);
+					this.listeModules.setOpaque(true);
+
+					if (o == 0) {
+						module.setBorder(new MatteBorder(1, 1, 0, 1, Color.BLACK));
+						supprModule.setBorder(new MatteBorder(1, 0, 0, 0, Color.BLACK));
+					} else if (o == (this.controleur.getModele().getFormation().getModules().size() * 2) - 2) {
+						module.setBorder(new MatteBorder(0, 1, 1, 1, Color.BLACK));
+						supprModule.setBorder(new MatteBorder(0, 0, 1, 0, Color.BLACK));
+					} else {
+						module.setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK));
+						supprModule.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK));
 					}
+				} else {
+
+					Component[] tblModules = this.listeModules.getComponents();
 					
+					for (int i = 0; i < tblModules.length; ++i) {
+						hashModules.put(((String) tblModules[i].getName()), "");
+					}
+
+					if (!hashModules.containsKey((String) pair.getKey())) {
+
+						JLabel module = new JLabel((String) pair.getKey(), JLabel.CENTER);
+						module.setName((String) pair.getKey());
+						JLabel supprModule = new JLabel("Supprimer", JLabel.CENTER);
+						supprModule.setName((String) pair.getKey());
+						module.setPreferredSize(new Dimension(50, (int)(50)));
+						supprModule.setPreferredSize(new Dimension(50, (int)(50)));
+
+						this.listeModules.add(module);
+						this.listeModules.add(supprModule);
+						this.listeModules.setOpaque(true);
+
+						if (o == 0) {
+							module.setBorder(new MatteBorder(1, 1, 0, 1, Color.BLACK));
+							supprModule.setBorder(new MatteBorder(1, 0, 0, 0, Color.BLACK));
+						} else if (o == (this.controleur.getModele().getFormation().getModules().size() * 2) - 2) {
+							module.setBorder(new MatteBorder(0, 1, 1, 1, Color.BLACK));
+							supprModule.setBorder(new MatteBorder(0, 0, 1, 0, Color.BLACK));
+						} else {
+							module.setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK));
+							supprModule.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK));
+						}
+					}
 				}
+				o += 2;
 			}
-			else{
-				
-				JOptionPane.showMessageDialog(null, "Le nom du module ne peut être vide.", "Nom de module incorrect", JOptionPane.WARNING_MESSAGE);
-				this.couleur = null;
-				repaint();
-				
+			validate();
+			if (this.controleur.getModele().getFormation().getModules().size() > 1) {
+				this.scrollModules.setBounds((int) (largeurConteneur * 0.52), (int)(hauteurConteneur * 0.575), (int)(largeurConteneur * 0.36), (int)(hauteurConteneur * 0.1) * 2);
 			}
 			
 		} else if (evt.getSource() == this.btnSavePlanning) {
@@ -267,16 +256,6 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 			this.modele.addPlanning(this.planning);
 		}
 
-	}
-
-	public void removeBTN(Hashtable mp, Component c, String key){
-		listeModules.remove( (Component) mp.get( key ) );
-		listeModules.remove( c ); 
-		if (this.controleur.getModele().getFormation().getModules().size() == 1) {
-			this.scrollModules.setBounds((int)(largeurConteneur * 0.52), (int)(hauteurConteneur * 0.575), (int)(largeurConteneur * 0.36), (int)(hauteurConteneur * 0.1) );
-
-		}
-		this.txtModule.requestFocus();
 	}
 
 	public String nomFormation() {
@@ -296,7 +275,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.btnSaveFormation = new JButton("Enregistrer");
 		this.btnOpenPlanning = new JButton("Ouvrir un fichier");
 		this.btnLoadPlanning = new JButton("Générer le planning");
-		this.btnSaveModule = new JButton("Sauvegarder");
+		this.btnSaveModule = new JButton("Enregistrer le module");
 		this.btnSavePlanning = new JButton("Enregistrer sur le disque");
 
 		this.lblPath = new JLabel("", JLabel.CENTER);
@@ -421,28 +400,23 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.lblModule.setForeground(Color.WHITE);
 		this.conteneur.add(this.lblModule);
 
-		this.txtModule.setBounds((int)(largeurConteneur * 0.27), (int)(hauteurConteneur * 0.46), (int)(largeurConteneur * 0.2), (int)(hauteurConteneur * 0.075));
-		this.txtModule.setOpaque(false);
-		this.txtModule.setForeground(Color.BLACK);
-		this.txtModule.addFocusListener(this);
-		this.conteneur.add(this.txtModule);
-		
 		this.lblAbrevModule.setBounds((int)(largeurConteneur * 0.1 + (hauteurConteneur * 0.46 - hauteurConteneur * 0.45)), (int)(hauteurConteneur * 0.55), (int)(largeurConteneur * 0.15), (int)(hauteurConteneur * 0.075));
 		this.lblAbrevModule.setOpaque(false);
 		this.lblAbrevModule.setForeground(Color.WHITE);
 		this.conteneur.add(this.lblAbrevModule);
 
-		this.txtAbrev.setBounds((int)(largeurConteneur * 0.27), (int)(hauteurConteneur * 0.55), (int)(largeurConteneur * 0.2), (int)(hauteurConteneur * 0.075));
-		this.txtAbrev.setOpaque(false);
-		this.txtAbrev.setForeground(Color.BLACK);
-		this.txtAbrev.addFocusListener(this);
-		this.conteneur.add(this.txtAbrev);
 
 		this.lblCouleur.setBounds((int)(largeurConteneur * 0.1 + (hauteurConteneur * 0.46 - hauteurConteneur * 0.45)), (int)(hauteurConteneur * 0.64), (int)(largeurConteneur * 0.15), (int)(hauteurConteneur * 0.075));
 		this.lblCouleur.setOpaque(false);
 		this.lblCouleur.setForeground(Color.WHITE);
 		this.conteneur.add(this.lblCouleur);
-		
+
+		this.txtModule.setBounds((int)(largeurConteneur * 0.27), (int)(hauteurConteneur * 0.46), (int)(largeurConteneur * 0.2), (int)(hauteurConteneur * 0.075));
+
+		this.txtModule.setOpaque(false);
+		this.txtModule.setForeground(Color.BLACK);
+		this.conteneur.add(this.txtModule);
+
 		this.lblCurrentColor.setBounds((int)(this.txtModule.getX()), (int)(hauteurConteneur * 0.64), (int)(hauteurConteneur * 0.075), (int)(hauteurConteneur * 0.075));
 		this.lblCurrentColor.setLayout(null);
 		this.lblCurrentColor.setOpaque(false);
@@ -452,16 +426,11 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.lblCurrentColor.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (!pnlCouleur.isVisible()) {
-					btnSaveModule.setVisible(false);
 					pnlCouleur.setVisible(true);
-					scrollColors.setVisible(true);
 					lblCurrentColor.setToolTipText("Cliquer pour masquer les couleurs");
 				} else {
-					
 					pnlCouleur.setVisible(false);
-					scrollColors.setVisible(false);
 					lblCurrentColor.setToolTipText("Cliquer pour afficher les couleurs disponibles");
-					btnSaveModule.setVisible(true);
 				}
 			}
 		});
@@ -469,65 +438,42 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 
 		this.conteneur.add(this.lblCurrentColor); /* Ajout du Label au conteneur*/
 
-		this.pnlCouleur = new JPanel(new GridLayout(0, 3));
+		this.pnlCouleur = new JPanel(new GridLayout(3, 3));
+		this.pnlCouleur.setBounds((int)((this.txtModule.getX() + this.txtModule.getWidth()) - (int)(hauteurConteneur * 0.21)), (int)(hauteurConteneur * 0.64), (int)(hauteurConteneur * 0.21), (int)(hauteurConteneur * 0.21) + 1);
 		this.pnlCouleur.setVisible(false);
+		this.pnlCouleur.setBackground(new Color(80, 80, 80));
 		this.pnlCouleur.setOpaque(false);
-		
-		initColorPane();
-		/*
-		for (int i = 0; i < this.tblCouleurs.length; ++i) {
 
-			final Color couleurEnCour = tblCouleurs[i];
-			JLabel lblChxCouleur = new JLabel() {@Override
+		for (int i = 0; i < 9; ++i) {
+
+			final Color couleurEnCour = tblCouleurs[i]; /* La couleur du Panel proposant la couleur prend la valeur du tableau de couleurs */
+
+			JPanel lblChxCouleur = new JPanel() {@Override
 				protected void paintComponent(Graphics g) {
 					g.setColor(couleurEnCour);
 					g.fillOval(0, 0, (int)(hauteurConteneur * 0.069), (int)(hauteurConteneur * 0.069));
 				}
-			
 			};
-			lblChxCouleur.setPreferredSize( new Dimension((int)(hauteurConteneur * 0.070), (int)(hauteurConteneur * 0.070)));
-			
+
 			lblChxCouleur.addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {
-					if( controleur.checkCouleurPrise(couleurEnCour) ){
-						
-						couleur = couleurEnCour;
-						repaint();
-					}
-
+					couleur = couleurEnCour;
+					repaint();
 				}
 			});
-			
 			pnlCouleur.add(lblChxCouleur);
 		}
-*/
-		this.scrollColors = new JScrollPane();
-		this.scrollColors.setVisible(false);
-		this.scrollColors.setBounds((int)((this.txtModule.getX() + this.txtModule.getWidth()) - (int)(hauteurConteneur * 0.21)), (int)(hauteurConteneur * 0.64), (int)(hauteurConteneur * 0.21) + this.scrollColors.getVerticalScrollBar().getPreferredSize().width, (int) ( (hauteurConteneur * 0.21)  / 1.5 ));
-		this.scrollColors.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		this.scrollColors.setBorder(null);
-		this.scrollColors.setOpaque(false);
-		this.scrollColors.setViewportView(this.pnlCouleur);
-		this.scrollColors.getViewport().setOpaque(false);
-		this.conteneur.add(this.scrollColors);
-		
-		this.lblNbSeances = new JLabel("Nombre de séances", JLabel.CENTER);
-		this.lblNbSeances.setBounds((int)(largeurConteneur * 0.1 + (hauteurConteneur * 0.46 - hauteurConteneur * 0.45)), (int)(hauteurConteneur * 0.73), (int)(largeurConteneur * 0.15), (int)(hauteurConteneur * 0.075));
-		this.lblNbSeances.setOpaque(false);
-		this.lblNbSeances.setForeground(Color.WHITE);
-		this.conteneur.add(this.lblNbSeances);
 
-		this.txtNbSeances = new JTextField( JTextField.CENTER );
-		this.txtNbSeances.setHorizontalAlignment( JTextField.CENTER );
-		this.txtNbSeances.setBounds((int)(largeurConteneur * 0.27), (int)(hauteurConteneur * 0.73), (int)(hauteurConteneur * 0.075), (int)(hauteurConteneur * 0.075));
-		this.txtNbSeances.setOpaque(false);
-		this.txtNbSeances.setForeground(Color.BLACK);
-		this.txtNbSeances.addFocusListener(this);
-		this.conteneur.add(this.txtNbSeances);
-		
-		this.btnSaveModule.setBounds( (int)(largeurConteneur * 0.29) + this.txtNbSeances.getWidth(), (int)(hauteurConteneur * 0.73), (int) ( this.txtModule.getWidth() - ( ( (largeurConteneur * 0.29) + this.txtNbSeances.getWidth() ) - this.txtNbSeances.getX() ) ), (int)(hauteurConteneur * 0.075));
+		this.conteneur.add(this.pnlCouleur);
+
+		this.txtAbrev.setBounds((int)(largeurConteneur * 0.27), (int)(hauteurConteneur * 0.55), (int)(largeurConteneur * 0.2), (int)(hauteurConteneur * 0.075));
+		this.txtAbrev.setOpaque(false);
+		this.txtAbrev.setForeground(Color.BLACK);
+		this.conteneur.add(this.txtAbrev);
+
+
+		this.btnSaveModule.setBounds((int) this.lblModule.getX(), (int)(hauteurConteneur * 0.7), (int)(largeurConteneur * 0.15), (int)(hauteurConteneur * 0.075));
 		this.btnSaveModule.addActionListener(this);
-		this.btnSaveModule.setEnabled(false);
 		this.conteneur.add(this.btnSaveModule);
 
 		conteneur.add(this.zoneModules);
@@ -559,159 +505,5 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.conteneur.add(this.lblPath);
 
 	}
-
-	public void nouveauModule(){
-
-		this.controleur.nouveauModule( this.txtModule.getText(), this.txtAbrev.getText(), couleur, Integer.parseInt(this.txtNbSeances.getText()) );
-		Hashtable hashModules = new Hashtable();
-		Iterator it = this.controleur.getModele().getFormation().getModules().entrySet().iterator();
-
-		int o = 0;
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry) it.next();
-
-			if (this.listeModules.getComponentCount() == 0) {
-
-
-				JLabel module = new JLabel((String) pair.getKey(), JLabel.CENTER);
-				module.setName((String) pair.getKey());
-
-				JLabel supprModule = new JLabel("Supprimer", JLabel.CENTER);
-				supprModule.setName("Supprimer");
-
-				module.setPreferredSize( new Dimension(0, (int)(hauteurConteneur * 0.1) ) );
-				supprModule.setPreferredSize(new Dimension(0, (int)(hauteurConteneur * 0.1) ) );
-
-
-				this.listeModules.add(module);
-				this.listeModules.add(supprModule);
-				this.listeModules.setOpaque(true);
-
-				if (o == 0) {
-					module.setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK));
-					supprModule.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK));
-				} else if (o == (this.controleur.getModele().getFormation().getModules().size() * 2) - 2) {
-					module.setBorder(new MatteBorder(0, 0, 0, 1, Color.BLACK));
-					supprModule.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK));
-				} else {
-					module.setBorder(new MatteBorder(0, 0, 0, 1, Color.BLACK));
-					supprModule.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK));
-				}
-			} else {
-
-				Component[] tblModules = this.listeModules.getComponents();
-				
-				for (int i = 0; i < tblModules.length; ++i) {
-					hashModules.put(((String) tblModules[i].getName()), "");
-				}
-
-				if (!hashModules.containsKey((String) pair.getKey())) {
-
-					JLabel module = new JLabel((String) pair.getKey(), JLabel.CENTER);
-					module.setName((String) pair.getKey());
-					JLabel supprModule = new JLabel("Supprimer", JLabel.CENTER);
-					supprModule.setName((String) pair.getKey());
-					module.setPreferredSize( new Dimension(0, (int)(hauteurConteneur * 0.1) ) );
-					supprModule.setPreferredSize(new Dimension(0, (int)(hauteurConteneur * 0.1) ) );
-
-					this.listeModules.add(module);
-					this.listeModules.add(supprModule);
-					this.listeModules.setOpaque(true);
-
-					if (o == 0) {
-						module.setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK));
-						supprModule.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK));
-					} else if (o == (this.controleur.getModele().getFormation().getModules().size() * 2) - 2) {
-						module.setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK));
-						supprModule.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK));
-					} else {
-						module.setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK));
-						supprModule.setBorder(new MatteBorder(0, 0, 0, 0, Color.BLACK));
-					}
-				}
-			}
-			o += 2;
-		}
-		couleur = null;
-		repaint();
-		validate();
-		if (this.controleur.getModele().getFormation().getModules().size() > 1) {
-			this.scrollModules.setBounds((int) (largeurConteneur * 0.52), (int)(hauteurConteneur * 0.575), (int)(largeurConteneur * 0.36), (int)(hauteurConteneur * 0.1) * 2);
-		}
-	}
-
-	/*
-	 * Réinitialisation des saisie
-	 */
-	public void initSaisie(){
-		this.txtFormation.setText("");
-		this.txtModule.setText("");
-		this.txtAbrev.setText("");
-		this.txtNbSeances.setText("");
-		this.couleur = null;
-		repaint();
-	}
-	
-	
-	
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-public void initColorPane(){
-	this.pnlCouleur.removeAll();
-	for (int i = 0; i < this.tblCouleurs.length; ++i) {
-
-		final Color couleurEnCour = tblCouleurs[i]; /* La couleur du Panel proposant la couleur prend la valeur du tableau de couleurs */
-
-		JLabel lblChxCouleur = new JLabel() {@Override
-			protected void paintComponent(Graphics g) {
-				g.setColor(couleurEnCour);
-				g.fillOval(0, 0, (int)(hauteurConteneur * 0.069), (int)(hauteurConteneur * 0.069));
-			}
-		
-		};
-		lblChxCouleur.setPreferredSize( new Dimension((int)(hauteurConteneur * 0.070), (int)(hauteurConteneur * 0.070)));
-		
-		lblChxCouleur.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if( controleur.checkCouleurPrise(couleurEnCour) ){
-					
-					couleur = couleurEnCour;
-					repaint();
-				}
-
-			}
-		});
-		
-		pnlCouleur.add(lblChxCouleur);
-	}
-}
-
-
-
-
-
 
 }

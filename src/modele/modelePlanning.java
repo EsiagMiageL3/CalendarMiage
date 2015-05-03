@@ -1,4 +1,4 @@
-package src.modele;
+package modele;
 
 import java.awt.Color;
 import java.io.File;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import src.vue.vuePlanning;
+import vue.vuePlanning;
 
 @SuppressWarnings("serial")
 public class modelePlanning implements Serializable{
@@ -35,12 +35,8 @@ public class modelePlanning implements Serializable{
 		this.formationPlanning = new Formation(nomFormation);
 	}
 	
-	public void addModule(String key, String abreviation, Color couleur, int nbSeances){
-		this.formationPlanning.getModules().put(key, new Module( key, abreviation, couleur, nbSeances));
-	}
-	
-	public void supprModule(String key){
-		this.formationPlanning.getModules().remove( key );
+	public void addModule(String key, Color couleur){
+		this.formationPlanning.getModules().put(key, new Module( key, couleur));
 	}
 	
 	public Formation getFormation(){

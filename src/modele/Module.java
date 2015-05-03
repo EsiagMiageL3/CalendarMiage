@@ -1,5 +1,5 @@
 
-package src.modele;
+package modele;
 import java.awt.Color;
 import java.io.*;
 import java.util.ArrayList;
@@ -21,11 +21,9 @@ public class Module implements Serializable{
 		this.nb_heures = 0;
 	}
 	
-	public Module (String nom_m, String abreviation, Color couleur, int nbSeances){
+	public Module (String nom_m,  Color couleur){
 		this.nom_m = nom_m;
-		this.abreviation = abreviation;
 		this.couleurModule = couleur;
-		this.nb_seances = nbSeances;
 	}
 	 /*
  	public void addSeance(Seance nouvelleSeance) {
