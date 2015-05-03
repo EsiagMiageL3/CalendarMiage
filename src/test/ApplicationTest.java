@@ -1,10 +1,22 @@
 package src.test;
 
+<<<<<<< HEAD
 import src.modele.Module;
 import src.modele.Formation;
 //<<<<<<< Updated upstream
 //=======
 import src.modele.Seance;
+=======
+import modele.Module;
+import modele.Formation;
+//<<<<<<< Updated upstream
+//=======
+import modele.Seance;
+
+//>>>>>>> Stashed changes
+import modele.Module;
+import modele.Formation;
+>>>>>>> origin/master
 
 import java.awt.Color;
 import java.io.File;
@@ -30,6 +42,16 @@ public class ApplicationTest {
 		
 		
 		//Seance coursJava = new Seance(m1.getNom(),m1.getAbreviation(),m1.getCouleur(),m1.getNb_heures(),m1.nb_seances,10);
+<<<<<<< HEAD
+=======
+		
+		
+		
+		
+		
+		
+		
+>>>>>>> origin/master
 		
 	
 		for (Module m : l1){
