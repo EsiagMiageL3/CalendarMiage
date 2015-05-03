@@ -8,7 +8,6 @@ import src.modele.Module;
 
 @SuppressWarnings("serial")
 public class Seance extends Module implements Serializable{
-<<<<<<< HEAD
 	public int rang_seances,nb_seances;
 	
 	public Seance (int n,int m){
@@ -22,7 +21,7 @@ public class Seance extends Module implements Serializable{
 					//super(nom_m, couleur);	
 					this.rang_seances = n;
 					this.nb_seances = m;
-=======
+
 	public int nb_seances,rang_seances;
 	
 	public Seance (int n,int m){
@@ -36,12 +35,12 @@ public class Seance extends Module implements Serializable{
 					super(nom_m,couleur);	
 					this.nb_seances = n;
 					this.rang_seances = m;
->>>>>>> origin/master
+
 	}
 
 	
 	
-<<<<<<< HEAD
+
 	public void AjoutSeance(String nom_module, int n) throws RechercheSeanceException {
 		if (super.nom_m.equals(nom_module));
 		/*

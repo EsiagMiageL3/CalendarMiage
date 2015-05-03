@@ -17,8 +17,6 @@ public class MainTest {
 		
 		modelePlanning modele = new modelePlanning(); 
 		controleurPlanning controleur = new controleurPlanning(modele);
-		//vueAcceuil acc = new vueAcceuil(controleur);
-		//vueAcceuil2 acc2 = new vueAcceuil2(controleur);
 
 		vueAcceuil2 acc2 = new vueAcceuil2(controleur);
 		//hahahahahahaha//
@@ -33,7 +31,7 @@ public class MainTest {
 						seance1.AjoutSeance(12,10);
 			}
 					catch (RechercheSeanceException e){}
-				}
+				
 			
 
 }
