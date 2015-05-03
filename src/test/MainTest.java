@@ -1,8 +1,8 @@
-package test;
+package src.test;
 
-import controleur.controleurPlanning;
-import modele.modelePlanning;
-import vue.*;
+import src.controleur.controleurPlanning;
+import src.modele.modelePlanning;
+import src.vue.*;
 
 public class MainTest {
 	

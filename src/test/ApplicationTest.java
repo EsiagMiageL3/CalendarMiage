@@ -1,10 +1,10 @@
-package test;
+package src.test;
 
-import modele.Module;
-import modele.Formation;
+import src.modele.Module;
+import src.modele.Formation;
 //<<<<<<< Updated upstream
 //=======
-import modele.Seance;
+import src.modele.Seance;
 
 import java.awt.Color;
 import java.io.File;
@@ -17,9 +17,9 @@ public class ApplicationTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Module m1 = new Module("Java" ,  Color.red);
-		Module m2 = new Module("Base de donnees" ,  Color.red);
-		Module m3 = new Module("Comptabilite" , Color.red);
+		Module m1 = new Module("Java" ,"sersdf",  Color.red,45);
+		Module m2 = new Module("Base de donnees" , "ser",  Color.red,12);
+		Module m3 = new Module("Comptabilite" ,"ser", Color.red, 12);
 		
 		ArrayList<Module> l1= new ArrayList<Module>();
 		l1.add(m1);
@@ -29,15 +29,9 @@ public class ApplicationTest {
 		Formation f1 = new Formation("f1", 3, l1);
 		
 		
-		Seance coursJava = new Seance(m1.getNom(),m1.getAbreviation(),m1.getCouleur(),m1.getNb_heures(),m1.nb_seances,10);
+		//Seance coursJava = new Seance(m1.getNom(),m1.getAbreviation(),m1.getCouleur(),m1.getNb_heures(),m1.nb_seances,10);
 		
-		
-		
-		
-		
-		
-		
-		
+	
 		for (Module m : l1){
 			System.out.println("La dur�e du module "+m.getNom()+" est de "+m.getNb_heures()+" heures");
 		}

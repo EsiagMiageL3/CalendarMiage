@@ -1,4 +1,4 @@
-package vue;
+package src.vue;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;

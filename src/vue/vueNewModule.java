@@ -1,4 +1,4 @@
-package vue;
+package src.vue;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,8 +7,8 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import modele.Formation;
-import modele.Module;
+import src.modele.Formation;
+import src.modele.Module;
 
 /**
  *

@@ -1,4 +1,4 @@
-package vue;
+package src.vue;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -6,8 +6,8 @@ import java.util.*;
 
 import javax.swing.*;
 
-import modele.Module;
-import modele.modelePlanning;
+import src.modele.Module;
+import src.modele.modelePlanning;
 
 import java.text.*;
 
