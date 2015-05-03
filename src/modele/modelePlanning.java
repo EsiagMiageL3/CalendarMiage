@@ -1,20 +1,11 @@
 package modele;
-
+// je pense que tu tes tromper cela devais etre dans les controleur 
+//et ta classe qui ce trouve dans les controleeur doit etre dans le modéle 
 import java.awt.Color;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
 
 import vue.vuePlanning;
 

@@ -1,4 +1,4 @@
-package test;
+package test;// Avooir si il faut suprimer 
 
 import modele.Module;
 import modele.Formation;
@@ -45,11 +45,11 @@ public class ApplicationTest {
 		
 		
 		for (Module m : l1){
-			System.out.println("La dur�e du module "+m.getNom()+" est de "+m.getNb_heures()+" heures");
+		//	System.out.println("La dur�e du module "+m.getNom()+" est de "+m.getNb_heures()+" heures");
 		}
 		
-		int duree_totale = m1.getNb_heures()+m2.getNb_heures()+m3.getNb_heures();
-		System.out.println("La dur�e totale de la formation est de "+ duree_totale+" heures");
+		//int duree_totale = m1.getNb_heures()+m2.getNb_heures()+m3.getNb_heures();
+		//System.out.println("La dur�e totale de la formation est de "+ duree_totale+" heures");
 		
 		//final String chemin = "D:/workspace/CalendarMiage/file/modules.txt";
 		final String chemin = "/Users/cyriellemintombou/Documents/workspace/CalendarMiage/file/modules.txt";
