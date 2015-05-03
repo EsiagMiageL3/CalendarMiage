@@ -4,7 +4,9 @@ encoding//src/exception/RechercheSeanceException.java=UTF-8
 encoding//src/modele/ApplicationFinal.java=UTF-8
 encoding//src/modele/Module.java=UTF-8
 encoding//src/modele/Seance.java=UTF-8
+<<<<<<< HEAD
 encoding//src/modele/modelePlanning.java=UTF-8
 encoding//src/test/ApplicationTest.java=UTF-8
+=======
+>>>>>>> origin/master
 encoding//src/test/MainTest.java=UTF-8
-encoding//src/vue/PlanningAcceuil.java=UTF-8

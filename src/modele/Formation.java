@@ -1,11 +1,10 @@
 
-package modele;
+package src.modele;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.JOptionPane;
 
 public class Formation implements Serializable {
 	
