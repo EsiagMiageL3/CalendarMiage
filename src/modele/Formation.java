@@ -1,11 +1,11 @@
 
-package modele;
+package src.modele;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-@SuppressWarnings("serial")
+
 public class Formation implements Serializable {
 	
 	public String nom_f;
