@@ -40,7 +40,7 @@ import javax.swing.border.MatteBorder;
  * @author nounoursmoelleux
  */
 public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener, MouseListener {
-
+//
 	/* Tableau des couleurs disponnibles pour les modules */
 	private Color[] tblCouleurs = {
 		new Color(25, 25, 25), new Color(198, 61, 15), new Color(0, 90, 49), new Color(85, 140, 137), new Color(222, 27, 27), new Color(125, 25, 53), new Color(88, 88, 88), new Color(255, 240, 86), new Color(126, 143, 124),
