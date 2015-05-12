@@ -78,25 +78,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	}
 
 	private void initComponents() {
-	            	
-					/*
-	        		try {
-	        			for (javax.swing.UIManager.LookAndFeelInfo info: javax.swing.UIManager.getInstalledLookAndFeels()) {
-	        				if ("Nimbus".equals(info.getName())) {
-	        					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-	        					break;
-	        				}
-	        			}
-	        		} catch (ClassNotFoundException ex) {
-	        			java.util.logging.Logger.getLogger(vuePlanning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-	        		} catch (InstantiationException ex) {
-	        			java.util.logging.Logger.getLogger(vuePlanning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-	        		} catch (IllegalAccessException ex) {
-	        			java.util.logging.Logger.getLogger(vuePlanning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-	        		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-	        			java.util.logging.Logger.getLogger(vuePlanning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-	        		}
-	        		*/
+	           
 	        		
 	              //  JFrame frame = new JFrame();
 	                
