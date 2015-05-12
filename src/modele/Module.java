@@ -4,35 +4,45 @@ import java.awt.Color;
 import java.io.*;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 public class Module implements Serializable{
 
 	public String nom_m, abreviation, couleur;
 	public Color couleurModule;
-	public int nb_seances, nb_heures;
+	public int nb_seances, rang_seances;
 	public ArrayList<Seance> lst_Seance;
 	
 	public Module (){
-		this.nom_m = "Module par défaut";
+		this.nom_m = "Module par dÔøΩfaut";
 		this.abreviation = "MD";
 		this.couleur = "WHITE";
 		this.nb_seances = 0;
-		this.nb_heures = 0;
+		this.rang_seances = 0;
 	}
 	
+<<<<<<< HEAD
+	public Module (String nom_m,Color couleur){
+		this.nom_m = nom_m;
+		this.couleurModule = couleur;
+=======
 	public Module (String nom_m, String abreviation, Color couleur, int nbSeances){
 		this.nom_m = nom_m;
 		this.abreviation = abreviation;
 		this.couleurModule = couleur;
 		this.nb_seances = nbSeances;
+>>>>>>> origin/master
 	}
-	 /*
- 	public void addSeance(Seance nouvelleSeance) {
-		this.lst_Seance.add(nouvelleSeance);
-		JOptionPane.showMessageDialog(null, "La nouvelle " + nouvelleSeance.nom + " a été ajouté avec succès au module " + this.nom_m);
+	
+	
+	public Module (String nom_m, String abreviation, Color couleur,int nb_seances, int rang_seances ){
+		this.nom_m = nom_m;
+		this.couleurModule = couleur;
+		this.abreviation = abreviation;
+		this.nb_seances = nb_seances;
+		this.rang_seances = rang_seances;
 	}
- 	*/
+	
+	
+	
 	public String getNom() {
 		return nom_m;
 	}
@@ -57,11 +67,14 @@ public class Module implements Serializable{
 	public void setNb_seances(int nb_seances) {
 		this.nb_seances = nb_seances;
 	}
-	public int getNb_heures() {
-		return nb_heures;
+
+	public int getRang_seances() {
+		return rang_seances;
 	}
-	public void setNb_heures(int nb_heures) {
-		this.nb_heures = nb_heures;
+
+	public void setRang_seances(int rang_seances) {
+		this.rang_seances = rang_seances;
 	}
+	
 }
 
