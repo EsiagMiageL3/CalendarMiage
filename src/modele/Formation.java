@@ -11,11 +11,14 @@ public class Formation implements Serializable {
 	public String nom_f;
 	public int duree;
 	public HashMap<String, Module> liste_Modules;
+	public HashMap<String, Semaine> lst_Semaines; /* Clé = Numéro de la semaine */
+	
 	
 	
 	public Formation(String nom_f){
 		this.nom_f = nom_f;
 		this.liste_Modules = new HashMap<String, Module>();
+		this.lst_Semaines =  new HashMap<String, Semaine>();
 	}
 	
 	public Formation(String nom_f, int duree, ArrayList<Module> liste_modules){
@@ -27,6 +30,16 @@ public class Formation implements Serializable {
 	 	public String getNomFormation() {
 			return nom_f;
 		}
+	 	
+	 	public void addSemaine(String num, Semaine semaine) {
+			this.lst_Semaines.put(num, semaine);
+		} 	 	
+	 	
+	 	public Semaine getSemaine(int num) {
+			return this.lst_Semaines.get(Integer.toString(num));
+		} 
+	 	
+	 	
 	 	
 	 	public void setNomFormation(String nom) {
 			this.nom_f = nom;

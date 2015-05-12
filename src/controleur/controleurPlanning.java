@@ -147,7 +147,6 @@ public class controleurPlanning {
 	public modelePlanning openPlanning() throws IOException{
 		JFileChooser chooser = new JFileChooser();
 		chooser.setDialogTitle("Choisissez le fichier de votre planning");
-		//chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		int returnVal = chooser.showOpenDialog(null);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
 		   System.out.println("You chose to open this directory: " +
@@ -157,20 +156,18 @@ public class controleurPlanning {
 			          new BufferedInputStream(
 			            new FileInputStream(
 		                  new File( chooser.getSelectedFile().getAbsolutePath()))));
-						  
-						  // Enregistrement du chemin vers le fichier de suavegarde
+
 						  this.pathFichier = chooser.getSelectedFile().getAbsolutePath();
 						  
 		      try {
 		    	  	this.modele = null;
-			        this.modele = ((modelePlanning) input.readObject());
+		    	  	this.modele = (modelePlanning) input.readObject();
 			      } catch (ClassNotFoundException e) {
 			    	  JOptionPane.showMessageDialog(null, "Ce fichier ne contient aucune donnée de planning !");
-			        
+			      } catch (InvalidClassException e) {
+			    	  JOptionPane.showMessageDialog(null, "Ce fichier ne contient pas de données de planning valides.");
 			      } catch (IOException e) {
-					// TODO Auto-generated catch block
-			    	  System.out.println("fuck");
-			    	  JOptionPane.showMessageDialog(null, "Ce fichier ne contient aucune donnée de planning !");
+			    	  JOptionPane.showMessageDialog(null, "Ouverture du fichier impossible.");
 				}
 		      
 				input.close();

@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,8 +34,6 @@ import src.modele.modelePlanning;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
-
-
 
 /**
  *
@@ -116,9 +116,28 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	}
 	
 	@Override
-	public void focusGained(FocusEvent e){ 
-		validate();
-		repaint();
+	public void focusGained(FocusEvent e){
+		 
+		TimerTask task = new TimerTask()
+		{
+			int i = 0;
+			public void run() 
+			{
+				if(i < 500){
+				i += 1;
+				txtModule.setLocation( i, 0);
+				}
+				else{
+					cancel();
+				}
+			}	
+		};
+		
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(task, 0, 1);
+		
+		//validate();
+		//repaint();
 	}
 	
 	@Override
@@ -148,12 +167,12 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		} else if (evt.getSource() == this.btnOpenPlanning) {
 			
 			try {
-				this.controleur.openPlanning();
+				this.controleur.openPlanning(); /* Ouverture de l'explorateur de fichier et ouverture du fichier de planning */
 				
-				this.initSaisie();
-				this.txtFormation.setText(this.controleur.getModele().getFormation().nom_f);
+				this.initSaisie(); /* Remet ˆ zŽro les anciennes saisies de la fentre */
+				this.txtFormation.setText(this.controleur.getModele().getFormation().nom_f); /* Renseigne le nom de la formation extraite du fichier ouvert */
 				repaint();
-				this.lblPath.setText(this.controleur.getChemin());
+				this.lblPath.setText( this.controleur.getChemin() ); /* Renseigne le chemin du fichier ouvert, ˆ droite du bouton d'ouverture de fichier */
 
 				Iterator it = this.controleur.getModele().getFormation().getModules().entrySet().iterator();
 
@@ -196,7 +215,6 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 					supprModule.setName("Supprimer");
 					module.setText((String) pair.getKey());
 					module.setName((String) pair.getKey());
-
 
 					module.setPreferredSize(new Dimension(0, (int)(hauteurConteneur * 0.1)));
 					supprModule.setPreferredSize(new Dimension(0, (int)(hauteurConteneur * 0.1)));
@@ -263,7 +281,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 				e.printStackTrace();
 			}
 		} else {
-			this.planning = new vuePlanning(this.modele);
+			this.planning = new vuePlanning(this.modele, this.controleur);
 			this.modele.addPlanning(this.planning);
 		}
 
@@ -474,7 +492,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.pnlCouleur.setOpaque(false);
 		
 		initColorPane();
-		/*
+		
 		for (int i = 0; i < this.tblCouleurs.length; ++i) {
 
 			final Color couleurEnCour = tblCouleurs[i];
@@ -500,7 +518,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 			
 			pnlCouleur.add(lblChxCouleur);
 		}
-*/
+
 		this.scrollColors = new JScrollPane();
 		this.scrollColors.setVisible(false);
 		this.scrollColors.setBounds((int)((this.txtModule.getX() + this.txtModule.getWidth()) - (int)(hauteurConteneur * 0.21)), (int)(hauteurConteneur * 0.64), (int)(hauteurConteneur * 0.21) + this.scrollColors.getVerticalScrollBar().getPreferredSize().width, (int) ( (hauteurConteneur * 0.21)  / 1.5 ));

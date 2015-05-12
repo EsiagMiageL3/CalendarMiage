@@ -3,31 +3,49 @@ package src.vue;
 import java.awt.event.*;
 import java.awt.*;
 import java.util.*;
+import java.util.Timer;
 
 import javax.swing.*;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+import org.joda.time.Weeks;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+import src.controleur.controleurPlanning;
+import src.modele.Formation;
+import src.modele.Jour;
 import src.modele.Module;
+import src.modele.Semaine;
 import src.modele.modelePlanning;
 
 import java.text.*;
 
 public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	
+	private int largeurConteneur, hauteurConteneur; /* Variables contenant la hauteur et largeur de la fenêtre */
+	private Formation fm;
+	
+	private controleurPlanning Controleur;
+	
 	private JPanel pnlInfos;
 	private JLabel lblDisplayFormation, lblDisplayNbModules, nbJours, lblDisplayNbJours;
 	
 	private modelePlanning modele;
-	private static String[] tbl = {"Septembre","Octobre","Novembre", "Decembre", "Janvier", "Fevrier", "Mars", "Avril", "Juin", "Juillet", "Aout"};
+	private static String[] tbl = {"Septembre","Octobre","Novembre", "Decembre", "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout"};
 	private static JButton[] bouttons = new JButton[40];
 	ArrayList < JPanel > lstMois = new ArrayList < JPanel > ();
     
 	/**
 	 * Constructeur
 	 */
-	public vuePlanning(modelePlanning nouveauModele) {
+	public vuePlanning(modelePlanning nouveauModele, controleurPlanning Controleur) {
 		
 		
 		initComponents();
+		this.Controleur = Controleur;
 		this.modele = nouveauModele;
 
 		//this.setTitle("Calendar Miage - Mintombou Cyrielle, Souto Camille, Deora Julien");
@@ -61,6 +79,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 
 	private void initComponents() {
 	            	
+					/*
 	        		try {
 	        			for (javax.swing.UIManager.LookAndFeelInfo info: javax.swing.UIManager.getInstalledLookAndFeels()) {
 	        				if ("Nimbus".equals(info.getName())) {
@@ -77,7 +96,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
 	        			java.util.logging.Logger.getLogger(vuePlanning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	        		}
-	        		
+	        		*/
 	        		
 	              //  JFrame frame = new JFrame();
 	                
@@ -110,21 +129,97 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	                 *  Défintion du ContentPane de la fenêtre
 	                 */
 	                this.setContentPane(conteneur);
-	                
+	                this.setUndecorated(true);
+	        		largeurConteneur = this.getWidth(); /* Affection de la largeur du conteneur à la variable */
+	        		hauteurConteneur = this.getHeight(); /* Affection de la hauteur du conteneur à la variable */
 	                /*
 	                 *  Panel contenant le planning
 	                 */
 	                JPanel planning = new JPanel();
-	                planning.setLayout( new GridLayout( 0, 4,10,10 ) );
-	                //planning.setOpaque(false);
+	                planning.setLayout( new GridLayout( 0, 3,10,10 ) );
+	                //planning.setBounds(50, (int) (getHauteurEcran() * 0.20), getLargeurEcran() - 100, (int) (getHauteurEcran() * 0.75) );
+		              
 	                planning.setBackground(new Color(80,80,80));
 	                /*
 	                 *  JScrollPane contenant le Panel du planning
 	                 *  Définition de sa dimension et de sa position
 	                 */
 	                JScrollPane Jscroll = new JScrollPane();
-	                Jscroll.setBounds(50, (int) (getHauteurEcran() * 0.20), getLargeurEcran() - 100, (int) (getHauteurEcran() * 0.75) );
+	                Jscroll.setBounds( (int) ( largeurConteneur * 0.01 ), (int) ( hauteurConteneur * 0.05 ), (int) ( largeurConteneur * 0.9 ), (int) ( hauteurConteneur * 0.9) );
 	              
+	                JLabel settings = new JLabel( "\uD83D\uDEE0", JLabel.CENTER );
+	                
+	                settings.setOpaque(false);
+	                settings.setForeground(Color.WHITE);
+	                settings.setBounds( (int) ( largeurConteneur * 0.92 ), (int) ( hauteurConteneur * 0.45 ), (int) ( hauteurConteneur * 0.1 ), (int) ( hauteurConteneur * 0.1) );
+	                //settings.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true)); 
+	                settings.setFont(new Font("Arial", Font.PLAIN, 40));
+	                settings.setHorizontalAlignment(JLabel.CENTER);
+	                
+
+	                conteneur.add( settings );
+	                
+	                final JPanel sideBar = new JPanel(new GridLayout(10, 1, 20,0));
+	                sideBar.setOpaque(true);
+	                sideBar.setBounds( (int) ( largeurConteneur + 1), 0, (int) ( largeurConteneur * 0.15 ), (int) ( hauteurConteneur) );
+	               sideBar.setBackground(new Color(80, 80, 80));
+	               
+	               
+		               
+		               	                JLabel iconYear = new JLabel("\uD83D\uDCC5", JLabel.CENTER);
+		               	                iconYear.setVisible(true);
+		               	                iconYear.setOpaque(false);
+		               	                iconYear.setFont(new Font("Arial", Font.PLAIN, 35));
+		       	                
+		               	                JLabel iconSave = new JLabel("\uD83D\uDCBE", JLabel.CENTER);
+		               	             iconSave.setVisible(true);
+		               	          iconSave.setOpaque(false);
+		               	       iconSave.setFont(new Font("Arial", Font.PLAIN, 35));
+
+              	                JLabel iconQuit = new JLabel("\u274C", JLabel.CENTER);
+              	              iconQuit.setVisible(true);
+              	            iconQuit.setOpaque(false);
+              	          iconQuit.setFont(new Font("Arial", Font.PLAIN, 35));
+              	       
+		               	    
+		               	             sideBar.add(iconYear);
+		               	             sideBar.add(iconSave);
+		               	             sideBar.add(iconQuit);
+		               	            
+		               	             conteneur.add(sideBar);
+	         
+
+	              
+	                settings.addMouseListener(new MouseAdapter() {
+		     			public void mousePressed(MouseEvent e) {
+		     				TimerTask task = new TimerTask(){
+		     					
+		     					int i = 0;
+		     					int positionDepart = sideBar.getX();
+		     					int destination = largeurConteneur - sideBar.getWidth();
+		     					
+		     					public void run(){
+		     						if( sideBar.getX() > destination){
+		     							i += 1;
+			     						sideBar.setLocation( ( positionDepart ) - i, 0);
+		     						}
+		     						else{
+		     							repaint();
+		     							validate();
+		     							cancel();
+		     							
+		     							
+		     
+		     						}
+		     					}
+		     					
+		     				};
+		     				
+		     				Timer timer = new Timer();
+		     				timer.scheduleAtFixedRate(task, 0, 2);
+		     				
+		    			}
+		    		});
 	                /*
 	                 *  Le Panel du planning devient le Viewport du JScrollPane
 	                 *  On l'ajoute au ContentPane
@@ -146,7 +241,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        		test.setLayout(null);
 	        		test.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 	        		test.setBounds(0, 0, getLargeurEcran(), (int) (getHauteurEcran() * 0.2) );
-	        		conteneur.add(test);
+	        		//conteneur.add(test);
 
 	        		JLabel displayAnnee = new JLabel();
 	        		
@@ -217,9 +312,9 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        		
 
 	        		
-	                for(int i = 0; i < 11; ++i){
+	                for(int i = 0; i < tbl.length; ++i){
 	                	JPanel mois = new JPanel();
-	                	//mois.setBackground(Color.GRAY);
+	                	mois.setPreferredSize(new Dimension( (int) (Jscroll.getWidth() * 0.3), (int) (Jscroll.getWidth() * 0.2)));
 	                	mois.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 	                	mois.setLayout(new BorderLayout());
 	                	JLabel nomMois = new JLabel(tbl[i], SwingConstants.CENTER);
@@ -235,6 +330,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	                	cadreMois.setBackground(Color.WHITE);
 	                	
 	                	JLabel Lundi = new JLabel("Lun", SwingConstants.CENTER);
+	                	
 	                	JLabel Mardi = new JLabel("Mar", SwingConstants.CENTER);
 	                	JLabel Mercredi = new JLabel("Mer", SwingConstants.CENTER);
 	                	JLabel Jeudi = new JLabel("Jeu", SwingConstants.CENTER);
@@ -257,7 +353,6 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 
 	        			int premierJour = calendrier.get(GregorianCalendar.DAY_OF_WEEK);
 	        			
-
 	        			if (premierJour == 1) {
 	        				premierJour = 8;
 	        				System.out.println("" + premierJour);
@@ -270,6 +365,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        					cadreMois.add(lbl);
 	        				} else {
 	        					JButton jour = new JButton();
+	        					jour.setMargin(new Insets(0, 0, 0, 0));
 	        					jour.setFont(new Font("Arial", Font.PLAIN, 9));
 	                    		jour.setText("" + (j - (premierJour - 2)));
 	                    		cadreMois.add(jour);
@@ -279,14 +375,19 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        					//Définition du format utilisé pour extraire la date
 	        					DateFormat df = new SimpleDateFormat("dd_MM_yyyy");
 
-	        					//On récup√®re la date
+	        					//On récupère la date
 	        					Date dateButton = calendrier2.getTime();
-
+	        					
+	        					//
+	        					int week = calendrier2.get(Calendar.WEEK_OF_YEAR);
+	        					
 	        					//Formattage de la date voulue selon le format voulu
 	        					String dateBouton = df.format(dateButton);
 	        					//Le nom du boutton est celui de sa date
-	        					jour.setName(dateBouton);
+	        					jour.setName( dateBouton);
 	        					if (calendrier2.get(calendrier2.DAY_OF_WEEK) == calendrier2.SUNDAY || calendrier2.get(calendrier2.DAY_OF_WEEK) == calendrier2.SATURDAY) {
+	        						jour.setOpaque(true);
+	        						jour.setBorderPainted(false);
 	        						jour.setBackground(Color.BLACK);
 	        						jour.setForeground(Color.WHITE);
 	        						jour.addActionListener(new ActionListener() {
@@ -296,16 +397,27 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        							}
 	        						});
 	        					} else {
-
+	        						jour.setOpaque(true);
+	        						jour.setBorderPainted(false);
 	        						jour.addActionListener(new ActionListener() {
 	        							public void actionPerformed(ActionEvent evt) {
+	 
+	        								createWeeks();
+	        								
+	        							 
 	        								String buttonText = ((JButton) evt.getSource()).getName();
+	        								
+	        								/*
+	        								JOptionPane.showMessageDialog(null, "Date du Jour: " + fm.getSemaine(calendrier2.get(Calendar.WEEK_OF_YEAR)).getJour(buttonText).getDate() );
+	        								
+	        								JOptionPane.showMessageDialog(null, "Semaine du Jour: " + fm.getSemaine(calendrier2.get(Calendar.WEEK_OF_YEAR)).getJour(buttonText).getSemaine() );
+	        								
 	        								JOptionPane.showMessageDialog(null, buttonText);
-	        								Date dateNo = calendrier2.getTime();
-	        								//saisieModule();
+	        								JOptionPane.showMessageDialog(null, calendrier2.get(Calendar.WEEK_OF_YEAR));
+*/
 	        								
 	        								
-	        								//detail jour = new detail(buttonText, dateNo);
+	        								detailSemaine semaine = new detailSemaine( calendrier2.get(Calendar.WEEK_OF_YEAR), Controleur );
 	        							}
 	        						});
 	        					}
@@ -334,6 +446,28 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
 	}
 
+	public void createWeeks() {
+		/* Création des semaines de l'année supérieure */
+		//this.fm = new Formation("Java");
+		
+		DateTime dateTime1 = new DateTime( 2015, 1, 1, 0, 0, 0 );
+		DateTime dateTime2 = new DateTime(2015, 8, 31, 0, 0, 0);
+
+		int weeks = Weeks.weeksBetween(dateTime1, dateTime2).getWeeks();
+		int days = Days.daysBetween(dateTime1, dateTime2).getDays();
+
+		//JOptionPane.showMessageDialog(null, weeks);
+		
+		for( int i = 1; i < weeks + 1; ++i){
+			Semaine semaine2015 = new Semaine( "2015", i );
+			//this.fm.addSemaine(Integer.toString(i), semaine2015);
+			this.Controleur.getModele().getFormation().addSemaine(Integer.toString(i), semaine2015);
+		}
+		
+	}
+	
+	
+	
 	// Récupérer la hauteur de l'écran
 	public static int getHauteurEcran() {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
