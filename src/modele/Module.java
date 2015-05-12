@@ -1,5 +1,4 @@
-
-package src.modele;
+package modele;
 import java.awt.Color;
 import java.io.*;
 import java.util.ArrayList;
@@ -19,17 +18,15 @@ public class Module implements Serializable{
 		this.rang_seances = 0;
 	}
 	
-<<<<<<< HEAD
 	public Module (String nom_m,Color couleur){
 		this.nom_m = nom_m;
-		this.couleurModule = couleur;
-=======
+		this.couleurModule = couleur;}
+		
 	public Module (String nom_m, String abreviation, Color couleur, int nbSeances){
 		this.nom_m = nom_m;
 		this.abreviation = abreviation;
 		this.couleurModule = couleur;
 		this.nb_seances = nbSeances;
->>>>>>> origin/master
 	}
 	
 	

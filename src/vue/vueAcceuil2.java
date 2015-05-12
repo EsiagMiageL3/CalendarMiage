@@ -1,4 +1,4 @@
-package src.vue;
+package vue;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -27,9 +27,9 @@ import java.util.TimerTask;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import src.controleur.controleurPlanning;
-import src.modele.Module;
-import src.modele.modelePlanning;
+import controleur.controleurPlanning;
+import modele.Module;
+import modele.modelePlanning;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -53,59 +53,59 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	private controleurPlanning controleur; /* Controleur de la vue */
 	private vuePlanning planning;
 	private ArrayList < Module > lstModules;
-	private int largeurConteneur, hauteurConteneur; /* Variables contenant la hauteur et largeur de la fenêtre */
+	private int largeurConteneur, hauteurConteneur; /* Variables contenant la hauteur et largeur de la fenÔøΩtre */
 
 	private JPanel conteneur; /* Conteneur de la JFrame, deviendra son ContentPane */
 
 	private JButton btnOpenPlanning; /* Permet d'ouvrir un fichier de planning */
-	private JLabel lblPath; /* Label affichant le chemin du fichier après ouverture */
+	private JLabel lblPath; /* Label affichant le chemin du fichier aprÔøΩs ouverture */
 	private JButton btnSavePlanning; /* Permet de sauvegarder les modifications dans un fichier de planning */
-	private JButton btnLoadPlanning; /* Bouton pour générer le planning automatiquement */
+	private JButton btnLoadPlanning; /* Bouton pour g≈Ωn≈Ωrer le planning automatiquement */
 	private JButton btnCancel; /* Quitter le programme */
 
 	private JLabel lblTitre; /* Premier label du formulaire, haut de page */
 	private JLabel lblSousTitre; /* Second label du formulaire, haut de page */
 
-	private JLabel lblFormation; /* Label juxtaposé à la saisie du nom de la formation */
+	private JLabel lblFormation; /* Label juxtapos≈Ω ÀÜ la saisie du nom de la formation */
 	private JTextField txtFormation; /* Zone de texte permettant de saisir le nom de la formation */
 	private JButton btnSaveFormation; /* Bouton qui sauvegarde la formation */
 
 	private JPanel zoneModules; /* Panel englobant les composants relatifs aux modules */
 
-	private JLabel lblModule; /* Label juxtaposé à la saisie du nom du module */
+	private JLabel lblModule; /* Label juxtapos≈Ω ÀÜ la saisie du nom du module */
 	private JTextField txtModule; /* Zone de texte permettant de saisir le nom du module */
 
-	private JLabel lblAbrevModule; /* Label juxtaposé à la saisie de l'abréviation du module */
-	private JTextField txtAbrev; /* Zone de texte permettant de saisir l'abréviation du module */
+	private JLabel lblAbrevModule; /* Label juxtapos≈Ω ÀÜ la saisie de l'abr≈Ωviation du module */
+	private JTextField txtAbrev; /* Zone de texte permettant de saisir l'abr≈Ωviation du module */
 
-	private JLabel lblCouleur; /* Label juxtaposé au choix de la couleur du module */
+	private JLabel lblCouleur; /* Label juxtapos≈Ω au choix de la couleur du module */
 	private JPanel lblCurrentColor; /* Label permettant de choisir la couleur du module */
 	private JPanel pnlCouleur; /* Panel proposant les couleurs disponibles pour le module */
 
-	private JLabel lblNbSeances; /* Label juxtaposé à la saisie du nombre de séances */
-	private JTextField txtNbSeances; /* Zone de texte permettant de saisir le nombre de séances maximal du module */
+	private JLabel lblNbSeances; /* Label juxtapos≈Ω ÀÜ la saisie du nombre de s≈Ωances */
+	private JTextField txtNbSeances; /* Zone de texte permettant de saisir le nombre de s≈Ωances maximal du module */
 	
-	private JPanel listeModules; /* Panel affichant les modules enregistrés sous forme de Labels */
-	private JLabel lblSavedModules; /* Label situé au dessus de la liste des modules enregistrés */
+	private JPanel listeModules; /* Panel affichant les modules enregistr≈Ωs sous forme de Labels */
+	private JLabel lblSavedModules; /* Label situ≈Ω au dessus de la liste des modules enregistr≈Ωs */
 	
-	private JScrollPane scrollModules; /* JScrollPane contenant le panel des modules enregsitrés */
-	private JScrollPane scrollColors; /* JScrollPane contenant le panel des couleurs à choisir */
+	private JScrollPane scrollModules; /* JScrollPane contenant le panel des modules enregsitr≈Ωs */
+	private JScrollPane scrollColors; /* JScrollPane contenant le panel des couleurs ÀÜ choisir */
 	
 	private JButton btnSaveModule; /* Permet d'enregistrer le module */
 
 	/*
 	 * Constructeur
-	 * Prend un controleur en paramètre
+	 * Prend un controleur en paramÔøΩtre
 	 */
 	public vueAcceuil2(controleurPlanning controleur) {
 
 		this.controleur = controleur; /* Permet d'enregistrer le module */
 
-		initComponents(); /* Création des composants de la fenêtre */
+		initComponents(); /* Cr≈Ωation des composants de la fenÔøΩtre */
 
-		this.setVisible(true); /* Affichage de la fenêtre */
+		this.setVisible(true); /* Affichage de la fenÔøΩtre */
 
-	    this.txtModule.addMouseListener(this); /* Ajout du Listener de focus à la zone de saisie du nom de module */
+	    this.txtModule.addMouseListener(this); /* Ajout du Listener de focus ÀÜ la zone de saisie du nom de module */
 	    this.txtModule.addFocusListener(this);
 	}
 
@@ -144,7 +144,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == this.txtModule){
 			if( this.controleur.getModele().getFormation() == null ){
-				JOptionPane.showMessageDialog(null, "Veillez à créer une formation en premier lieu.");
+				JOptionPane.showMessageDialog(null, "Veillez ÀÜ cr≈Ωer une formation en premier lieu.");
 				this.txtFormation.requestFocus();
 			}
 		}
@@ -153,7 +153,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == this.btnSaveFormation) {
 			
-			/* Cas où le nom de la formation est incorrect */
+			/* Cas oÔøΩ le nom de la formation est incorrect */
 			if( !this.controleur.nouvelleFormation(this.txtFormation) ){
 
 				this.txtFormation.setBorder(new MatteBorder(1, 1, 1, 1, Color.RED));
@@ -161,7 +161,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 				
 			}
 			
-			this.btnSaveFormation.setText("Modifier"); /* Le bouton permet désormais de modifier le nom de la formation et non d'en créer une nouvelle */
+			this.btnSaveFormation.setText("Modifier"); /* Le bouton permet d≈Ωsormais de modifier le nom de la formation et non d'en cr≈Ωer une nouvelle */
 			this.btnSaveModule.setEnabled(true); /* On 	active le bouton permettant d'enregistrer les modules */
 			
 		} else if (evt.getSource() == this.btnOpenPlanning) {
@@ -169,10 +169,10 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 			try {
 				this.controleur.openPlanning(); /* Ouverture de l'explorateur de fichier et ouverture du fichier de planning */
 				
-				this.initSaisie(); /* Remet à zéro les anciennes saisies de la fenêtre */
+				this.initSaisie(); /* Remet ÀÜ z≈Ωro les anciennes saisies de la fenÔøΩtre */
 				this.txtFormation.setText(this.controleur.getModele().getFormation().nom_f); /* Renseigne le nom de la formation extraite du fichier ouvert */
 				repaint();
-				this.lblPath.setText( this.controleur.getChemin() ); /* Renseigne le chemin du fichier ouvert, à droite du bouton d'ouverture de fichier */
+				this.lblPath.setText( this.controleur.getChemin() ); /* Renseigne le chemin du fichier ouvert, ÀÜ droite du bouton d'ouverture de fichier */
 
 				Iterator it = this.controleur.getModele().getFormation().getModules().entrySet().iterator();
 
@@ -256,18 +256,18 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 					this.txtModule.setText("");
 				}
 				else{
-					int reponse = JOptionPane.showConfirmDialog(null,"Ce nom de module exite déjà.\n" + "Les données concernant ce module seront modifiés.\n" + "Souhaitez-vous continuer ?", "Module existant", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					int reponse = JOptionPane.showConfirmDialog(null,"Ce nom de module exite d≈ΩjÀÜ.\n" + "Les donn≈Ωes concernant ce module seront modifi≈Ωs.\n" + "Souhaitez-vous continuer ?", "Module existant", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					
 					if( reponse == JOptionPane.YES_NO_OPTION){
 						this.controleur.nouveauModule( this.txtModule.getText(), this.txtAbrev.getText(), couleur, Integer.parseInt(this.txtNbSeances.getText()) );
-						JOptionPane.showMessageDialog(null, "Modifications enregistrés.");
+						JOptionPane.showMessageDialog(null, "Modifications enregistr≈Ωs.");
 					}
 					
 				}
 			}
 			else{
 				
-				JOptionPane.showMessageDialog(null, "Le nom du module ne peut être vide.", "Nom de module incorrect", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Le nom du module ne peut ÔøΩtre vide.", "Nom de module incorrect", JOptionPane.WARNING_MESSAGE);
 				this.couleur = null;
 				repaint();
 				
@@ -276,7 +276,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		} else if (evt.getSource() == this.btnSavePlanning) {
 			try {
 				this.controleur.savePlanning();
-				JOptionPane.showMessageDialog(null, "Modification enregistrées sur le disque youpi !");
+				JOptionPane.showMessageDialog(null, "Modification enregistr≈Ωes sur le disque youpi !");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -303,34 +303,34 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 
 	private void initComponents() {
 
-		/* Définition de la taille et de la position de la fenêtre principale */
+		/* D≈Ωfinition de la taille et de la position de la fenÔøΩtre principale */
 		this.setSize((int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width * 0.75), (int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height * 0.75));
 
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE); /* La fermeture de la fenêtre entraine la fermeture du programme */
-		this.setUndecorated(true); /* Suppression de la barre de titre de la fenêtre */
-		this.setLocationRelativeTo(null); /* Permet de positionner la fenêtre au centre de l'écran */
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE); /* La fermeture de la fenÔøΩtre entraine la fermeture du programme */
+		this.setUndecorated(true); /* Suppression de la barre de titre de la fenÔøΩtre */
+		this.setLocationRelativeTo(null); /* Permet de positionner la fenÔøΩtre au centre de l'≈Ωcran */
 
 		this.btnCancel = new JButton("Quitter");
 		this.btnSaveFormation = new JButton("Enregistrer");
 		this.btnOpenPlanning = new JButton("Ouvrir un fichier");
-		this.btnLoadPlanning = new JButton("Générer le planning");
+		this.btnLoadPlanning = new JButton("G≈Ωn≈Ωrer le planning");
 		this.btnSaveModule = new JButton("Sauvegarder");
 		this.btnSavePlanning = new JButton("Enregistrer sur le disque");
 
 		this.lblPath = new JLabel("", JLabel.CENTER);
 		this.lblPath.setHorizontalAlignment(JLabel.LEFT);
 		this.lblCouleur = new JLabel("Couleur", JLabel.CENTER);
-		this.lblAbrevModule = new JLabel("Abréviation", JLabel.CENTER);
-		this.lblSavedModules = new JLabel("Modules enregistrés", JLabel.CENTER);
+		this.lblAbrevModule = new JLabel("Abr≈Ωviation", JLabel.CENTER);
+		this.lblSavedModules = new JLabel("Modules enregistr≈Ωs", JLabel.CENTER);
 
-		this.lblSousTitre = new JLabel("Pour commencer, vous pouvez soit ouvrir un fichier de planning existant, soit créer une nouvelle formation.", JLabel.CENTER);
+		this.lblSousTitre = new JLabel("Pour commencer, vous pouvez soit ouvrir un fichier de planning existant, soit cr≈Ωer une nouvelle formation.", JLabel.CENTER);
 		this.lblFormation = new JLabel("Nom de la formation", JLabel.CENTER);
 		this.lblModule = new JLabel("Nom du module", JLabel.CENTER);
 		this.lblTitre = new JLabel("Bienvenue sur votre outil de gestion de planning", JLabel.CENTER);
 
 		/*
-		 * Instanciation du conteneur de la fenêtre
-		 * Réecriture de la méthode paint component afin d'y ajouter un dégradé de couleurs
+		 * Instanciation du conteneur de la fenÔøΩtre
+		 * R≈Ωecriture de la m≈Ωthode paint component afin d'y ajouter un d≈Ωgrad≈Ω de couleurs
 		 */
 		this.conteneur = new JPanel() {@Override
 			protected void paintComponent(Graphics g) {
@@ -350,17 +350,17 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 
 		this.conteneur.setLayout(null); /* Affectation d'un layout null au ContentPane afin de positionner les composants comme voulu */
 		this.conteneur.setOpaque(false); /* Le ContentPane sera transparent */
-		this.conteneur.setSize(this.getSize()); /* Taille du conteneur égale à celle de la fenêtre */
-		this.setContentPane(this.conteneur); /* Le conteneur devient le ContentPane de la fenêtre principale */
-		largeurConteneur = this.conteneur.getWidth(); /* Affection de la largeur du conteneur à la variable */
-		hauteurConteneur = this.conteneur.getHeight(); /* Affection de la hauteur du conteneur à la variable */
+		this.conteneur.setSize(this.getSize()); /* Taille du conteneur ≈Ωgale ÀÜ celle de la fenÔøΩtre */
+		this.setContentPane(this.conteneur); /* Le conteneur devient le ContentPane de la fenÔøΩtre principale */
+		largeurConteneur = this.conteneur.getWidth(); /* Affection de la largeur du conteneur ÀÜ la variable */
+		hauteurConteneur = this.conteneur.getHeight(); /* Affection de la hauteur du conteneur ÀÜ la variable */
 
 
 		/*
-		 * Instanciation du Panel de sélection de la couleur du module
-		 * Réecriture de la méthode paintComponent pour l'afficher en tant que cercle
+		 * Instanciation du Panel de s≈Ωlection de la couleur du module
+		 * R≈Ωecriture de la m≈Ωthode paintComponent pour l'afficher en tant que cercle
 		 * Cercle vide si la variable "couleur" est nulle
-		 * Cercle plein si cette dernière ne l'est pas
+		 * Cercle plein si cette derniÔøΩre ne l'est pas
 		 */
 		this.lblCurrentColor = new JPanel() {@Override
 			protected void paintComponent(Graphics g) {
@@ -529,7 +529,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.scrollColors.getViewport().setOpaque(false);
 		this.conteneur.add(this.scrollColors);
 		
-		this.lblNbSeances = new JLabel("Nombre de séances", JLabel.CENTER);
+		this.lblNbSeances = new JLabel("Nombre de s≈Ωances", JLabel.CENTER);
 		this.lblNbSeances.setBounds((int)(largeurConteneur * 0.1 + (hauteurConteneur * 0.46 - hauteurConteneur * 0.45)), (int)(hauteurConteneur * 0.73), (int)(largeurConteneur * 0.15), (int)(hauteurConteneur * 0.075));
 		this.lblNbSeances.setOpaque(false);
 		this.lblNbSeances.setForeground(Color.WHITE);
@@ -659,7 +659,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	}
 
 	/*
-	 * Réinitialisation des saisie
+	 * R≈Ωinitialisation des saisie
 	 */
 	public void initSaisie(){
 		this.txtFormation.setText("");

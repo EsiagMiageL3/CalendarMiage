@@ -1,4 +1,4 @@
-package src.vue;
+package vue;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,9 +9,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import src.modele.Jour;
-import src.modele.ModeleStatiqueObjet;
-import src.modele.Semaine;
+import modele.Jour;
+import modele.ModeleStatiqueObjet;
+import modele.Semaine;
 
 
 
@@ -22,7 +22,7 @@ public class detailJour extends JFrame {
         super();
         
         this.semaine = semaine;
-        setTitle("JTable avec modèle statique");
+        setTitle("JTable avec modÔøΩle statique");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
         JTable tableau = new JTable(new ModeleStatiqueObjet( semaine.getLstjours() ));

@@ -1,4 +1,4 @@
-package src.modele;
+package modele;
 
 import java.text.DateFormat;
 import java.text.Format;
@@ -13,7 +13,7 @@ public class Semaine {
 	
 	private String annee;
 	private int numeroSemaine;
-	private Hashtable<String, Jour> lst_JourSemaine; /* Clé = date du jour */
+	private Hashtable<String, Jour> lst_JourSemaine; /* Cl≈Ω = date du jour */
 	
 	
 	public Semaine(String annee, int numero){
@@ -39,16 +39,16 @@ public class Semaine {
 		/* Instanciation du calendrier */
 		Calendar c = Calendar.getInstance();
 
-		/* Positionnement du calendrier à l'annee passée en paramètre */
+		/* Positionnement du calendrier ÀÜ l'annee pass≈Ωe en paramÔøΩtre */
 		c.set(Calendar.YEAR, annee);
 		
-		/* Positionnement du calendrier au numéro de semaine passé en paramètre */
+		/* Positionnement du calendrier au num≈Ωro de semaine pass≈Ω en paramÔøΩtre */
 		c.set(Calendar.WEEK_OF_YEAR, numSemaine);
 
 		/* Positionnement du calendrier au jour premier jour de la semaine */
 		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 
-		/* Définition du format de restitution de la date du jour */
+		/* D≈Ωfinition du format de restitution de la date du jour */
 		DateFormat df = new SimpleDateFormat("dd_MM_yyyy");
 		
 		for (int i = 0; i < 7; i++) {
@@ -59,7 +59,7 @@ public class Semaine {
 		   DateFormat formatterMois = new SimpleDateFormat("MMMM"); 
 		   String mois = formatterMois.format( c.getTime() );
 		   
-		   /* Création du jour */
+		   /* Cr≈Ωation du jour */
 		   Jour jourSemaine = new Jour( df.format(c.getTime()), numSemaine, nom, mois );
 		   
 		    

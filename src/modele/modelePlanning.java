@@ -1,29 +1,20 @@
-<<<<<<< HEAD
 package modele;
 // je pense que tu tes tromper cela devais etre dans les controleur 
 //et ta classe qui ce trouve dans les controleeur doit etre dans le modéle 
 import java.awt.Color;
-=======
-package src.modele;
 
 import java.awt.Color;
-<<<<<<< HEAD
 import java.io.Serializable;
-=======
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
->>>>>>> origin/master
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
->>>>>>> origin/master
-
-import src.vue.vuePlanning;
+import vue.vuePlanning;
 
 
 public class modelePlanning implements Serializable{

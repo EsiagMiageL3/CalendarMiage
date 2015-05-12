@@ -1,4 +1,4 @@
-package src.modele;
+package modele;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;

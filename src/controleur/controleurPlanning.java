@@ -1,4 +1,4 @@
-package src.controleur;
+package controleur;
 import java.awt.Color;
 import java.awt.Component;
 import java.io.*;
@@ -8,8 +8,8 @@ import java.util.Map;
 
 import javax.swing.*;
 
-import src.modele.Module;
-import src.modele.modelePlanning;
+import modele.Module;
+import modele.modelePlanning;
 
 public class controleurPlanning {
 	// Instance du modele du planning
@@ -25,39 +25,39 @@ public class controleurPlanning {
 	public boolean nouvelleFormation(JTextField txtFormation){
 		if( !txtFormation.getText().trim().equals( "" ) ){
 			this.modele.addFormation( txtFormation.getText() );
-			JOptionPane.showMessageDialog(null,"Formation créée !");
+			JOptionPane.showMessageDialog(null,"Formation cr≈Ω≈Ωe !");
 			return true;
 		}
 		else{
-			System.out.println( "Nom de formation éronnée" );
-			JOptionPane.showMessageDialog(null,"Le nom de la formation ne peut être vide." , "Nom de formation incorrect", JOptionPane.WARNING_MESSAGE);
+			System.out.println( "Nom de formation ≈Ωronn≈Ωe" );
+			JOptionPane.showMessageDialog(null,"Le nom de la formation ne peut ÔøΩtre vide." , "Nom de formation incorrect", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 	}
 	
 	/*
-	 * Méthode vérifiant si la couleur choisie pour un module a déjà été attribué à un autre
-	 * Retourne false si la couleur est déjà prise
+	 * M≈Ωthode v≈Ωrifiant si la couleur choisie pour un module a d≈ΩjÀÜ ≈Ωt≈Ω attribu≈Ω ÀÜ un autre
+	 * Retourne false si la couleur est d≈ΩjÀÜ prise
 	 * Retourne true le cas contraire 
 	 */
 	public boolean checkCouleurPrise(Color couleurChoisie){
 		
-		boolean trouvé = false;
+		boolean trouv≈Ω = false;
 		
-		/* On crée l'itérateur permettant de parcourir la map */
+		/* On cr≈Ωe l'it≈Ωrateur permettant de parcourir la map */
 		Iterator it = this.modele.getFormation().getModules().entrySet().iterator();
 		
-		/* Si l'on rencontre la couleur lors du parcours, le booleen trouvé passe à true */ 
+		/* Si l'on rencontre la couleur lors du parcours, le booleen trouv≈Ω passe ÀÜ true */ 
 		while (it.hasNext()) {
 			final Map.Entry pair = (Map.Entry) it.next();
 			if( this.modele.getFormation().getModules().get( (String) pair.getKey() ).couleurModule == couleurChoisie  ){
-				trouvé = true;
+				trouv≈Ω = true;
 			}
 		}
 		
-		/* Si la couleur est déjà présente, affichage du message d'erreur et renvoie de la valeur False */ 
-		if( trouvé ){
-			JOptionPane.showMessageDialog(null, "La couleur est déjà prise pour un autre module, veuillez en choisir une autre ou modifier celle du module.");
+		/* Si la couleur est d≈ΩjÀÜ pr≈Ωsente, affichage du message d'erreur et renvoie de la valeur False */ 
+		if( trouv≈Ω ){
+			JOptionPane.showMessageDialog(null, "La couleur est d≈ΩjÀÜ prise pour un autre module, veuillez en choisir une autre ou modifier celle du module.");
 			return false;
 		}
 		else{
@@ -67,26 +67,26 @@ public class controleurPlanning {
 	}
 	
 	/*
-	 * Méthode vérifiant si le nom du nouveau module est celui d'un déjà existant
-	 * Retourne false si la couleur est déjà prise
+	 * M≈Ωthode v≈Ωrifiant si le nom du nouveau module est celui d'un d≈ΩjÀÜ existant
+	 * Retourne false si la couleur est d≈ΩjÀÜ prise
 	 * Retourne true le cas contraire 
 	 */
 	public boolean checkNomModule(String nomModule){
-		boolean trouvé = false;
+		boolean trouv≈Ω = false;
 		
-		/* On crée l'itérateur permettant de parcourir la map */
+		/* On cr≈Ωe l'it≈Ωrateur permettant de parcourir la map */
 		Iterator it = this.modele.getFormation().getModules().entrySet().iterator();
 		
-		/* Si l'on rencontre le nom lors du parcours, le booleen trouvé passe à true */ 
+		/* Si l'on rencontre le nom lors du parcours, le booleen trouv≈Ω passe ÀÜ true */ 
 		while (it.hasNext()) {
 			final Map.Entry pair = (Map.Entry) it.next();
 			if( this.modele.getFormation().getModules().get( (String) pair.getKey() ).nom_m.equals( nomModule ) ){
-				trouvé = true;
+				trouv≈Ω = true;
 			}
 		}
 		
-		/* Si le nom est déjà présent, affichage du message d'erreur et renvoie de la valeur False */ 
-		if( trouvé ){
+		/* Si le nom est d≈ΩjÀÜ pr≈Ωsent, affichage du message d'erreur et renvoie de la valeur False */ 
+		if( trouv≈Ω ){
 				return false;
 			
 		}
@@ -106,7 +106,7 @@ public class controleurPlanning {
 	}
 	
 	public boolean supprModule(String key){
-		int reponse = JOptionPane.showConfirmDialog(null,"Vous êtes sur le point de supprimer le module " + key + ".\n" + "Les éventuelles séances attribuées à ce module seront également supprimé.\n" + "Souhaitez-vous continuer ?", "Suppression du module " + key, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int reponse = JOptionPane.showConfirmDialog(null,"Vous ÔøΩtes sur le point de supprimer le module " + key + ".\n" + "Les ≈Ωventuelles s≈Ωances attribu≈Ωes ÀÜ ce module seront ≈Ωgalement supprim≈Ω.\n" + "Souhaitez-vous continuer ?", "Suppression du module " + key, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
 		if( reponse == JOptionPane.YES_NO_OPTION){
 			this.modele.supprModule(key);
@@ -120,7 +120,7 @@ public class controleurPlanning {
 	
 	public void savePlanning() throws IOException{
 		JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle("Choisissez le dossier où enregistrer le fichier de votre planning");
+		chooser.setDialogTitle("Choisissez le dossier oÔøΩ enregistrer le fichier de votre planning");
 		int returnVal = chooser.showSaveDialog(null);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
 		   System.out.println("You chose to open this directory: " +
@@ -163,9 +163,9 @@ public class controleurPlanning {
 		    	  	this.modele = null;
 		    	  	this.modele = (modelePlanning) input.readObject();
 			      } catch (ClassNotFoundException e) {
-			    	  JOptionPane.showMessageDialog(null, "Ce fichier ne contient aucune donnée de planning !");
+			    	  JOptionPane.showMessageDialog(null, "Ce fichier ne contient aucune donn≈Ωe de planning !");
 			      } catch (InvalidClassException e) {
-			    	  JOptionPane.showMessageDialog(null, "Ce fichier ne contient pas de données de planning valides.");
+			    	  JOptionPane.showMessageDialog(null, "Ce fichier ne contient pas de donn≈Ωes de planning valides.");
 			      } catch (IOException e) {
 			    	  JOptionPane.showMessageDialog(null, "Ouverture du fichier impossible.");
 				}

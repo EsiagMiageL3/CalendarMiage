@@ -2,12 +2,12 @@ package modele;
 /// cela va etre la fin du modèle 
 import javax.swing.JOptionPane;
 
-import logique.Filiere;
+//import logique.Filiere;
 
 
 public class ApplicationFinal {
 	
-	public static void supprimerModule(Module m) 
+	/*public static void supprimerModule(Module m) 
 	{
 		 Module.remove(m);
 	}
@@ -18,15 +18,15 @@ public class ApplicationFinal {
 	public static void supprimerFiliere(Filiere f) 
 	{
 		Filiere.remove(f);
-	}
-}
+	}*/
 
-public void addSeance(Seance nouvelleSeance) {
+
+/*public void addSeance(Seance nouvelleSeance) {
 	this.lst_Seance.add(nouvelleSeance);
 	JOptionPane.showMessageDialog(null, "La nouvelle " + nouvelleSeance.nom_seance + " a �t� ajout� avec succ�s au module " + this.nom_m);
 }
 
-	
+
 	
 	
 	
@@ -68,11 +68,11 @@ public void addSeance(Seance nouvelleSeance) {
 			  }
 		 prof = null;
 	}
-
+*/
 	
 	
 	
-	
+	}
 	
 	
 	

@@ -1,4 +1,4 @@
-package src.vue;
+package vue;
 
 import javax.swing.*;
 
@@ -26,9 +26,9 @@ import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
-import src.controleur.controleurPlanning;
-import src.modele.Formation;
-import src.modele.Semaine;
+import controleur.controleurPlanning;
+import modele.Formation;
+import modele.Semaine;
 
 public class detailSemaine extends JFrame implements ActionListener, FocusListener, MouseListener  {
 	
@@ -54,13 +54,13 @@ public class detailSemaine extends JFrame implements ActionListener, FocusListen
 	
 	private void initComponents() {
 
-		/* Définition de la taille et de la position de la fenêtre principale */
+		/* D≈Ωfinition de la taille et de la position de la fenÔøΩtre principale */
 		this.setSize((int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width * 0.95), (int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height * 0.95));
-		this.setUndecorated(true); /* Suppression de la barre de titre de la fenêtre */
-		this.setLocationRelativeTo(null); /* Permet de positionner la fenêtre au centre de l'écran */
+		this.setUndecorated(true); /* Suppression de la barre de titre de la fenÔøΩtre */
+		this.setLocationRelativeTo(null); /* Permet de positionner la fenÔøΩtre au centre de l'≈Ωcran */
 		/*
-		 * Instanciation du conteneur de la fenêtre
-		 * Réecriture de la méthode paint component afin d'y ajouter un dégradé de couleurs
+		 * Instanciation du conteneur de la fenÔøΩtre
+		 * R≈Ωecriture de la m≈Ωthode paint component afin d'y ajouter un d≈Ωgrad≈Ω de couleurs
 		 */
 		this.conteneur = new JPanel() {@Override
 			protected void paintComponent(Graphics g) {
@@ -80,10 +80,10 @@ public class detailSemaine extends JFrame implements ActionListener, FocusListen
 
 		this.conteneur.setLayout(null); /* Affectation d'un layout null au ContentPane afin de positionner les composants comme voulu */
 		this.conteneur.setOpaque(false); /* Le ContentPane sera transparent */
-		this.conteneur.setSize(this.getSize()); /* Taille du conteneur égale à celle de la fenêtre */
-		this.setContentPane(this.conteneur); /* Le conteneur devient le ContentPane de la fenêtre principale */
-		largeurConteneur = this.conteneur.getWidth(); /* Affection de la largeur du conteneur à la variable */
-		hauteurConteneur = this.conteneur.getHeight(); /* Affection de la hauteur du conteneur à la variable */
+		this.conteneur.setSize(this.getSize()); /* Taille du conteneur ≈Ωgale ÀÜ celle de la fenÔøΩtre */
+		this.setContentPane(this.conteneur); /* Le conteneur devient le ContentPane de la fenÔøΩtre principale */
+		largeurConteneur = this.conteneur.getWidth(); /* Affection de la largeur du conteneur ÀÜ la variable */
+		hauteurConteneur = this.conteneur.getHeight(); /* Affection de la hauteur du conteneur ÀÜ la variable */
 		
 		this.cadreSeances = new JPanel( new GridLayout(0, 8, 7, 0) );
 		this.cadreSeances.setOpaque(false);

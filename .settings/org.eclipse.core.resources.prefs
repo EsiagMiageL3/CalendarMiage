@@ -1,12 +1,19 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=origin/master
 eclipse.preferences.version=1
+encoding//src/controleur/controleurPlanning.java=UTF-8
 encoding//src/exception/RechercheFormationException.java=UTF-8
 encoding//src/exception/RechercheSeanceException.java=UTF-8
 encoding//src/modele/ApplicationFinal.java=UTF-8
 encoding//src/modele/Module.java=UTF-8
 encoding//src/modele/Seance.java=UTF-8
-<<<<<<< HEAD
+encoding//src/modele/Semaine.java=UTF-8
 encoding//src/modele/modelePlanning.java=UTF-8
 encoding//src/test/ApplicationTest.java=UTF-8
-=======
->>>>>>> origin/master
 encoding//src/test/MainTest.java=UTF-8
+encoding//src/vue/detailJour.java=UTF-8
+encoding//src/vue/detailSemaine.java=UTF-8
+encoding//src/vue/vueAcceuil2.java=UTF-8
+encoding//src/vue/vueNewModule.java=UTF-8
+encoding//src/vue/vuePlanning.java=UTF-8

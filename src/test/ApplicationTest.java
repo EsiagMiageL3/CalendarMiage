@@ -2,11 +2,7 @@ package test;// Avooir si il faut suprimer
 
 import modele.Module;
 import modele.Formation;
-//<<<<<<< Updated upstream
-//=======
 import modele.Seance;
-
-//>>>>>>> Stashed changes
 import modele.Module;
 import modele.Formation;
 

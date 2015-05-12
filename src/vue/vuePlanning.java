@@ -1,4 +1,4 @@
-package src.vue;
+package vue;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -14,18 +14,18 @@ import org.joda.time.Weeks;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import src.controleur.controleurPlanning;
-import src.modele.Formation;
-import src.modele.Jour;
-import src.modele.Module;
-import src.modele.Semaine;
-import src.modele.modelePlanning;
+import controleur.controleurPlanning;
+import modele.Formation;
+import modele.Jour;
+import modele.Module;
+import modele.Semaine;
+import modele.modelePlanning;
 
 import java.text.*;
 
 public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	
-	private int largeurConteneur, hauteurConteneur; /* Variables contenant la hauteur et largeur de la fenêtre */
+	private int largeurConteneur, hauteurConteneur; /* Variables contenant la hauteur et largeur de la fenÔøΩtre */
 	private Formation fm;
 	
 	private controleurPlanning Controleur;
@@ -54,12 +54,12 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 		this.setVisible(true);
 	}
  
-	// Récupérer la largeur de l'écran
+	// R≈Ωcup≈Ωrer la largeur de l'≈Ωcran
 	public static int largeurEcran() {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
 	}
 
-	// Récupérer la hauteur de l'écran
+	// R≈Ωcup≈Ωrer la hauteur de l'≈Ωcran
 	public static int hauteurEcran() {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
 	}
@@ -120,18 +120,18 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	                };
 	                
 	                /*
-	                 *  Aucun layout pour permettre de positionner les composants précisemment
-	                 *  en fonction de la taille de l'écran
+	                 *  Aucun layout pour permettre de positionner les composants pr≈Ωcisemment
+	                 *  en fonction de la taille de l'≈Ωcran
 	                 */
 	                conteneur.setLayout(null);
 	                
 	                /*
-	                 *  Défintion du ContentPane de la fenêtre
+	                 *  D≈Ωfintion du ContentPane de la fenÔøΩtre
 	                 */
 	                this.setContentPane(conteneur);
 	                this.setUndecorated(true);
-	        		largeurConteneur = this.getWidth(); /* Affection de la largeur du conteneur à la variable */
-	        		hauteurConteneur = this.getHeight(); /* Affection de la hauteur du conteneur à la variable */
+	        		largeurConteneur = this.getWidth(); /* Affection de la largeur du conteneur ÀÜ la variable */
+	        		hauteurConteneur = this.getHeight(); /* Affection de la hauteur du conteneur ÀÜ la variable */
 	                /*
 	                 *  Panel contenant le planning
 	                 */
@@ -142,7 +142,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	                planning.setBackground(new Color(80,80,80));
 	                /*
 	                 *  JScrollPane contenant le Panel du planning
-	                 *  Définition de sa dimension et de sa position
+	                 *  D≈Ωfinition de sa dimension et de sa position
 	                 */
 	                JScrollPane Jscroll = new JScrollPane();
 	                Jscroll.setBounds( (int) ( largeurConteneur * 0.01 ), (int) ( hauteurConteneur * 0.05 ), (int) ( largeurConteneur * 0.9 ), (int) ( hauteurConteneur * 0.9) );
@@ -233,7 +233,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	                
 	                /*
 	                 *  Panel contenant les controles
-	                 *  Définition de ses tailles et positions
+	                 *  D≈Ωfinition de ses tailles et positions
 	                 *  Ajout au ContentPane
 	                 */
 	        		JPanel test = new JPanel();
@@ -299,7 +299,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        		
 	        		test.add(this.pnlInfos);
 	        		
-	               //Anciennne facon de définir les labels
+	               //Anciennne facon de d≈Ωfinir les labels
 	        		
 	        		
 	        		Date vraiDateduJour;
@@ -346,7 +346,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	                	cadreMois.add(Samedi);
 	                	cadreMois.add(Dimanche);
 	                	
-	        			//9 = octobre, décalage au mois supérieur
+	        			//9 = octobre, d≈Ωcalage au mois sup≈Ωrieur
 	        			GregorianCalendar calendrier = new GregorianCalendar(2014, cptMois, 1);
 
 	        			int nbJours = calendrier.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
@@ -369,13 +369,13 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        					jour.setFont(new Font("Arial", Font.PLAIN, 9));
 	                    		jour.setText("" + (j - (premierJour - 2)));
 	                    		cadreMois.add(jour);
-	                    		//Création d'un calendrier à la date du bouton
+	                    		//Cr≈Ωation d'un calendrier ÀÜ la date du bouton
 	        					final GregorianCalendar calendrier2 = new GregorianCalendar(2014, cptMois, (j - (premierJour - 2)));
 
-	        					//Définition du format utilisé pour extraire la date
+	        					//D≈Ωfinition du format utilis≈Ω pour extraire la date
 	        					DateFormat df = new SimpleDateFormat("dd_MM_yyyy");
 
-	        					//On récupère la date
+	        					//On r≈ΩcupÔøΩre la date
 	        					Date dateButton = calendrier2.getTime();
 	        					
 	        					//
@@ -392,8 +392,8 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        						jour.setForeground(Color.WHITE);
 	        						jour.addActionListener(new ActionListener() {
 	        							public void actionPerformed(ActionEvent evt) {
-	        								JOptionPane.showMessageDialog(null, "Les jours de weekend ne sont pas éditables.", "Jour non éditable", JOptionPane.WARNING_MESSAGE);
-	        								//afficherModulesEnregistrés();
+	        								JOptionPane.showMessageDialog(null, "Les jours de weekend ne sont pas ≈Ωditables.", "Jour non ≈Ωditable", JOptionPane.WARNING_MESSAGE);
+	        								//afficherModulesEnregistr≈Ωs();
 	        							}
 	        						});
 	        					} else {
@@ -441,13 +441,13 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 		
 	}
 	
-	// Récupérer la largeur de l'écran
+	// R≈Ωcup≈Ωrer la largeur de l'≈Ωcran
 	public static int getLargeurEcran() {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
 	}
 
 	public void createWeeks() {
-		/* Création des semaines de l'année supérieure */
+		/* Cr≈Ωation des semaines de l'ann≈Ωe sup≈Ωrieure */
 		//this.fm = new Formation("Java");
 		
 		DateTime dateTime1 = new DateTime( 2015, 1, 1, 0, 0, 0 );
@@ -468,7 +468,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	
 	
 	
-	// Récupérer la hauteur de l'écran
+	// R≈Ωcup≈Ωrer la hauteur de l'≈Ωcran
 	public static int getHauteurEcran() {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
 	}

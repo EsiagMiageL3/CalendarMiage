@@ -1,4 +1,4 @@
-package src.vue;
+package vue;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,8 +7,8 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import src.modele.Formation;
-import src.modele.Module;
+import modele.Formation;
+import modele.Module;
 
 /**
  *
@@ -27,7 +27,7 @@ public class vueNewModule extends javax.swing.JFrame {
 				
 				  //planning.getLstModules().add( new Module(nomModule(), abrevModule(), "il", 2, 2) );
 				//formation.addModule( new Module(nomModule(), abrevModule(), "il", 2, 2));
-				JOptionPane.showMessageDialog(null, "Le module " + nomModule() + " a été ajouté avec succès à la formation " + formation.nom_f);
+				JOptionPane.showMessageDialog(null, "Le module " + nomModule() + " a ≈Ωt≈Ω ajout≈Ω avec succÔøΩs ÀÜ la formation " + formation.nom_f);
 			
 			}
 		});
@@ -78,12 +78,12 @@ public class vueNewModule extends javax.swing.JFrame {
         jLabel2.setBackground(new java.awt.Color(51, 102, 255));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Abréviation du nom");
+        jLabel2.setText("Abr≈Ωviation du nom");
         jLabel2.setToolTipText("");
         jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jLabel2.setOpaque(true);
 
-        jTextField2.setText("Saisissez une abréviation");
+        jTextField2.setText("Saisissez une abr≈Ωviation");
 
         jLabel3.setBackground(new java.awt.Color(51, 102, 255));
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -98,7 +98,7 @@ public class vueNewModule extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(51, 102, 255));
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Nombre de séances");
+        jLabel4.setText("Nombre de s≈Ωances");
         jLabel4.setToolTipText("");
         jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jLabel4.setOpaque(true);
@@ -109,7 +109,7 @@ public class vueNewModule extends javax.swing.JFrame {
         jLabel5.setBackground(new java.awt.Color(51, 153, 255));
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Création d'un nouveau module de formation");
+        jLabel5.setText("Cr≈Ωation d'un nouveau module de formation");
         jLabel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jLabel5.setOpaque(true);
 

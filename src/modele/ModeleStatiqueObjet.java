@@ -1,4 +1,4 @@
-package src.modele;
+package modele;
 
 import java.awt.Color;
 import java.util.ArrayList;

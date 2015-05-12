@@ -1,7 +1,7 @@
-package src.test;
+package test;
 
-import src.exception.RechercheSeanceException;
-import src.modele.Seance;
+import exception.RechercheSeanceException;
+import modele.Seance;
 
 public class SeanceTest {
 
