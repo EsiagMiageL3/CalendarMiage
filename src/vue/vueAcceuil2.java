@@ -513,7 +513,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.scrollColors.getViewport().setOpaque(false);
 		this.conteneur.add(this.scrollColors);
 		
-		this.lblNbSeances = new JLabel("Nombre de sŽances", JLabel.CENTER);
+		this.lblNbSeances = new JLabel("Nombre de seances", JLabel.CENTER);
 		this.lblNbSeances.setBounds((int)(largeurConteneur * 0.1 + (hauteurConteneur * 0.46 - hauteurConteneur * 0.45)), (int)(hauteurConteneur * 0.73), (int)(largeurConteneur * 0.15), (int)(hauteurConteneur * 0.075));
 		this.lblNbSeances.setOpaque(false);
 		this.lblNbSeances.setForeground(Color.WHITE);

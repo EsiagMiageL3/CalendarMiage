@@ -106,7 +106,7 @@ public class controleurPlanning {
 	}
 	
 	public boolean supprModule(String key){
-		int reponse = JOptionPane.showConfirmDialog(null,"Vous �tes sur le point de supprimer le module " + key + ".\n" + "Les Žventuelles sŽances attribuŽes ˆ ce module seront Žgalement supprimŽ.\n" + "Souhaitez-vous continuer ?", "Suppression du module " + key, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int reponse = JOptionPane.showConfirmDialog(null,"Vous etes sur le point de supprimer le module " + key + ".\n" + "Les eventuelles seances attribuees ˆ ce module seront Žgalement supprimŽ.\n" + "Souhaitez-vous continuer ?", "Suppression du module " + key, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
 		if( reponse == JOptionPane.YES_NO_OPTION){
 			this.modele.supprModule(key);
@@ -120,12 +120,10 @@ public class controleurPlanning {
 	
 	public void savePlanning() throws IOException{
 		JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle("Choisissez le dossier o� enregistrer le fichier de votre planning");
+		chooser.setDialogTitle("Choisissez le dossier ou enregistrer le fichier de votre planning");
 		int returnVal = chooser.showSaveDialog(null);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
-		   System.out.println("You chose to open this directory: " +
-		        chooser.getSelectedFile().getAbsolutePath());
-		   
+			
 			this.output = new ObjectOutputStream(
 		              new BufferedOutputStream(
 		                new FileOutputStream(
@@ -151,8 +149,7 @@ public class controleurPlanning {
 		chooser.setDialogTitle("Choisissez le fichier de votre planning");
 		int returnVal = chooser.showOpenDialog(null);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
-		   System.out.println("You chose to open this directory: " +
-		        chooser.getSelectedFile().getAbsolutePath());
+
 		   
 			this.input = new ObjectInputStream(
 			          new BufferedInputStream(

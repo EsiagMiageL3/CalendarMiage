@@ -13,12 +13,14 @@ import modele.Formation;
 
 public class Htmltest {
 	public static modelePlanning p = new modelePlanning();
-
+//	private 
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		final String chemin_planning = "D:/test.html";
-	    final File fichier_planning =new File(chemin_planning); 
+		final String chemin_planning = "/Users/nounoursmoelleux/test.html";
+	    final File fichier_planning = new File(chemin_planning); 
+	    
         try {
             // Creation du fichier 
         	fichier_planning.createNewFile();
@@ -27,7 +29,7 @@ public class Htmltest {
             try {
                 writer.write("<html><head>"
 			+ "<title>Planning</title>"
-			+ "<link rel=stylesheet href=D:/test.css />"
+			+ "<link rel=stylesheet href=/Users/nounoursmoelleux/test.css/>"
 			+ "<h1><center>2014-2015</h1></center>"
 			+ "</head>"
 			+ "<table border=1 style=overflow:auto>"
@@ -51,6 +53,9 @@ public class Htmltest {
 				+ "<td bgcolor=#000000><font color=white><center>2</center></td>"
 				+ "<td bgcolor=#000000><font color=white><center>3</center></td>"
 			+ "</tr>"
+			
+			
+			
 			+ "<tr>"
 				+ "<td bgcolor=#48D1CC><font color=white><center>4</center></td>"
 				+ "<td bgcolor=#48D1CC><font color=white><center>5</center></td>"
@@ -97,12 +102,12 @@ public class Htmltest {
                 writer.close();
             }
         } catch (Exception e) {
-            System.out.println("Impossible de créer le fichier");
+            System.out.println("Impossible de creer le fichier");
         }
         
         try{
         Desktop d = Desktop.getDesktop();
-        d.browse(new URI("D:/test.html"));
+        d.browse( new URI("D:/test.html") );
         }catch(URISyntaxException e){
         	
         }catch(IOException e){

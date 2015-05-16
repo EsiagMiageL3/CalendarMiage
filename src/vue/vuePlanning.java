@@ -69,16 +69,6 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
 	}
 
-	//public void saisieModule(){
-	//0	vueNewModule saisieModule = new vueNewModule(this);
-//	}
-
-
-
-
-
-
-
 	private void initComponents() {
 	           
 	        		
@@ -105,17 +95,17 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	                
 	                /*
 	                 *  Aucun layout pour permettre de positionner les composants prŽcisemment
-	                 *  en fonction de la taille de l'Žcran
+	                 *  en fonction de la taille de l'ecran
 	                 */
 	                conteneur.setLayout(null);
 	                
 	                /*
-	                 *  DŽfintion du ContentPane de la fen�tre
+	                 *  DŽfintion du ContentPane de la fenetre
 	                 */
 	                this.setContentPane(conteneur);
 	                this.setUndecorated(true);
-	        		largeurConteneur = this.getWidth(); /* Affection de la largeur du conteneur ˆ la variable */
-	        		hauteurConteneur = this.getHeight(); /* Affection de la hauteur du conteneur ˆ la variable */
+	        		largeurConteneur = this.getWidth(); /* Affection de la largeur du conteneur a la variable */
+	        		hauteurConteneur = this.getHeight(); /* Affection de la hauteur du conteneur a la variable */
 	                /*
 	                 *  Panel contenant le planning
 	                 */
@@ -126,7 +116,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	                planning.setBackground(new Color(80,80,80));
 	                /*
 	                 *  JScrollPane contenant le Panel du planning
-	                 *  DŽfinition de sa dimension et de sa position
+	                 *  Definition de sa dimension et de sa position
 	                 */
 	                JScrollPane Jscroll = new JScrollPane();
 	                Jscroll.setBounds( (int) ( largeurConteneur * 0.01 ), (int) ( hauteurConteneur * 0.05 ), (int) ( largeurConteneur * 0.9 ), (int) ( hauteurConteneur * 0.9) );
@@ -140,7 +130,6 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	                settings.setFont(new Font("Arial", Font.PLAIN, 40));
 	                settings.setHorizontalAlignment(JLabel.CENTER);
 	                
-
 	                conteneur.add( settings );
 	                
 	                final JPanel sideBar = new JPanel(new GridLayout(10, 1, 20,0));
@@ -446,20 +435,18 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	}
 
 	public void createWeeks() {
-		/* CrŽation des semaines de l'annŽe supŽrieure */
-		//this.fm = new Formation("Java");
+
+		
+		/* Creation des semaines de l'annee superieure */
 		
 		DateTime dateTime1 = new DateTime( 2015, 1, 1, 0, 0, 0 );
 		DateTime dateTime2 = new DateTime(2015, 8, 31, 0, 0, 0);
 
 		int weeks = Weeks.weeksBetween(dateTime1, dateTime2).getWeeks();
 		int days = Days.daysBetween(dateTime1, dateTime2).getDays();
-
-		//JOptionPane.showMessageDialog(null, weeks);
 		
 		for( int i = 1; i < weeks + 1; ++i){
 			Semaine semaine2015 = new Semaine( "2015", i );
-			//this.fm.addSemaine(Integer.toString(i), semaine2015);
 			this.Controleur.getModele().getFormation().addSemaine(Integer.toString(i), semaine2015);
 		}
 		
@@ -494,7 +481,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 		this.setControleur(semaine.getControleur()); /* Action exécutée lors de la fermeture de la fenêtre modale */
 	}
 	
-	// RŽcupŽrer la hauteur de l'Žcran
+	// Recuperer la hauteur de l'ecran
 	public static int getHauteurEcran() {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
 	}
