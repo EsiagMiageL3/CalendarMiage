@@ -2,6 +2,7 @@ package test;
 
 
 import controleur.controleurPlanning;
+import modele.Formation;
 import modele.modelePlanning;
 import vue.*;
 
@@ -16,7 +17,10 @@ public class MainTest {
 		controleurPlanning controleur = new controleurPlanning(modele );
 		
 		vueAcceuil2 acc2 = new vueAcceuil2(controleur);
-
+		
+		
+		
+		
 	}
 }
 
