@@ -109,9 +109,21 @@ public class vueChoixModuleSeance extends JPanel implements ItemListener{
 				this.lblDuree.setBounds( (int) 0, (int) (hauteurConteneur * 0.32), (int) (largeurConteneur * 0.3), (int) (hauteurConteneur * 0.15) );
 				this.conteneur.add( this.lblDuree );
 				
-				this.txtDuree = new JTextField();
+				this.txtDuree = new JTextField("1");
 				this.txtDuree.setBounds( (int) (hauteurConteneur * 0.31), (int) (hauteurConteneur * 0.32), (int) (largeurConteneur * 0.5), (int) (hauteurConteneur * 0.15) );
 				this.conteneur.add(this.txtDuree);
+				
+				this.infoEnregistrement = new JLabel("La séance sera ajouté à la fermeture de la fenetre", JLabel.CENTER);
+				this.infoEnregistrement.setHorizontalAlignment( JLabel.CENTER );
+				this.infoEnregistrement.setOpaque( false );
+				this.infoEnregistrement.setForeground( new Color(80, 80, 80) );
+				this.infoEnregistrement.setBounds( (int) 2, (int) (hauteurConteneur * 0.8), (int) (largeurConteneur) - 4, (int) (hauteurConteneur * 0.1)  );
+				this.infoEnregistrement.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+				
+				this.conteneur.add( this.infoEnregistrement );
+				
+				this.conteneur.add( this.lblDuree );
+				
 	}
 	
 	public int getDureeSeance(){
