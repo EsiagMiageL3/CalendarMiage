@@ -97,7 +97,7 @@ public class Htmltest {
                 writer.close();
             }
         } catch (Exception e) {
-            System.out.println("Impossible de créer le fichier");
+            System.out.println("Impossible de crÃ©er le fichier");
         }
         
         try{
@@ -108,7 +108,6 @@ public class Htmltest {
         }catch(IOException e){
         	
         }
-//test
     }
 
 }

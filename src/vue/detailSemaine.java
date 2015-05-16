@@ -195,7 +195,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		     				
 		     				
 		     				
-		     				 String nom = ( (JPanel) e.getSource() ).getName();
+		     				String nom = ( (JPanel) e.getSource() ).getName();
 		     				String value = nom;
 		     				
 		     				String lettres =  value.replaceAll("\\d","");
