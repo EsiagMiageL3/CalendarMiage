@@ -48,10 +48,8 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 	private String[] tblJours = { "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche" };
 	
 	private HashMap<String, JLabel> lst_LblJours = new HashMap<String, JLabel>();
-	
-	
+
 	private HashMap<String, JPanel> lst_PnlSeances = new HashMap<String, JPanel>();
-	
 	
 	private int  largeurConteneur, hauteurConteneur;
 	
@@ -63,7 +61,6 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		
 	}
 	
-
 	private void initComponents() {
 		
 		/* Definition de la taille de la fenetre principale */
@@ -178,7 +175,12 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 					final Window fenetreParent = SwingUtilities.getWindowAncestor(this); /* Référence à la fenêtre courante pour la JDialog prochaine */
 					seance.addMouseListener(new MouseAdapter() {
 		     			public void mousePressed(MouseEvent e) {
-
+		     				
+		     				if( ( (JPanel) e.getSource() ).getComponentCount() != 0 ){
+		     					seanceExist( (JPanel) e.getSource() );
+		     				}
+		     				
+		     				
 		     				vueChoixModuleSeance chx = new vueChoixModuleSeance(controleur);
 		     				
 		     				
@@ -227,6 +229,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 			     				JLabel moduleSuite = new JLabel( "", JLabel.CENTER );
 			     				moduleSuite.setBackground(chx.getColorModule() );
 			     				moduleSuite.setOpaque(true);
+			     				description.setName( chx.getNomModule() );
 		     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + i) ) ).add(moduleSuite); 
 		     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + i) ) ).setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK ) );
 		     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + i) ) ).setBackground( chx.getColorModule() );
@@ -250,22 +253,6 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 					
 					this.lst_PnlSeances.put( this.tblJours[i - 1] + "_" + heure , seance );
 					
-					
-					/*
-     				if( controleur.getModele().getFormation().getSemaine( numSemaine ).getLstjours().get( this.tblJours[i-1] ).getListeSeances().containsKey( Integer.toString( heure ) ) ){
-     					Seance nomSeance = controleur.getModele().getFormation().getSemaine( numSemaine ).getLstjours().get( this.tblJours[i-1] ).getListeSeances().get( Integer.toString( heure ) );
-     					
-     					JLabel module = new JLabel( nomSeance.getMod(), JLabel.CENTER );
-	     				module.setBackground( nomSeance.getCouleurModule() );
-	     				module.setOpaque(true);
-	     				JLabel description = new JLabel( Integer.toString(nomSeance.getRangSeance()), JLabel.CENTER );
-	     				description.setOpaque( false );
-	     				this.lst_PnlSeances.get( seance.getName() ).add(module);
-	     				lst_PnlSeances.get( seance.getName() ).add(description);
-	     				repaint();
-	     				validate();
-     				}
-     				*/
 				}
 			}
 			
@@ -378,9 +365,45 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 	}
 	
 	public void seanceExist( JPanel seance ) {
-		int reponse = JOptionPane.showConfirmDialog(null,"Vous etes sur le point de supprimer le module "+ ".\n" + "Les Žventuelles sŽances attribuŽes ˆ ce module seront Žgalement supprimŽ.\n" + "Souhaitez-vous continuer ?", "Suppression du module " , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int reponse = JOptionPane.showConfirmDialog(null,"Une séance existe deja sur la plage horaire selectionnee\n" + "Souhaitez - vous supprimer cette derniere ?", "Suppression du module " , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
 		if( reponse == JOptionPane.YES_NO_OPTION){
+			int duree = 0;
+			int debut = 0;
+			
+			String nom = seance.getName();
+			
+			String lettres =  nom.replaceAll("\\d","");
+			String nomJour = lettres.substring(0, lettres.length()-1);
+			String intValue = nom.replaceAll("[^0-9]", "");
+			
+			Component[] composants = seance.getComponents();
+			
+			for( int i = 0; i < composants.length; ++i ){
+				
+				duree = Integer.parseInt( ( ( JLabel ) composants[i] ).getName() );
+				debut = Integer.parseInt( intValue ) -  Integer.parseInt( ( ( JLabel ) composants[i] ).getText() ) ;
+				
+			}
+
+			for( int i = 0; i < duree; ++i){
+				lst_PnlSeances.get( lettres + ( debut + i) ).removeAll();
+				Color color = UIManager.getColor ( "Panel.background" );
+				lst_PnlSeances.get( lettres + ( debut + i) ).setBackground( color );
+				lst_PnlSeances.get( lettres + ( debut + i) ).setBorder(new MatteBorder(0, 1, 1, 1, Color.BLACK ) );
+			}
+			lst_PnlSeances.get( lettres + ( debut + duree - 1) ).setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK ) );
+			
+			Seance refSeance = controleur.getModele().getFormation().getSemaine( numSemaine ).getLstjours().get( nom.substring( 0, nom.indexOf( "_" ) ) ).getListeSeances().get( Integer.toString( debut ) );
+			
+  			controleur.getModele().getFormation().getSemaine( numSemaine ).getLstjours().get( nom.substring( 0, nom.indexOf( "_" ) ) ).getListeSeances().remove( Integer.toString( debut ) );
+
+ 			controleur.getModele().getFormation().getModules().get( refSeance.getMod() ).getSeances().remove( refSeance.getRangSeance() );  
+ 			
+			repaint();
+			validate();
+			//JOptionPane.showMessageDialog(null, "Seance suprimee ! Taille " + controleur.getModele().getFormation().getModules().get( refSeance.getMod() ).getSeances().size() );
+			
 		}
 		else{
 			//
@@ -424,8 +447,12 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 						for(int j = 1; j < nomSeance.getDureeSeance(); ++j){
 							
 		 				JLabel moduleSuite = new JLabel( "", JLabel.CENTER );
+		 				moduleSuite.setText( Integer.toString( j ) );
 		 				moduleSuite.setBackground( nomSeance.getCouleurModule() );
 		 				moduleSuite.setOpaque(true);
+		 				
+		 				moduleSuite.setName( Integer.toString( nomSeance.getDureeSeance() ) );
+		 				
 							lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + j) ) ).add(moduleSuite); 
 							lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + j) ) ).setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK ) );
 							lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + j) ) ).setBackground( nomSeance.getCouleurModule() );
