@@ -134,7 +134,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		    * Boucle permettant de charger la date de chaque jour de la semaine dans les Label du haut
 		    */
 		   Iterator it = this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().entrySet().iterator();
-		   
+		   //
 		   while (it.hasNext()) {
 			   
 		        Map.Entry pair = (Map.Entry)it.next();
