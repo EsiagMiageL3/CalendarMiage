@@ -10,7 +10,7 @@ public class Formation implements Serializable {
 	public String nom_f;
 	public int duree;
 	public HashMap<String, Module> liste_Modules;
-	public HashMap<String, Semaine> lst_Semaines; /* Cl� = Num�ro de la semaine */
+	public HashMap<String, Semaine> lst_Semaines; /* Cle = Numero de la semaine */
 	
 	
 	

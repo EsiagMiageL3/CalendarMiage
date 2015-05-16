@@ -25,12 +25,12 @@ public class controleurPlanning {
 	public boolean nouvelleFormation(JTextField txtFormation){
 		if( !txtFormation.getText().trim().equals( "" ) ){
 			this.modele.addFormation( txtFormation.getText() );
-			JOptionPane.showMessageDialog(null,"Formation crŽŽe !");
+			JOptionPane.showMessageDialog(null,"Formation creee !");
 			return true;
 		}
 		else{
-			System.out.println( "Nom de formation ŽronnŽe" );
-			JOptionPane.showMessageDialog(null,"Le nom de la formation ne peut �tre vide." , "Nom de formation incorrect", JOptionPane.WARNING_MESSAGE);
+			System.out.println( "Nom de formation eronnee" );
+			JOptionPane.showMessageDialog(null,"Le nom de la formation ne peut etre vide." , "Nom de formation incorrect", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 	}
@@ -44,7 +44,7 @@ public class controleurPlanning {
 		
 		boolean trouvŽ = false;
 		
-		/* On crŽe l'itŽrateur permettant de parcourir la map */
+		/* On cree l'itŽrateur permettant de parcourir la map */
 		Iterator it = this.modele.getFormation().getModules().entrySet().iterator();
 		
 		/* Si l'on rencontre la couleur lors du parcours, le booleen trouvŽ passe ˆ true */ 
@@ -133,8 +133,10 @@ public class controleurPlanning {
 			
 		      //Ecriture de l'objet dans le fichier
 		      try {
+		    	  
 				this.output.writeObject(this.modele);
-			} catch (IOException e) {
+			
+		      } catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

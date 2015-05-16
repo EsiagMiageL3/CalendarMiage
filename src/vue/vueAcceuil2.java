@@ -97,7 +97,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 
 	/*
 	 * Constructeur
-	 * Prend un controleur en param�tre
+	 * Prend un controleur en parametre
 	 */
 	public vueAcceuil2(controleurPlanning controleur) {
 
@@ -297,17 +297,17 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.btnCancel = new JButton("Quitter");
 		this.btnSaveFormation = new JButton("Enregistrer");
 		this.btnOpenPlanning = new JButton("Ouvrir un fichier");
-		this.btnLoadPlanning = new JButton("GŽnŽrer le planning");
+		this.btnLoadPlanning = new JButton("Generer le planning");
 		this.btnSaveModule = new JButton("Sauvegarder");
 		this.btnSavePlanning = new JButton("Enregistrer sur le disque");
 
 		this.lblPath = new JLabel("", JLabel.CENTER);
 		this.lblPath.setHorizontalAlignment(JLabel.LEFT);
 		this.lblCouleur = new JLabel("Couleur", JLabel.CENTER);
-		this.lblAbrevModule = new JLabel("AbrŽviation", JLabel.CENTER);
-		this.lblSavedModules = new JLabel("Modules enregistrŽs", JLabel.CENTER);
+		this.lblAbrevModule = new JLabel("Abreviation", JLabel.CENTER);
+		this.lblSavedModules = new JLabel("Modules enregistres", JLabel.CENTER);
 
-		this.lblSousTitre = new JLabel("Pour commencer, vous pouvez soit ouvrir un fichier de planning existant, soit crŽer une nouvelle formation.", JLabel.CENTER);
+		this.lblSousTitre = new JLabel("Pour commencer, vous pouvez soit ouvrir un fichier de planning existant, soit creer une nouvelle formation.", JLabel.CENTER);
 		this.lblFormation = new JLabel("Nom de la formation", JLabel.CENTER);
 		this.lblModule = new JLabel("Nom du module", JLabel.CENTER);
 		this.lblTitre = new JLabel("Bienvenue sur votre outil de gestion de planning", JLabel.CENTER);

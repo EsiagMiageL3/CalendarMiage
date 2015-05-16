@@ -12,8 +12,7 @@ public class MainTest {
 	public static void main(String[] args) {
 		
 		modelePlanning modele = new modelePlanning(); 
-		controleurPlanning controleur = new controleurPlanning(modele);
-
+		controleurPlanning controleur = new controleurPlanning(modele );
 		vueAcceuil2 acc2 = new vueAcceuil2(controleur);
 
 	}

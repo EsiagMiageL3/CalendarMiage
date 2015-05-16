@@ -136,7 +136,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	                settings.setOpaque(false);
 	                settings.setForeground(Color.WHITE);
 	                settings.setBounds( (int) ( largeurConteneur * 0.92 ), (int) ( hauteurConteneur * 0.45 ), (int) ( hauteurConteneur * 0.1 ), (int) ( hauteurConteneur * 0.1) );
-	                //settings.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true)); 
+	                
 	                settings.setFont(new Font("Arial", Font.PLAIN, 40));
 	                settings.setHorizontalAlignment(JLabel.CENTER);
 	                
@@ -275,15 +275,13 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        		this.lblDisplayNbJours.setBackground(new Color(80,80,80));
 	        		this.lblDisplayNbJours.setOpaque(true);
 	        		
-	        		//titres.setBorder(new javax.swing.border.LineBorder(new Color(0, 0, 0), 1, true));
-	        		
 	        		this.pnlInfos.setBounds( (int) ( getLargeurEcran() * 0.05 ), (int) (test.getHeight() * 0.1), (int) 500, (int) (test.getHeight() * 0.8) );
 	        		
 	        		this.pnlInfos.setLayout(new GridLayout(0, 2, 10, (int) (this.pnlInfos.getHeight() * 0.05)));
 	        		
 	        		test.add(this.pnlInfos);
 	        		
-	               //Anciennne facon de dŽfinir les labels
+	               //Anciennne facon de definir les labels
 	        		
 	        		
 	        		Date vraiDateduJour;

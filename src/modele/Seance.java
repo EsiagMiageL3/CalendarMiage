@@ -31,7 +31,6 @@ public class Seance extends Module implements Serializable{
 		super();
 	}
 
-	
 	public Seance( String module, int rang, int duree, Module refModule ){
 		this.referenceModule = refModule;
 		this.rang_seances = rang + 1;
@@ -45,6 +44,10 @@ public class Seance extends Module implements Serializable{
 	
 	public void setHeureDebutSeance( int heure ){
 		this.heureDebut = heure;
+	}
+	
+	public int getDureeSeance(){
+		return this.dureeSeance;
 	}
 	
 	public void setDureeSeance( int nbHeure ){
@@ -72,6 +75,10 @@ public class Seance extends Module implements Serializable{
 	
 	public String getMod() {
 		return this.moduleSeance;
+	}
+	
+	public Module getRefModule() {
+		return this.referenceModule;
 	}
 
 	public void setNb_seances(int nb_seances) {

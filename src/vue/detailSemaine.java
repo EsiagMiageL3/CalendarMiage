@@ -48,7 +48,11 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 	private String[] tblJours = { "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche" };
 	
 	private HashMap<String, JLabel> lst_LblJours = new HashMap<String, JLabel>();
+	
+	
 	private HashMap<String, JPanel> lst_PnlSeances = new HashMap<String, JPanel>();
+	
+	
 	private int  largeurConteneur, hauteurConteneur;
 	
 	public detailSemaine(int numSemaine, controleurPlanning controleur){
@@ -126,20 +130,31 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 
 		}
 		
+		
+		
+		
 		   /*
 		    * Boucle permettant de charger la date de chaque jour de la semaine dans les Label du haut
 		    */
 		   Iterator it = this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().entrySet().iterator();
-		    while (it.hasNext()) {
+		   
+		   while (it.hasNext()) {
+			   
 		        Map.Entry pair = (Map.Entry)it.next();
 		        
 		        String texteOriginale = (String) pair.getKey(); /* Récupération du nom du jour grace à la clé de la map des jours de la semaine */
 		        
 		        this.lst_LblJours.get( (String) pair.getKey() ).setText( texteOriginale + " " + this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().get( pair.getKey() ).getNumJour() + " " +  this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().get( pair.getKey() ).getNomMois() );
-		    }
+		    
+		   }
 			
 		
 		
+		    
+		    
+		    
+		    
+		    
 		for( int j = 0; j < 11; ++ j ){
 			heure += 1;
 			
@@ -195,7 +210,8 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		     				JLabel module = new JLabel( chx.getNomModule(), JLabel.CENTER );
 		     				module.setBackground(chx.getColorModule() );
 		     				module.setOpaque(true);
-		     				//module.setName( chx.getNomModule() );
+		     				
+
 	     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) ) ) ).add(module); 
 	     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) ) ) ).setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK ) );
 	     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) ) ) ).setBackground( chx.getColorModule() );
@@ -234,6 +250,8 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 					
 					this.lst_PnlSeances.put( this.tblJours[i - 1] + "_" + heure , seance );
 					
+					
+					/*
      				if( controleur.getModele().getFormation().getSemaine( numSemaine ).getLstjours().get( this.tblJours[i-1] ).getListeSeances().containsKey( Integer.toString( heure ) ) ){
      					Seance nomSeance = controleur.getModele().getFormation().getSemaine( numSemaine ).getLstjours().get( this.tblJours[i-1] ).getListeSeances().get( Integer.toString( heure ) );
      					
@@ -247,7 +265,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 	     				repaint();
 	     				validate();
      				}
-     				
+     				*/
 				}
 			}
 			
@@ -257,6 +275,8 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		for( int i = 0; i < this.tblJours.length; ++i ){
 			this.lst_PnlSeances.get( this.tblJours[i] + "_" + 9 ).setBorder( new MatteBorder(1, 1, 1, 1, Color.BLACK) );
 		}
+		
+		loadSeance();
 	}
 	
 	
@@ -334,7 +354,6 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		        if(component.length != 0){
 		        for( int i = 0; i < component.length; i++ ){
 		        	
-		          
 		        		if( ( ( JLabel ) component[i] ).getName() != null  ){
 			                
 		        			String nomModule = ( ( JLabel ) component[i] ).getName();
@@ -357,6 +376,74 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		    }
 		
 	}
+	
+	public void seanceExist( JPanel seance ) {
+		int reponse = JOptionPane.showConfirmDialog(null,"Vous etes sur le point de supprimer le module "+ ".\n" + "Les Žventuelles sŽances attribuŽes ˆ ce module seront Žgalement supprimŽ.\n" + "Souhaitez-vous continuer ?", "Suppression du module " , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		
+		if( reponse == JOptionPane.YES_NO_OPTION){
+		}
+		else{
+			//
+		}
+	}
+	
+	public void loadSeance() {
+		
+		   Iterator it = this.lst_PnlSeances.entrySet().iterator();
+		   
+		   while (it.hasNext()) {
+			   
+		        Map.Entry curseur = (Map.Entry)it.next();
+		        
+				String nomPanel = (String) curseur.getKey();
+				String value = nomPanel;
+				
+				String lettres =  value.replaceAll("\\d","");
+				String nomJour = lettres.substring(0, lettres.length()-1);
+				String intValue = value.replaceAll("[^0-9]", "");
+		  
+				if (controleur.getModele().getFormation().getSemaine(numSemaine).getLstjours().get( nomJour ).getListeSeances().containsKey( intValue ) ) {
+					Seance nomSeance = controleur.getModele().getFormation().getSemaine(numSemaine).getLstjours().get( nomJour ).getListeSeances().get( intValue );
+
+					JLabel module = new JLabel(nomSeance.getMod(), JLabel.CENTER);
+					module.setBackground(nomSeance.getCouleurModule());
+					module.setOpaque(true);
+
+
+						lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) ) ) ).add(module); 
+						lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) ) ) ).setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK ) );
+						lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) ) ) ).setBackground( nomSeance.getCouleurModule() );
+						
+		 				JLabel description = new JLabel( "Rang: " + nomSeance.getRangSeance() + "/" + nomSeance.getRefModule().getSeances().size(), JLabel.CENTER );
+		 				description.setBackground( nomSeance.getCouleurModule() );
+		 				description.setOpaque(true);
+		 				description.setName( nomSeance.getMod() );
+		 				lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) ) )  ).add(description);
+		 				
+						
+						for(int j = 1; j < nomSeance.getDureeSeance(); ++j){
+							
+		 				JLabel moduleSuite = new JLabel( "", JLabel.CENTER );
+		 				moduleSuite.setBackground( nomSeance.getCouleurModule() );
+		 				moduleSuite.setOpaque(true);
+							lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + j) ) ).add(moduleSuite); 
+							lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + j) ) ).setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK ) );
+							lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + j) ) ).setBackground( nomSeance.getCouleurModule() );
+							
+						}
+						lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + nomSeance.getDureeSeance() ) ) ).setBorder(new LineBorder(Color.BLACK ) );
+						
+				}
+		   }
+		   
+
+					
+
+
+		}
+		
+
+	
 }
 
 
