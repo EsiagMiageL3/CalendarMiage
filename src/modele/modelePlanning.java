@@ -1,4 +1,3 @@
-
 package modele;
 
 import java.awt.Color;
