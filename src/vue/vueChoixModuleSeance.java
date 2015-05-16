@@ -149,7 +149,6 @@ public Color getColorModule(){
 		repaint();
 		validate();
 		}
-		//e.getItem();
 		
 	}
 }
