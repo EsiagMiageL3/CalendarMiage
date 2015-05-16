@@ -35,6 +35,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
+import vue.vuePlanning;
+
 /**
  *
  * @author nounoursmoelleux
@@ -53,43 +55,43 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	private controleurPlanning controleur; /* Controleur de la vue */
 	private vuePlanning planning;
 	private ArrayList < Module > lstModules;
-	private int largeurConteneur, hauteurConteneur; /* Variables contenant la hauteur et largeur de la fen�tre */
+	private int largeurConteneur, hauteurConteneur; /* Variables contenant la hauteur et largeur de la fenetre */
 
 	private JPanel conteneur; /* Conteneur de la JFrame, deviendra son ContentPane */
 
 	private JButton btnOpenPlanning; /* Permet d'ouvrir un fichier de planning */
-	private JLabel lblPath; /* Label affichant le chemin du fichier apr�s ouverture */
+	private JLabel lblPath; /* Label affichant le chemin du fichier apres ouverture */
 	private JButton btnSavePlanning; /* Permet de sauvegarder les modifications dans un fichier de planning */
-	private JButton btnLoadPlanning; /* Bouton pour gŽnŽrer le planning automatiquement */
+	private JButton btnLoadPlanning; /* Bouton pour generer le planning automatiquement */
 	private JButton btnCancel; /* Quitter le programme */
 
 	private JLabel lblTitre; /* Premier label du formulaire, haut de page */
 	private JLabel lblSousTitre; /* Second label du formulaire, haut de page */
 
-	private JLabel lblFormation; /* Label juxtaposŽ ˆ la saisie du nom de la formation */
+	private JLabel lblFormation; /* Label juxtapose a la saisie du nom de la formation */
 	private JTextField txtFormation; /* Zone de texte permettant de saisir le nom de la formation */
 	private JButton btnSaveFormation; /* Bouton qui sauvegarde la formation */
 
 	private JPanel zoneModules; /* Panel englobant les composants relatifs aux modules */
 
-	private JLabel lblModule; /* Label juxtaposŽ ˆ la saisie du nom du module */
+	private JLabel lblModule; /* Label juxtapose a la saisie du nom du module */
 	private JTextField txtModule; /* Zone de texte permettant de saisir le nom du module */
 
-	private JLabel lblAbrevModule; /* Label juxtaposŽ ˆ la saisie de l'abrŽviation du module */
-	private JTextField txtAbrev; /* Zone de texte permettant de saisir l'abrŽviation du module */
+	private JLabel lblAbrevModule; /* Label juxtapose a la saisie de l'abreviation du module */
+	private JTextField txtAbrev; /* Zone de texte permettant de saisir l'abreviation du module */
 
-	private JLabel lblCouleur; /* Label juxtaposŽ au choix de la couleur du module */
+	private JLabel lblCouleur; /* Label juxtapose au choix de la couleur du module */
 	private JPanel lblCurrentColor; /* Label permettant de choisir la couleur du module */
 	private JPanel pnlCouleur; /* Panel proposant les couleurs disponibles pour le module */
 
-	private JLabel lblNbSeances; /* Label juxtaposŽ ˆ la saisie du nombre de sŽances */
-	private JTextField txtNbSeances; /* Zone de texte permettant de saisir le nombre de sŽances maximal du module */
+	private JLabel lblNbSeances; /* Label juxtapose a la saisie du nombre de seances */
+	private JTextField txtNbSeances; /* Zone de texte permettant de saisir le nombre de seances maximal du module */
 	
-	private JPanel listeModules; /* Panel affichant les modules enregistrŽs sous forme de Labels */
-	private JLabel lblSavedModules; /* Label situŽ au dessus de la liste des modules enregistrŽs */
+	private JPanel listeModules; /* Panel affichant les modules enregistres sous forme de Labels */
+	private JLabel lblSavedModules; /* Label situe au dessus de la liste des modules enregistres */
 	
-	private JScrollPane scrollModules; /* JScrollPane contenant le panel des modules enregsitrŽs */
-	private JScrollPane scrollColors; /* JScrollPane contenant le panel des couleurs ˆ choisir */
+	private JScrollPane scrollModules; /* JScrollPane contenant le panel des modules enregsitres */
+	private JScrollPane scrollColors; /* JScrollPane contenant le panel des couleurs a choisir */
 	
 	private JButton btnSaveModule; /* Permet d'enregistrer le module */
 
@@ -101,11 +103,11 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 
 		this.controleur = controleur; /* Permet d'enregistrer le module */
 
-		initComponents(); /* CrŽation des composants de la fen�tre */
+		initComponents(); /* Creation des composants de la fenetre */
 
-		this.setVisible(true); /* Affichage de la fen�tre */
+		this.setVisible(true); /* Affichage de la fenetre */
 
-	    this.txtModule.addMouseListener(this); /* Ajout du Listener de focus ˆ la zone de saisie du nom de module */
+	    this.txtModule.addMouseListener(this); /* Ajout du Listener de focus a la zone de saisie du nom de module */
 	    this.txtModule.addFocusListener(this);
 	}
 
@@ -117,34 +119,17 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	
 	@Override
 	public void focusGained(FocusEvent e){
-		 
-		TimerTask task = new TimerTask()
-		{
-			int i = 0;
-			public void run() 
-			{
-				if(i < 500){
-				i += 1;
-				txtModule.setLocation( i, 0);
-				}
-				else{
-					cancel();
-				}
-			}	
-		};
-		
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(task, 0, 1);
 		
 		//validate();
 		//repaint();
+		
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == this.txtModule){
 			if( this.controleur.getModele().getFormation() == null ){
-				JOptionPane.showMessageDialog(null, "Veillez ˆ crŽer une formation en premier lieu.");
+				JOptionPane.showMessageDialog(null, "Veillez a creer une formation en premier lieu.");
 				this.txtFormation.requestFocus();
 			}
 		}
@@ -153,7 +138,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == this.btnSaveFormation) {
 			
-			/* Cas o� le nom de la formation est incorrect */
+			/* Cas ou le nom de la formation est incorrect */
 			if( !this.controleur.nouvelleFormation(this.txtFormation) ){
 
 				this.txtFormation.setBorder(new MatteBorder(1, 1, 1, 1, Color.RED));
@@ -161,7 +146,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 				
 			}
 			
-			this.btnSaveFormation.setText("Modifier"); /* Le bouton permet dŽsormais de modifier le nom de la formation et non d'en crŽer une nouvelle */
+			this.btnSaveFormation.setText("Modifier"); /* Le bouton permet desormais de modifier le nom de la formation et non d'en crŽer une nouvelle */
 			this.btnSaveModule.setEnabled(true); /* On 	active le bouton permettant d'enregistrer les modules */
 			
 		} else if (evt.getSource() == this.btnOpenPlanning) {
@@ -169,7 +154,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 			try {
 				this.controleur.openPlanning(); /* Ouverture de l'explorateur de fichier et ouverture du fichier de planning */
 				
-				this.initSaisie(); /* Remet ˆ zŽro les anciennes saisies de la fen�tre */
+				this.initSaisie(); /* Remet a zero les anciennes saisies de la fenetre */
 				this.txtFormation.setText(this.controleur.getModele().getFormation().nom_f); /* Renseigne le nom de la formation extraite du fichier ouvert */
 				repaint();
 				this.lblPath.setText( this.controleur.getChemin() ); /* Renseigne le chemin du fichier ouvert, ˆ droite du bouton d'ouverture de fichier */
@@ -256,7 +241,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 					this.txtModule.setText("");
 				}
 				else{
-					int reponse = JOptionPane.showConfirmDialog(null,"Ce nom de module exite dŽjˆ.\n" + "Les donnŽes concernant ce module seront modifiŽs.\n" + "Souhaitez-vous continuer ?", "Module existant", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					int reponse = JOptionPane.showConfirmDialog(null,"Ce nom de module exite deja.\n" + "Les donnees concernant ce module seront modifies.\n" + "Souhaitez-vous continuer ?", "Module existant", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					
 					if( reponse == JOptionPane.YES_NO_OPTION){
 						this.controleur.nouveauModule( this.txtModule.getText(), this.txtAbrev.getText(), couleur, Integer.parseInt(this.txtNbSeances.getText()) );
@@ -267,7 +252,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 			}
 			else{
 				
-				JOptionPane.showMessageDialog(null, "Le nom du module ne peut �tre vide.", "Nom de module incorrect", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Le nom du module ne peut etre vide.", "Nom de module incorrect", JOptionPane.WARNING_MESSAGE);
 				this.couleur = null;
 				repaint();
 				
@@ -282,7 +267,6 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 			}
 		} else {
 			this.planning = new vuePlanning(this.modele, this.controleur);
-			this.modele.addPlanning(this.planning);
 		}
 
 	}
@@ -303,12 +287,12 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 
 	private void initComponents() {
 
-		/* DŽfinition de la taille et de la position de la fen�tre principale */
+		/* DŽfinition de la taille et de la position de la fenetre principale */
 		this.setSize((int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width * 0.75), (int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height * 0.75));
 
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE); /* La fermeture de la fen�tre entraine la fermeture du programme */
-		this.setUndecorated(true); /* Suppression de la barre de titre de la fen�tre */
-		this.setLocationRelativeTo(null); /* Permet de positionner la fen�tre au centre de l'Žcran */
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE); /* La fermeture de la fenetre entraine la fermeture du programme */
+		this.setUndecorated(true); /* Suppression de la barre de titre de la fenetre */
+		this.setLocationRelativeTo(null); /* Permet de positionner la fenetre au centre de l'ecran */
 
 		this.btnCancel = new JButton("Quitter");
 		this.btnSaveFormation = new JButton("Enregistrer");
@@ -329,7 +313,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.lblTitre = new JLabel("Bienvenue sur votre outil de gestion de planning", JLabel.CENTER);
 
 		/*
-		 * Instanciation du conteneur de la fen�tre
+		 * Instanciation du conteneur de la fenetre
 		 * RŽecriture de la mŽthode paint component afin d'y ajouter un dŽgradŽ de couleurs
 		 */
 		this.conteneur = new JPanel() {@Override
@@ -350,17 +334,17 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 
 		this.conteneur.setLayout(null); /* Affectation d'un layout null au ContentPane afin de positionner les composants comme voulu */
 		this.conteneur.setOpaque(false); /* Le ContentPane sera transparent */
-		this.conteneur.setSize(this.getSize()); /* Taille du conteneur Žgale ˆ celle de la fen�tre */
-		this.setContentPane(this.conteneur); /* Le conteneur devient le ContentPane de la fen�tre principale */
-		largeurConteneur = this.conteneur.getWidth(); /* Affection de la largeur du conteneur ˆ la variable */
-		hauteurConteneur = this.conteneur.getHeight(); /* Affection de la hauteur du conteneur ˆ la variable */
+		this.conteneur.setSize(this.getSize()); /* Taille du conteneur egale a celle de la fenetre */
+		this.setContentPane(this.conteneur); /* Le conteneur devient le ContentPane de la fenetre principale */
+		largeurConteneur = this.conteneur.getWidth(); /* Affection de la largeur du conteneur a la variable */
+		hauteurConteneur = this.conteneur.getHeight(); /* Affection de la hauteur du conteneur a la variable */
 
 
 		/*
-		 * Instanciation du Panel de sŽlection de la couleur du module
-		 * RŽecriture de la mŽthode paintComponent pour l'afficher en tant que cercle
+		 * Instanciation du Panel de selection de la couleur du module
+		 * Reecriture de la methode paintComponent pour l'afficher en tant que cercle
 		 * Cercle vide si la variable "couleur" est nulle
-		 * Cercle plein si cette derni�re ne l'est pas
+		 * Cercle plein si cette derniere ne l'est pas
 		 */
 		this.lblCurrentColor = new JPanel() {@Override
 			protected void paintComponent(Graphics g) {
@@ -659,9 +643,10 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	}
 
 	/*
-	 * RŽinitialisation des saisie
+	 * Reinitialisation des saisie
 	 */
 	public void initSaisie(){
+		this.listeModules.removeAll();
 		this.txtFormation.setText("");
 		this.txtModule.setText("");
 		this.txtAbrev.setText("");

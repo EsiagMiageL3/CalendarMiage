@@ -2,6 +2,7 @@ package vue;
 
 import java.awt.event.*;
 import java.awt.*;
+import java.awt.Dialog.ModalityType;
 import java.util.*;
 import java.util.Timer;
 
@@ -28,8 +29,10 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	private int largeurConteneur, hauteurConteneur; /* Variables contenant la hauteur et largeur de la fen�tre */
 	private Formation fm;
 	
-	private controleurPlanning Controleur;
+	private static int numeroSemaine;
 	
+	private controleurPlanning Controleur;
+	private controleurPlanning cont2;
 	private JPanel pnlInfos;
 	private JLabel lblDisplayFormation, lblDisplayNbModules, nbJours, lblDisplayNbJours;
 	
@@ -47,13 +50,15 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 		initComponents();
 		this.Controleur = Controleur;
 		this.modele = nouveauModele;
-
+		this.createWeeks();
 		//this.setTitle("Calendar Miage - Mintombou Cyrielle, Souto Camille, Deora Julien");
 		//this.lblDisplayFormation.setText(this.modele.getLstFormation().get(0).nom_f);
 		//this.lblDisplayNbModules.setText( Integer.toString(this.modele.getLstFormation().get(0).duree) );
+		
 		this.setVisible(true);
 	}
- 
+
+
 	// RŽcupŽrer la largeur de l'Žcran
 	public static int largeurEcran() {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
@@ -73,9 +78,6 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 
 
 
-	public void actionPerformed(ActionEvent evt) {
-
-	}
 
 	private void initComponents() {
 	           
@@ -328,7 +330,7 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	                	cadreMois.add(Samedi);
 	                	cadreMois.add(Dimanche);
 	                	
-	        			//9 = octobre, dŽcalage au mois supŽrieur
+	        			//9 = octobre, decalage au mois superieur
 	        			GregorianCalendar calendrier = new GregorianCalendar(2014, cptMois, 1);
 
 	        			int nbJours = calendrier.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
@@ -337,7 +339,6 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        			
 	        			if (premierJour == 1) {
 	        				premierJour = 8;
-	        				System.out.println("" + premierJour);
 	        			}
 	        			
 	        			for (int j = 1; j < nbJours + (premierJour - 1); ++j) {
@@ -351,13 +352,13 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        					jour.setFont(new Font("Arial", Font.PLAIN, 9));
 	                    		jour.setText("" + (j - (premierJour - 2)));
 	                    		cadreMois.add(jour);
-	                    		//CrŽation d'un calendrier ˆ la date du bouton
+	                    		//Creation d'un calendrier a la date du bouton
 	        					final GregorianCalendar calendrier2 = new GregorianCalendar(2014, cptMois, (j - (premierJour - 2)));
 
-	        					//DŽfinition du format utilisŽ pour extraire la date
+	        					//Definition du format utilise pour extraire la date
 	        					DateFormat df = new SimpleDateFormat("dd_MM_yyyy");
 
-	        					//On rŽcup�re la date
+	        					//On recupere la date
 	        					Date dateButton = calendrier2.getTime();
 	        					
 	        					//
@@ -374,38 +375,51 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	        						jour.setForeground(Color.WHITE);
 	        						jour.addActionListener(new ActionListener() {
 	        							public void actionPerformed(ActionEvent evt) {
-	        								JOptionPane.showMessageDialog(null, "Les jours de weekend ne sont pas Žditables.", "Jour non Žditable", JOptionPane.WARNING_MESSAGE);
+	        								JOptionPane.showMessageDialog(null, "Les jours de weekend ne sont pas editables.", "Jour non editable", JOptionPane.WARNING_MESSAGE);
 	        								//afficherModulesEnregistrŽs();
 	        							}
 	        						});
 	        					} else {
+	        						final Window win = SwingUtilities.getWindowAncestor(this);
+	        						//final Window win = SwingUtilities.getWindowAncestor(this);
 	        						jour.setOpaque(true);
 	        						jour.setBorderPainted(false);
-	        						jour.addActionListener(new ActionListener() {
-	        							public void actionPerformed(ActionEvent evt) {
-	 
-	        								createWeeks();
+	        						jour.addActionListener( new ActionListener(){
+	        							public void actionPerformed(ActionEvent evt){
 	        								
-	        							 
 	        								String buttonText = ((JButton) evt.getSource()).getName();
-	        								
+
 	        								/*
-	        								JOptionPane.showMessageDialog(null, "Date du Jour: " + fm.getSemaine(calendrier2.get(Calendar.WEEK_OF_YEAR)).getJour(buttonText).getDate() );
+	        										JOptionPane.showMessageDialog(null, "Date du Jour: " + fm.getSemaine(calendrier2.get(Calendar.WEEK_OF_YEAR)).getJour(buttonText).getDate() );
+	        										
+	        										JOptionPane.showMessageDialog(null, "Semaine du Jour: " + fm.getSemaine(calendrier2.get(Calendar.WEEK_OF_YEAR)).getJour(buttonText).getSemaine() );
+	        										
+	        								 */
+
+	        								detailSemaine semaine = new detailSemaine( calendrier2.get(Calendar.WEEK_OF_YEAR), Controleur);
+	        								//detailSemaine semaine = new detailSemaine( calendrier2.get(Calendar.WEEK_OF_YEAR), Controleur );
+
+	        								JDialog dialogSemaine = new JDialog(win, "Semaine", ModalityType.APPLICATION_MODAL);
+
 	        								
-	        								JOptionPane.showMessageDialog(null, "Semaine du Jour: " + fm.getSemaine(calendrier2.get(Calendar.WEEK_OF_YEAR)).getJour(buttonText).getSemaine() );
+	        								dialogSemaine.setModal(true); /* La fenetre de dialogue est modale */
+	        								dialogSemaine.getContentPane().add(semaine); /* On définit le ContentPane de la fenêtre avec l'instance de la classe detailSemaine */
+	        								dialogSemaine.setPreferredSize( semaine.getSize() ); /* Définition de la taille de la fenêtre modale par celle de son ContentPane */
+	        								dialogSemaine.setResizable( false ); /* La fenêtre ne sera pas réajustable */
+	        								dialogSemaine.pack(); /* Obvious */
+	        								dialogSemaine.setLocationRelativeTo(null); /* Permet de centrer la fenêtre */
+	        								dialogSemaine.setVisible(true); /* Obvious */
+	        								/* --------------- */
+	        								setControleur(semaine.getControleur()); /* Action exécutée lors de la fermeture de la fenêtre modale */
+	        							
+	        								((JButton) evt.getSource()).setBackground( new Color(85, 140, 137) );
 	        								
-	        								JOptionPane.showMessageDialog(null, buttonText);
-	        								JOptionPane.showMessageDialog(null, calendrier2.get(Calendar.WEEK_OF_YEAR));
-*/
-	        								
-	        								
-	        								detailSemaine semaine = new detailSemaine( calendrier2.get(Calendar.WEEK_OF_YEAR), Controleur );
 	        							}
 	        						});
 	        					}
 	        					if (dateBouton.equals(DateduJour)) { //Today
 
-	        						jour.setBackground(Color.BLUE);
+	        						jour.setBackground( new Color(0, 90, 49) );
 
 	        					}
 	        				}
@@ -421,6 +435,11 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	            
 	    	
 		
+	}
+	
+	
+	public void setControleur( controleurPlanning cont){
+		this.Controleur = cont;
 	}
 	
 	// RŽcupŽrer la largeur de l'Žcran
@@ -449,6 +468,33 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 	}
 	
 	
+	public void actionPerformed(ActionEvent evt) {
+		final Window win = SwingUtilities.getWindowAncestor(this);
+		String buttonText = ((JButton) evt.getSource()).getName();
+
+		/*
+				JOptionPane.showMessageDialog(null, "Date du Jour: " + fm.getSemaine(calendrier2.get(Calendar.WEEK_OF_YEAR)).getJour(buttonText).getDate() );
+				
+				JOptionPane.showMessageDialog(null, "Semaine du Jour: " + fm.getSemaine(calendrier2.get(Calendar.WEEK_OF_YEAR)).getJour(buttonText).getSemaine() );
+				
+		 */
+
+		detailSemaine semaine = new detailSemaine( 3, this.Controleur);
+		//detailSemaine semaine = new detailSemaine( calendrier2.get(Calendar.WEEK_OF_YEAR), Controleur );
+
+		JDialog dialogSemaine = new JDialog(win, "Semaine", ModalityType.APPLICATION_MODAL);
+
+		
+		dialogSemaine.setModal(true); /* La fenetre de dialogue est modale */
+		dialogSemaine.getContentPane().add(semaine); /* On définit le ContentPane de la fenêtre avec l'instance de la classe detailSemaine */
+		dialogSemaine.setPreferredSize( semaine.getSize() ); /* Définition de la taille de la fenêtre modale par celle de son ContentPane */
+		dialogSemaine.setResizable( false ); /* La fenêtre ne sera pas réajustable */
+		dialogSemaine.pack(); /* Obvious */
+		dialogSemaine.setLocationRelativeTo(null); /* Permet de centrer la fenêtre */
+		dialogSemaine.setVisible(true); /* Obvious */
+		/* --------------- */
+		this.setControleur(semaine.getControleur()); /* Action exécutée lors de la fermeture de la fenêtre modale */
+	}
 	
 	// RŽcupŽrer la hauteur de l'Žcran
 	public static int getHauteurEcran() {

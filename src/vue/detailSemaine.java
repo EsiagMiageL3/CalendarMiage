@@ -3,6 +3,7 @@ package vue;
 import javax.swing.*;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -10,6 +11,8 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.RenderingHints;
+import java.awt.Window;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -17,27 +20,32 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TimerTask;
 
 import javax.swing.JFrame;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import controleur.controleurPlanning;
 import modele.Formation;
+import modele.Jour;
+import modele.Seance;
 import modele.Semaine;
 
-public class detailSemaine extends JFrame implements ActionListener, FocusListener, MouseListener  {
+public class detailSemaine extends JPanel implements ActionListener, FocusListener, MouseListener  {
 	
 	private controleurPlanning controleur;
 	private Formation fm;
 	private int numSemaine;
 	private JPanel conteneur;
 	private JPanel cadreSeances;
-	private String[] tblJours = { "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche" };
+	private String[] tblJours = { "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche" };
 	
 	private HashMap<String, JLabel> lst_LblJours = new HashMap<String, JLabel>();
 	private HashMap<String, JPanel> lst_PnlSeances = new HashMap<String, JPanel>();
@@ -49,18 +57,17 @@ public class detailSemaine extends JFrame implements ActionListener, FocusListen
 		initComponents();
 		this.setVisible(true);
 		
-		
 	}
 	
-	private void initComponents() {
 
-		/* DŽfinition de la taille et de la position de la fen�tre principale */
+	private void initComponents() {
+		
+		/* Definition de la taille de la fenetre principale */
 		this.setSize((int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width * 0.95), (int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height * 0.95));
-		this.setUndecorated(true); /* Suppression de la barre de titre de la fen�tre */
-		this.setLocationRelativeTo(null); /* Permet de positionner la fen�tre au centre de l'Žcran */
+
 		/*
-		 * Instanciation du conteneur de la fen�tre
-		 * RŽecriture de la mŽthode paint component afin d'y ajouter un dŽgradŽ de couleurs
+		 * Instanciation du conteneur de la fenetre
+		 * Reecriture de la methode paint component afin d'y ajouter un degrade de couleurs
 		 */
 		this.conteneur = new JPanel() {@Override
 			protected void paintComponent(Graphics g) {
@@ -80,19 +87,22 @@ public class detailSemaine extends JFrame implements ActionListener, FocusListen
 
 		this.conteneur.setLayout(null); /* Affectation d'un layout null au ContentPane afin de positionner les composants comme voulu */
 		this.conteneur.setOpaque(false); /* Le ContentPane sera transparent */
-		this.conteneur.setSize(this.getSize()); /* Taille du conteneur Žgale ˆ celle de la fen�tre */
-		this.setContentPane(this.conteneur); /* Le conteneur devient le ContentPane de la fen�tre principale */
-		largeurConteneur = this.conteneur.getWidth(); /* Affection de la largeur du conteneur ˆ la variable */
-		hauteurConteneur = this.conteneur.getHeight(); /* Affection de la hauteur du conteneur ˆ la variable */
+		this.conteneur.setSize(this.getSize()); /* Taille du conteneur Žgale ˆ celle de la fenetre */
+		this.setLayout(null);
+		this.add(this.conteneur);
+		//this.setContentPane(this.conteneur); /* Le conteneur devient le ContentPane de la fenetre principale */
+		largeurConteneur = this.conteneur.getWidth(); /* Affection de la largeur du conteneur a la variable */
+		hauteurConteneur = this.conteneur.getHeight(); /* Affection de la hauteur du conteneur a la variable */
 		
 		this.cadreSeances = new JPanel( new GridLayout(0, 8, 7, 0) );
 		this.cadreSeances.setOpaque(false);
-		//this.cadreSeances.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		this.cadreSeances.setBounds((int)(largeurConteneur * 0.01), (int)(hauteurConteneur * 0.05), (int)(largeurConteneur * 0.98), (int)(hauteurConteneur * 0.9));
 		buildSeances();
+
 		this.conteneur.add(this.cadreSeances);
 		
 	}
+	
 	
 	private void buildSeances(){
 		int heure = 8;
@@ -107,8 +117,6 @@ public class detailSemaine extends JFrame implements ActionListener, FocusListen
 				jour.setFont(new Font("Arial", Font.PLAIN, 11));
 				jour.setOpaque(false);
 				jour.setForeground(Color.WHITE);
-				//+ " " + this.fm.getSemaine( this.numSemaine ).getLstjours()
-				
 				
 				jour.setText( this.tblJours[i - 1] );
 				
@@ -118,14 +126,16 @@ public class detailSemaine extends JFrame implements ActionListener, FocusListen
 
 		}
 		
+		   /*
+		    * Boucle permettant de charger la date de chaque jour de la semaine dans les Label du haut
+		    */
 		   Iterator it = this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().entrySet().iterator();
 		    while (it.hasNext()) {
 		        Map.Entry pair = (Map.Entry)it.next();
 		        
-		        String texteOriginale = this.lst_LblJours.get( this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().get( pair.getKey() ).getNomJour() ).getText();
-		        this.lst_LblJours.get( this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().get( pair.getKey() ).getNomJour() ).setText( texteOriginale + " " + this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().get( pair.getKey() ).getNumJour() + " " +  this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().get( pair.getKey() ).getNomMois() );
-		      
+		        String texteOriginale = (String) pair.getKey(); /* Récupération du nom du jour grace à la clé de la map des jours de la semaine */
 		        
+		        this.lst_LblJours.get( (String) pair.getKey() ).setText( texteOriginale + " " + this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().get( pair.getKey() ).getNumJour() + " " +  this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().get( pair.getKey() ).getNomMois() );
 		    }
 			
 		
@@ -143,23 +153,101 @@ public class detailSemaine extends JFrame implements ActionListener, FocusListen
 					this.cadreSeances.add( lblHeure );
 				}
 				else{
-					JPanel seance = new JPanel();
+					JPanel seance = new JPanel( new GridLayout(0,1));
 					seance.setOpaque(true);
 					
 					seance.setBorder(new MatteBorder(0, 1, 1, 1, Color.BLACK));
 					seance.setName(this.tblJours[i-1] + "_" + heure);
+
 					
+					final Window fenetreParent = SwingUtilities.getWindowAncestor(this); /* Référence à la fenêtre courante pour la JDialog prochaine */
 					seance.addMouseListener(new MouseAdapter() {
 		     			public void mousePressed(MouseEvent e) {
-		     				JOptionPane.showMessageDialog(null, ( (JPanel) e.getSource() ).getName() );
+
+		     				vueChoixModuleSeance chx = new vueChoixModuleSeance(controleur);
 		     				
 		     				
+		     				JDialog dialogSemaine = new JDialog( fenetreParent, "Choix du module de la séance", ModalityType.APPLICATION_MODAL );
+
+							
+							dialogSemaine.setModal(true); /* La fenetre de dialogue est modale */
+							dialogSemaine.getContentPane().add(chx); /* On définit le ContentPane de la fenêtre avec l'instance de la classe detailSemaine */
+							dialogSemaine.setPreferredSize( chx.getSize() ); /* Définition de la taille de la fenêtre modale par celle de son ContentPane */
+							dialogSemaine.setResizable( false ); /* La fenêtre ne sera pas réajustable */
+							dialogSemaine.pack(); /* Obvious */
+							dialogSemaine.setLocationRelativeTo(null); /* Permet de centrer la fenêtre */
+							dialogSemaine.setVisible(true); /* Obvious */
+		     				
+		     				
+		     				
+		     				 String nom = ( (JPanel) e.getSource() ).getName();
+		     				String value = nom;
+		     				
+		     				String lettres =  value.replaceAll("\\d","");
+		     				String intValue = value.replaceAll("[^0-9]", "");
+		     				
+			      			int taille = controleur.getModele().getFormation().getModules().get( chx.getNomModule() ).getSeances().size();
+			     				
+			      			controleur.getModele().getFormation().getSemaine( numSemaine ).getLstjours().get( nom.substring( 0, nom.indexOf( "_" ) ) ).getListeSeances().put( intValue.toString(), new Seance( chx.getNomModule(), taille, chx.getDureeSeance(), controleur.getModele().getFormation().getModules().get( chx.getNomModule() ) ));//   getListeSeances().put( intValue.toString(), new Seance("Java"));
+
+			     			controleur.getModele().getFormation().getModules().get( chx.getNomModule() ).getSeances().put( Integer.toString(taille) + 1, new Seance( chx.getNomModule(), taille, chx.getDureeSeance(), controleur.getModele().getFormation().getModules().get( chx.getNomModule() ) ));  
+			     			
+		     				JLabel module = new JLabel( chx.getNomModule(), JLabel.CENTER );
+		     				module.setBackground(chx.getColorModule() );
+		     				module.setOpaque(true);
+		     				//module.setName( chx.getNomModule() );
+	     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) ) ) ).add(module); 
+	     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) ) ) ).setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK ) );
+	     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) ) ) ).setBackground( chx.getColorModule() );
+	     					
+		     				JLabel description = new JLabel( "Rang: " + Integer.toString(taille + 1) + "/" + taille, JLabel.CENTER );
+		     				description.setBackground( chx.getColorModule() );
+		     				description.setOpaque(true);
+		     				description.setName( chx.getNomModule() );
+		     				lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) ) )  ).add(description);
+		     				
+		     				for(int i = 1; i < chx.getDureeSeance(); ++i){
+		     					
+			     				JLabel moduleSuite = new JLabel( "", JLabel.CENTER );
+			     				moduleSuite.setBackground(chx.getColorModule() );
+			     				moduleSuite.setOpaque(true);
+		     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + i) ) ).add(moduleSuite); 
+		     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + i) ) ).setBorder(new MatteBorder(0, 1, 0, 1, Color.BLACK ) );
+		     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + i) ) ).setBackground( chx.getColorModule() );
+		     					
+		     				}
+	     					lst_PnlSeances.get( lettres + Integer.toString( (Integer.parseInt(intValue) + chx.getDureeSeance()) ) ).setBorder(new LineBorder(Color.BLACK ) );
+	     					
+
+		     				
+		     			
+		     				
+
+							repaint();
+		     				validate();
+		     				
+		     		 refreshSeances();
 		     			}
 					});
 					
 					this.cadreSeances.add( seance );
 					
 					this.lst_PnlSeances.put( this.tblJours[i - 1] + "_" + heure , seance );
+					
+     				if( controleur.getModele().getFormation().getSemaine( numSemaine ).getLstjours().get( this.tblJours[i-1] ).getListeSeances().containsKey( Integer.toString( heure ) ) ){
+     					Seance nomSeance = controleur.getModele().getFormation().getSemaine( numSemaine ).getLstjours().get( this.tblJours[i-1] ).getListeSeances().get( Integer.toString( heure ) );
+     					
+     					JLabel module = new JLabel( nomSeance.getMod(), JLabel.CENTER );
+	     				module.setBackground( nomSeance.getCouleurModule() );
+	     				module.setOpaque(true);
+	     				JLabel description = new JLabel( Integer.toString(nomSeance.getRangSeance()), JLabel.CENTER );
+	     				description.setOpaque( false );
+	     				this.lst_PnlSeances.get( seance.getName() ).add(module);
+	     				lst_PnlSeances.get( seance.getName() ).add(description);
+	     				repaint();
+	     				validate();
+     				}
+     				
 				}
 			}
 			
@@ -170,62 +258,103 @@ public class detailSemaine extends JFrame implements ActionListener, FocusListen
 			this.lst_PnlSeances.get( this.tblJours[i] + "_" + 9 ).setBorder( new MatteBorder(1, 1, 1, 1, Color.BLACK) );
 		}
 	}
-	/*
-	public static void main(String[] args) {
-		
-		detailSemaine semaine = new detailSemaine();
-	}
-	*/
 	
 	
 	
-	
-	
+	public controleurPlanning getControleur() {
+		return this.controleur;
+	}
+
+
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
+	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public void mouseExited(MouseEvent arg0) {
+	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public void mousePressed(MouseEvent arg0) {
+	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public void focusGained(FocusEvent arg0) {
+	public void focusGained(FocusEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public void focusLost(FocusEvent arg0) {
+	public void focusLost(FocusEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void refreshSeances() {
+		Component[] component;
+		   Iterator it = this.lst_PnlSeances.entrySet().iterator();
+		    while (it.hasNext()) {
+		        Map.Entry pair = (Map.Entry)it.next();
+		        
+		        if(  (  ( JPanel ) pair.getValue() ).getComponentCount() != 0 ){
+		        	
+		        component =  (  ( JPanel ) pair.getValue() ).getComponents() ;
+		        
+		        if(component.length != 0){
+		        for( int i = 0; i < component.length; i++ ){
+		        	
+		          
+		        		if( ( ( JLabel ) component[i] ).getName() != null  ){
+			                
+		        			String nomModule = ( ( JLabel ) component[i] ).getName();
+		        			String descriptionRang = ( ( JLabel ) component[i] ).getText();
+		        			
+			      			int taille = controleur.getModele().getFormation().getModules().get( nomModule ).getSeances().size();
+			     			
+			      			( ( JLabel ) component[i] ).setText( descriptionRang.substring(0, descriptionRang.length()-1) + Integer.toString(taille) );
+			            
+		        			 
+		        		}
+		            
+
+		        }
+		        }
+		        
+		        }
+		        repaint();
+		        validate();
+		    }
 		
 	}
 }
