@@ -1,5 +1,6 @@
 package modele;
 
+import java.awt.RenderingHints;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Hashtable;
@@ -10,7 +11,7 @@ public class Jour {
 	private String dateJour, nomJour, numJour, nomMois;
 	private int numSemaine;
 	
-	private Hashtable<String, Seance> lst_Seances; /* ClŽ = module de la sŽance */
+	private Hashtable<String, Seance> lst_Seances = new Hashtable<String, Seance>(); /* Clï¿½ = module de la sï¿½ance */
 	
 	public Jour(String date, int numSemaine, String Nom, String Mois){
 		this.dateJour = date;
@@ -24,6 +25,9 @@ public class Jour {
 		return date.substring(0, 2);
 	}
 	
+	public Hashtable<String, Seance> getListeSeances(){
+		return this.lst_Seances;
+	}
 	public String getNumJour(){
 		return this.numJour;
 	}
@@ -61,4 +65,6 @@ public class Jour {
 
 	    return titleCase.toString();
 	}
+
+
 }

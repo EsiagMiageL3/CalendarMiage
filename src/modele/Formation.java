@@ -10,7 +10,7 @@ public class Formation implements Serializable {
 	public String nom_f;
 	public int duree;
 	public HashMap<String, Module> liste_Modules;
-	public HashMap<String, Semaine> lst_Semaines; /* Cl = Numro de la semaine */
+	public HashMap<String, Semaine> lst_Semaines; /* Clï¿½ = Numï¿½ro de la semaine */
 	
 	
 	
@@ -35,7 +35,7 @@ public class Formation implements Serializable {
 		} 	 	
 	 	
 	 	public Semaine getSemaine(int num) {
-			return this.lst_Semaines.get(Integer.toString(num));
+			return this.lst_Semaines.get( Integer.toString(num) );
 		} 
 	 	
 	 	

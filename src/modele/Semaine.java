@@ -13,7 +13,7 @@ public class Semaine {
 	
 	private String annee;
 	private int numeroSemaine;
-	private Hashtable<String, Jour> lst_JourSemaine; /* ClŽ = date du jour */
+	private Hashtable<String, Jour> lst_JourSemaine; /* ClŽ = num du jour */
 	
 	
 	public Semaine(String annee, int numero){
@@ -65,7 +65,7 @@ public class Semaine {
 		    
 		   /* Ajout du jour dans la Hashtable des jours de la semaine en cours */
 		   try{
-			   this.addJour( df.format(c.getTime()), jourSemaine );
+			   this.addJour( nom, jourSemaine );
 		   }
 		   catch(NullPointerException e){
 			   JOptionPane.showMessageDialog(null, "Fuck");
