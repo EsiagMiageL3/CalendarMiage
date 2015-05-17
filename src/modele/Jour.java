@@ -11,7 +11,7 @@ public class Jour {
 	private String dateJour, nomJour, numJour, nomMois;
 	private int numSemaine;
 	
-	private Hashtable<String, Seance> lst_Seances = new Hashtable<String, Seance>(); /* Cl� = module de la s�ance */
+	private Hashtable<String, Seance> lst_Seances = new Hashtable<String, Seance>(); /* Cleee = module de la seeeance */
 	
 	public Jour(String date, int numSemaine, String Nom, String Mois){
 		this.dateJour = date;

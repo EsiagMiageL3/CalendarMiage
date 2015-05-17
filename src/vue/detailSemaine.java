@@ -20,24 +20,21 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.TimerTask;
 
-import javax.swing.JFrame;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
+
+
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import test.Htmltest;
 import controleur.controleurPlanning;
 import modele.Formation;
-import modele.Jour;
+
 import modele.Seance;
-import modele.Semaine;
+
 
 public class detailSemaine extends JPanel implements ActionListener, FocusListener, MouseListener  {
 	
@@ -91,7 +88,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 
 		this.conteneur.setLayout(null); /* Affectation d'un layout null au ContentPane afin de positionner les composants comme voulu */
 		this.conteneur.setOpaque(false); /* Le ContentPane sera transparent */
-		this.conteneur.setSize(this.getSize()); /* Taille du conteneur egale ˆ celle de la fenetre */
+		this.conteneur.setSize(this.getSize()); /* Taille du conteneur egale  celle de la fenetre */
 		this.setLayout(null);
 		this.add(this.conteneur);
 		//this.setContentPane(this.conteneur); /* Le conteneur devient le ContentPane de la fenetre principale */
@@ -152,7 +149,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 			   
 		        Map.Entry pair = (Map.Entry)it.next();
 		        
-		        String texteOriginale = (String) pair.getKey(); /* Récupération du nom du jour grace à la clé de la map des jours de la semaine */
+		        String texteOriginale = (String) pair.getKey(); /* Recuperation du nom du jour grace a la cle de la map des jours de la semaine */
 		        
 		        this.lst_LblJours.get( (String) pair.getKey() ).setText( texteOriginale + " " + this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().get( pair.getKey() ).getNumJour() + " " +  this.controleur.getModele().getFormation().getSemaine( this.numSemaine ).getLstjours().get( pair.getKey() ).getNomMois() );
 		    
@@ -185,7 +182,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 					seance.setName(this.tblJours[i-1] + "_" + heure);
 
 					
-					final Window fenetreParent = SwingUtilities.getWindowAncestor(this); /* Référence à la fenêtre courante pour la JDialog prochaine */
+					final Window fenetreParent = SwingUtilities.getWindowAncestor(this); /* Reference a la fenetre courante pour la JDialog prochaine */
 					seance.addMouseListener(new MouseAdapter() {
 		     			public void mousePressed(MouseEvent e) {
 		     				
@@ -197,15 +194,15 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		     				vueChoixModuleSeance chx = new vueChoixModuleSeance(controleur);
 		     				
 		     				
-		     				JDialog dialogSemaine = new JDialog( fenetreParent, "Choix du module de la séance", ModalityType.APPLICATION_MODAL );
+		     				JDialog dialogSemaine = new JDialog( fenetreParent, "Choix du module de la seance", ModalityType.APPLICATION_MODAL );
 
 							
 							dialogSemaine.setModal(true); /* La fenetre de dialogue est modale */
-							dialogSemaine.getContentPane().add(chx); /* On définit le ContentPane de la fenêtre avec l'instance de la classe detailSemaine */
-							dialogSemaine.setPreferredSize( chx.getSize() ); /* Définition de la taille de la fenêtre modale par celle de son ContentPane */
-							dialogSemaine.setResizable( false ); /* La fenêtre ne sera pas réajustable */
+							dialogSemaine.getContentPane().add(chx); /* On definit le ContentPane de la fenetre avec l'instance de la classe detailSemaine */
+							dialogSemaine.setPreferredSize( chx.getSize() ); /* Definition de la taille de la fenetre modale par celle de son ContentPane */
+							dialogSemaine.setResizable( false ); /* La fenetre ne sera pas reajustable */
 							dialogSemaine.pack(); /* Obvious */
-							dialogSemaine.setLocationRelativeTo(null); /* Permet de centrer la fenêtre */
+							dialogSemaine.setLocationRelativeTo(null); /* Permet de centrer la fenetre */
 							dialogSemaine.setVisible(true); /* Obvious */
 		     				
 		     				
@@ -378,7 +375,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 	}
 	
 	public void seanceExist( JPanel seance ) {
-		int reponse = JOptionPane.showConfirmDialog(null,"Une séance existe deja sur la plage horaire selectionnee\n" + "Souhaitez - vous supprimer cette derniere ?", "Suppression du module " , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int reponse = JOptionPane.showConfirmDialog(null,"Une seance existe deja sur la plage horaire selectionnee\n" + "Souhaitez - vous supprimer cette derniere ?", "Suppression du module " , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
 		if( reponse == JOptionPane.YES_NO_OPTION){
 			int duree = 0;
