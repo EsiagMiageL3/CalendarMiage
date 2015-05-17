@@ -21,6 +21,24 @@ import modele.Formation;
 
 public class Htmltest {
 	
+
+	private controleurPlanning controleur;
+	private static String nom="nom";
+	private static JTextField t;
+	private Formation fm;
+	private detailSemaine d;
+	private static HashMap<String, JPanel> lst_PnlSeances = new HashMap<String, JPanel>();
+	
+	public Htmltest(HashMap<String, JPanel> lst_PnlSeances){
+		this.lst_PnlSeances = lst_PnlSeances;
+	}
+	
+	public Htmltest( controleurPlanning controleur ){
+		this.controleur = controleur;
+	}
+
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -36,6 +54,7 @@ public class Htmltest {
 		final String chemin_planning = "D:/test.html";
 	    final File fichier_planning =new File(chemin_planning); 
         try {
+<<<<<<< HEAD
         	controleur.getModele().addFormation(nom_f, annee_f);
         	controleur.getModele().addModule(key, abr, Color.red, 5);
         	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
@@ -47,6 +66,16 @@ public class Htmltest {
 		//final String chemin_planning = "/Users/cyriellemintombou/Downloads/test.html";
 
 	    //final File fichier_planning =new File(chemin_planning); 
+=======
+        	controleur.getModele().addFormation(nom_f, "2014");
+        	controleur.getModele().addModule(key, abr, Color.red, 5);
+        	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
+
+		
+
+		  final File fichier_planning =new File(chemin_planning);
+	   
+>>>>>>> origin/master
         try {
         	controleur.getModele().addFormation(nom_f, "2014");
 
@@ -245,6 +274,10 @@ public class Htmltest {
         }
 
 
+<<<<<<< HEAD
        }
+=======
+    }
+>>>>>>> origin/master
 
 }
