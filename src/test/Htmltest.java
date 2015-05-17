@@ -54,19 +54,7 @@ public class Htmltest {
 		final String chemin_planning = "D:/test.html";
 	    final File fichier_planning =new File(chemin_planning); 
         try {
-<<<<<<< HEAD
-        	controleur.getModele().addFormation(nom_f, annee_f);
-        	controleur.getModele().addModule(key, abr, Color.red, 5);
-        	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
 
-		//final String nom_f = "Master MIAGE";
-		
-		//final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
-
-		//final String chemin_planning = "/Users/cyriellemintombou/Downloads/test.html";
-
-	    //final File fichier_planning =new File(chemin_planning); 
-=======
         	controleur.getModele().addFormation(nom_f, "2014");
         	controleur.getModele().addModule(key, abr, Color.red, 5);
         	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
@@ -74,7 +62,7 @@ public class Htmltest {
 		
 
 	   
->>>>>>> origin/master
+
         try {
         	controleur.getModele().addFormation(nom_f, "2014");
 
@@ -255,14 +243,6 @@ public class Htmltest {
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-       }
-=======
-    }
->>>>>>> origin/master
-=======
->>>>>>> 1eead2405a658c43ca4923656a4b93dfe8b07e0c
 
         
 	}

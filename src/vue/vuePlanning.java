@@ -14,6 +14,9 @@ import org.joda.time.Weeks;
 import controleur.controleurPlanning;
 import modele.Semaine;
 
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.text.*;
 
 public class vuePlanning extends JFrame {
@@ -61,8 +64,9 @@ public class vuePlanning extends JFrame {
 	/**
 	 * Creation des different composant de la fenetre
 	 * Prend en parametre l'annee de debut de la formation pour pouvoir creer dynamiquement les jours
+	 *
 	 */
-	private void initComponents(int annee) {
+	private void initComponents(int annee) throws FontFormatException, IOException {
 
 		/* Definition de la taille de la fenetre (egale a celle de l'ecran en l'occurence) */
 		this.setSize(getLargeurEcran(), getHauteurEcran());
@@ -121,14 +125,14 @@ public class vuePlanning extends JFrame {
 		
 		/* On ajoute le JScrollPane au ContentPane */
 		this.conteneur.add( this.Jscroll );
-		
-		JLabel settings = new JLabel("\u2699", JLabel.CENTER);
+		        
+		JLabel settings = new JLabel( "\u2699", JLabel.CENTER);
 
 		settings.setOpaque(false);
 		settings.setForeground(Color.WHITE);
 		settings.setBounds((int)(largeurConteneur * 0.92), (int)(hauteurConteneur * 0.45), (int)(hauteurConteneur * 0.1), (int)(hauteurConteneur * 0.1));
 
-		settings.setFont(new Font("Arial", Font.PLAIN, 40));
+		settings.setFont(new Font("Arial", Font.PLAIN, 42));
 		settings.setHorizontalAlignment(JLabel.CENTER);
 
 		this.conteneur.add(settings);
@@ -141,7 +145,7 @@ public class vuePlanning extends JFrame {
 		JLabel iconYear = new JLabel("\uD83D\uDCC5", JLabel.CENTER);
 		iconYear.setVisible(true);
 		iconYear.setOpaque(false);
-		iconYear.setFont(new Font("Arial", Font.PLAIN, 35));
+		iconYear.setFont(new Font("Symbola", Font.PLAIN, 35));
 
 		JLabel iconSave = new JLabel("\uD83D\uDCBE", JLabel.CENTER);
 		iconSave.setVisible(true);
