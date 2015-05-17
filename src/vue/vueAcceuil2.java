@@ -242,7 +242,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 				}
 				else{
 					int reponse = JOptionPane.showConfirmDialog(null,"Ce nom de module exite deja.\n" + "Les donnees concernant ce module seront modifies.\n" + "Souhaitez-vous continuer ?", "Module existant", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-					
+					//
 					if( reponse == JOptionPane.YES_NO_OPTION){
 						this.controleur.nouveauModule( this.txtModule.getText(), this.txtAbrev.getText(), couleur, Integer.parseInt(this.txtNbSeances.getText()) );
 						JOptionPane.showMessageDialog(null, "Modifications enregistres.");
