@@ -13,7 +13,7 @@ public class Module implements Serializable{
 	public Color couleurModule;
 	public int nb_seances;
 	public int quotasSeances;
-	public Hashtable<String, Seance> lst_Seance = new Hashtable<String, Seance>(); /* Cl�� = module de la s��ance */ 
+	public Hashtable<String, Seance> lst_Seance = new Hashtable<String, Seance>(); /* Clee = module de la seeance */ 
 	
 	
 	public Module (){

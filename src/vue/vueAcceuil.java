@@ -154,7 +154,7 @@ public class vueAcceuil extends JFrame implements ActionListener, FocusListener,
 				this.enableSaisies();
 				this.txtFormation.setText(this.controleur.getModele().getFormation().nom_f); /* Renseigne le nom de la formation extraite du fichier ouvert */
 				repaint();
-				this.lblPath.setText( this.controleur.getChemin() ); /* Renseigne le chemin du fichier ouvert, ˆ droite du bouton d'ouverture de fichier */
+				this.lblPath.setText( this.controleur.getChemin() ); /* Renseigne le chemin du fichier ouvert,  droite du bouton d'ouverture de fichier */
 
 				Iterator it = this.controleur.getModele().getFormation().getModules().entrySet().iterator();
 
@@ -290,7 +290,7 @@ public class vueAcceuil extends JFrame implements ActionListener, FocusListener,
 	@SuppressWarnings({ "unchecked", "rawtypes", "serial" })
 	private void initComponents() {
 
-		/* DŽfinition de la taille et de la position de la fenetre principale */
+		/* Definition de la taille et de la position de la fenetre principale */
 		this.setSize((int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width * 0.75), (int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height * 0.75));
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); /* La fermeture de la fenetre entraine la fermeture du programme */
@@ -321,7 +321,7 @@ public class vueAcceuil extends JFrame implements ActionListener, FocusListener,
 		
 		/*
 		 * Instanciation du conteneur de la fenetre
-		 * Reecriture de la methode paint component afin d'y ajouter un dŽgradŽ de couleurs
+		 * Reecriture de la methode paint component afin dy ajouter un degrade de couleurs
 		 */
 		this.conteneur = new JPanel() {@Override
 			protected void paintComponent(Graphics g) {

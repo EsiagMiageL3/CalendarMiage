@@ -21,7 +21,7 @@ import java.text.*;
 
 public class vuePlanning extends JFrame {
 	
-	/* Represente l'annee du planning */
+	/* Represente lannee du planning */
 	private int annee;
 	/* Variables contenant la hauteur et largeur de la fenetre */
 	private int largeurConteneur, hauteurConteneur; 
@@ -37,14 +37,14 @@ public class vuePlanning extends JFrame {
 	private JPanel pnlInfos;
 	private JLabel lblDisplayFormation, lblDisplayNbModules, nbJours, lblDisplayNbJours;
 
-	/* Tableau des noms de mois, utiles pour la creation des mois de l'annee */
+	/* Tableau des noms de mois, utiles pour la creation des mois de lannee */
 	private static String[] tbl = { "Septembre", "Octobre", "Novembre", "Decembre", "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout" };
 
 
     
 	/**
 	 * Constructeur
-	 * Prend en parametres notre controleur, et le numero de l'annee
+	 * Prend en parametres notre controleur, et le numero de lannee
 	 */
 	public vuePlanning( controleurPlanning Controleur, int annee) {
 		
@@ -54,7 +54,7 @@ public class vuePlanning extends JFrame {
 		this.annee = annee;
 		this.Controleur = Controleur;
 		
-		/* Creation de toutes les semaines de l'annee et de leurs jours */
+		/* Creation de toutes les semaines de lannee et de leurs jours */
 		this.createWeeks( annee );
 		
 		/* Affichage de notre fenetre */
@@ -63,11 +63,20 @@ public class vuePlanning extends JFrame {
 
 	/**
 	 * Creation des different composant de la fenetre
-	 * Prend en parametre l'annee de debut de la formation pour pouvoir creer dynamiquement les jours
+	 * Prend en parametre lannee de debut de la formation pour pouvoir creer dynamiquement les jours
 	 *
 	 */
+<<<<<<< HEAD
 	private void initComponents(int annee) {
 		/* Definition de la taille de la fenetre (egale a celle de l'ecran en l'occurence) */
+=======
+
+	private void initComponents(int annee) {
+
+
+
+		/* Definition de la taille de la fenetre (egale a celle de lecran en loccurence) */
+>>>>>>> origin/master
 		this.setSize(getLargeurEcran(), getHauteurEcran());
 
 		/* Creation du panel destine a devenir le futur ContentPane de notre fenetre */
@@ -88,12 +97,12 @@ public class vuePlanning extends JFrame {
 			}
 		};
 
-		/* Le conteneur n'aura aucun LayoutManager afin de positionner librement les composant en proportion a la taille de l'ecran ( plus de detail dans le compte rendu ) */
+		/* Le conteneur naura aucun LayoutManager afin de positionner librement les composant en proportion a la taille de lecran ( plus de detail dans le compte rendu ) */
 		this.conteneur.setLayout(null);
 		
 		/* Le JPanel "conteneur" devient le ContentPane de la fenetre */
 		this.setContentPane( this.conteneur );
-		/* Permet de supprimer la barre de titre avec les boutons de fermeture, réduction et agrandissement de la fenêtre */
+		/* Permet de supprimer la barre de titre avec les boutons de fermeture, reduction et agrandissement de la fenetre */
 		this.setUndecorated(true);
 		largeurConteneur = this.getWidth(); /* Affection de la largeur du conteneur a la variable */
 		hauteurConteneur = this.getHeight(); /* Affection de la hauteur du conteneur a la variable */
@@ -101,13 +110,13 @@ public class vuePlanning extends JFrame {
 		/* Creation du JPanel qui contiendra les mois du planning */
 		this.planning = new JPanel();
 		
-		/* Choix d'un GridLayout de 3 colonnes, le nombre de lignes sera deduit => 3 mois par ligne */
+		/* Choix dun GridLayout de 3 colonnes, le nombre de lignes sera deduit => 3 mois par ligne */
 		this.planning.setLayout(new GridLayout(0, 3, 10, 10));
 
 		/* Creation du JScrollPane qui contiendra le JPanel contennant le planning */
 		this.Jscroll = new JScrollPane();
 		
-		/* Definition de sa taille et positions en pourcentages de la taille de l'ecran */
+		/* Definition de sa taille et positions en pourcentages de la taille de lecran */
 		this.Jscroll.setBounds((int)(largeurConteneur * 0.01), (int)(hauteurConteneur * 0.05), (int)(largeurConteneur * 0.9), (int)(hauteurConteneur * 0.9));
 
 		/* Le JPanel contenant le planning devient le ViewportView de notre JScrollPane */
@@ -254,7 +263,7 @@ public class vuePlanning extends JFrame {
 					jour.setFont(new Font("Arial", Font.PLAIN, 9));
 					jour.setText("" + (j - (premierJour - 2)));
 					cadreMois.add(jour);
-					//Creation d'un calendrier a la date du bouton
+					//Creation dun calendrier a la date du bouton
 					final GregorianCalendar calendrier2 = new GregorianCalendar(annee, cptMois, (j - (premierJour - 2)));
 
 					//Definition du format utilise pour extraire la date
@@ -296,7 +305,7 @@ public class vuePlanning extends JFrame {
 						});
 					}
 
-					/* Si le bouton en cours représentant la date d'aujourd'hui, on lui affecte une couleur particuliere */
+					/* Si le bouton en cours representant la date daujourdhui, on lui affecte une couleur particuliere */
 					if (dateBouton.equals(DateduJour)) {
 
 						jour.setBackground(new Color(0, 90, 49));
@@ -319,7 +328,7 @@ public class vuePlanning extends JFrame {
 	
 
 	/**
-	 * Mettre a jour l'instance du controleur apres avoir edite une semaine
+	 * Mettre a jour linstance du controleur apres avoir edite une semaine
 	 * Sera appele a la fermeture du formulaire contenant la fenetre
 	 */
 	public void setControleur( controleurPlanning cont){
@@ -329,47 +338,47 @@ public class vuePlanning extends JFrame {
 
 
 	/**
-	 * Methode permetant de creer les objets semaines pour l'annee passée en parametre
-	 * Par exemple, les semaine de l'année 2014 - 2015 seront creees de Septembre 2014 a Aout 2015 
+	 * Methode permetant de creer les objets semaines pour lannee passee en parametre
+	 * Par exemple, les semaine de lannee 2014 - 2015 seront creees de Septembre 2014 a Aout 2015 
 	 * Info: En creant une semaine, ses jours le seront aussi grace au constructeur de la semaine creee
 	 */
 	public void createWeeks( int annee ) {
 
 		/* 
-		 * Creation des semaines de l'annee de debut 
+		 * Creation des semaines de lannee de debut 
 		 */
 		
-		/* Instanciation du calendrier à la date de début de la formation */
+		/* Instanciation du calendrier a la date de debut de la formation */
 		GregorianCalendar calendrier = new GregorianCalendar( annee, 8, 1);
 		
 		/* Recupere le numero de semaine de la toute premiere semaine */
 		int semaineDebut = calendrier.get(Calendar.WEEK_OF_YEAR);
 
-		/* Enregistrement sous forme de DateTime de la date de debut de l'annee et de la date de fin (utilisation de JodaTime) */
+		/* Enregistrement sous forme de DateTime de la date de debut de lannee et de la date de fin (utilisation de JodaTime) */
 		DateTime septembreAnneeDebut = new DateTime( annee, 9, 1, 0, 0, 0 );
 		DateTime decembreAnneeDebut = new DateTime( annee, 12, 31, 0, 0, 0);
 
-		/* Calcul du nombre de semaines entre la date de debut et celle de fin de l'annee (utilisation de JodaTime) */
+		/* Calcul du nombre de semaines entre la date de debut et celle de fin de lannee (utilisation de JodaTime) */
 		int weeksAnneeDebut = Weeks.weeksBetween(septembreAnneeDebut, decembreAnneeDebut).getWeeks();
 		
-		/* Création itérative de chaque semaine en partant du numero de la premiere semaine jusqu'a celui de celle de fin */
+		/* Creation iterative de chaque semaine en partant du numero de la premiere semaine jusqua celui de celle de fin */
 		for( int j = semaineDebut; j < semaineDebut + weeksAnneeDebut + 1; ++j){
 			Semaine semaineAnneeDebut = new Semaine( Integer.toString( annee ), j );
 			this.Controleur.getModele().getFormation().addSemaine(Integer.toString(j), semaineAnneeDebut);
 		}	
 		
 		/* 
-		 * Creation des semaines de l'annee superieur 
+		 * Creation des semaines de lannee superieur 
 		 */
 		
-		/* Enregistrement sous forme de DateTime de la date de debut de l'annee et de la date de fin (utilisation de JodaTime) */
+		/* Enregistrement sous forme de DateTime de la date de debut de lannee et de la date de fin (utilisation de JodaTime) */
 		DateTime janvierAnneeSuperieure = new DateTime( annee + 1, 1, 1, 0, 0, 0 );
 		DateTime aoutAnneeSuperieure = new DateTime( annee + 1, 8, 31, 0, 0, 0);
 
-		/* Calcul du nombre de semaines entre la date de debut et celle de fin de l'annee (utilisation de JodaTime) */
+		/* Calcul du nombre de semaines entre la date de debut et celle de fin de lannee (utilisation de JodaTime) */
 		int weeks = Weeks.weeksBetween(janvierAnneeSuperieure, aoutAnneeSuperieure).getWeeks();
 		
-		/* Création itérative de chaque semaine en partant du numero de la premiere semaine jusqu'a celui de celle de fin */
+		/* Creation iterative de chaque semaine en partant du numero de la premiere semaine jusqua celui de celle de fin */
 		for( int i = 1; i < weeks + 2; ++i){
 			Semaine semaine2015 = new Semaine( Integer.toString( annee + 1 ), i );
 			this.Controleur.getModele().getFormation().addSemaine(Integer.toString(i), semaine2015);
@@ -390,37 +399,37 @@ public class vuePlanning extends JFrame {
 		/* Instanciation de la semaine ( le numero de semaine et le controleur en parmametres ) */
 		detailSemaine semaine = new detailSemaine( numSemaine, this.Controleur);
 
-		/* Instanciation de la JDialog qui contiendra l'objet semaine cree precedemment */
+		/* Instanciation de la JDialog qui contiendra lobjet semaine cree precedemment */
 		JDialog dialogSemaine = new JDialog(fenetreParent, "Semaine " + numSemaine, ModalityType.APPLICATION_MODAL);
 
 		/* La fenetre de dialogue est modale */
 		dialogSemaine.setModal(true); 	
-		/* On définit le ContentPane de la fenêtre avec l'instance de la classe detailSemaine */
+		/* On definit le ContentPane de la fenetre avec linstance de la classe detailSemaine */
 		dialogSemaine.getContentPane().add(semaine);    	 
-		/* Définition de la taille de la fenêtre modale par celle de son ContentPane */
+		/* Definition de la taille de la fenetre modale par celle de son ContentPane */
 		dialogSemaine.setPreferredSize( semaine.getSize() ); 
-		 /* La fenêtre ne sera pas réajustable */
+		 /* La fenetre ne sera pas reajustable */
 		dialogSemaine.setResizable( false );     
 		/* Obvious */
 		dialogSemaine.pack(); 				
-		/* Permet de centrer la fenêtre */
+		/* Permet de centrer la fenetre */
 		dialogSemaine.setLocationRelativeTo(null);  
 		 /* Obvious */
 		dialogSemaine.setVisible(true);                     
 		
-		/* Action exécutée lors de la fermeture de la fenêtre modale, mise à jour du controleur */
+		/* Action executee lors de la fermeture de la fenetre modale, mise a jour du controleur */
 		this.setControleur( semaine.getControleur() ); 
 	}
 	
 	/**
-	 * Recuperer la hauteur de l'ecran
+	 * Recuperer la hauteur de lecran
 	 */
 	public static int getHauteurEcran() {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
 	}
 
 	/**
-	 * Recuperer la largeur de l'ecran
+	 * Recuperer la largeur de lecran
 	 */
 	public static int getLargeurEcran() {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
