@@ -6,16 +6,35 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import javax.swing.*;
+import vue.detailSemaine;
 import controleur.controleurPlanning;
 import modele.modelePlanning;
 import modele.Formation;
 
 public class Htmltest {
-	public static modelePlanning p = new modelePlanning();
+	
+	private static String nom="nom";
+	private static JTextField t;
+	private Formation fm;
+	private detailSemaine d;
+	private static HashMap<String, JPanel> lst_PnlSeances = new HashMap<String, JPanel>();
+	
+	public Htmltest(HashMap<String, JPanel> lst_PnlSeances){
+		this.lst_PnlSeances = lst_PnlSeances;
+	}
+	
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		modelePlanning modele = new modelePlanning(); 
+		controleurPlanning controleur = new controleurPlanning(modele );
+		final String nom_f = "nom";
 		
 		final String chemin_planning = "D:/test.html";
 	    final File fichier_planning =new File(chemin_planning); 
@@ -31,7 +50,9 @@ public class Htmltest {
 			+ "</head>"
 			+ "<body>"
 			+ "<center><table>"
-			+ "<caption><h1>Formation</h1></caption>"
+			+ "<caption><h1>"
+			+ controleur.getModele().addFormation()
+			+ "</h1></caption>"
 			+ "</br></br></br></br></br></br>"
 			+ "<thead>"
 			+ "<tr>"
