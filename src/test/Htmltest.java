@@ -21,6 +21,24 @@ import modele.Formation;
 
 public class Htmltest {
 	
+
+	private controleurPlanning controleur;
+	private static String nom="nom";
+	private static JTextField t;
+	private Formation fm;
+	private detailSemaine d;
+	private static HashMap<String, JPanel> lst_PnlSeances = new HashMap<String, JPanel>();
+	
+	public Htmltest(HashMap<String, JPanel> lst_PnlSeances){
+		this.lst_PnlSeances = lst_PnlSeances;
+	}
+	
+	public Htmltest( controleurPlanning controleur ){
+		this.controleur = controleur;
+	}
+
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -29,23 +47,34 @@ public class Htmltest {
 		controleurPlanning controleur = new controleurPlanning(modele );
 
 		final String nom_f = "F1";
+		final String annee_f = "2015";
 		final String key = "Module1";
 		final String abr = "M1";
 		
 		final String chemin_planning = "D:/test.html";
 	    final File fichier_planning =new File(chemin_planning); 
         try {
-        	controleur.getModele().addFormation(nom_f);
+<<<<<<< HEAD
+        	controleur.getModele().addFormation(nom_f, annee_f);
         	controleur.getModele().addModule(key, abr, Color.red, 5);
         	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
 
-		final String nom_f = "Master MIAGE";
+		//final String nom_f = "Master MIAGE";
 		
 		//final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
 
-		final String chemin_planning = "/Users/cyriellemintombou/Downloads/test.html";
+		//final String chemin_planning = "/Users/cyriellemintombou/Downloads/test.html";
 
-	    final File fichier_planning =new File(chemin_planning); 
+	    //final File fichier_planning =new File(chemin_planning); 
+=======
+        	controleur.getModele().addFormation(nom_f, "2014");
+        	controleur.getModele().addModule(key, abr, Color.red, 5);
+        	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
+
+		
+
+	   
+>>>>>>> origin/master
         try {
         	controleur.getModele().addFormation(nom_f, "2014");
 
@@ -222,28 +251,24 @@ public class Htmltest {
         }
         
 
-        try{
-            Desktop d = Desktop.getDesktop();
-            d.browse(new URI("D:/test.html"));
-            }catch(URISyntaxException e){
-            	
-            }catch(IOException e){
-            	
-            }
 
 
 
 
-        try{
-        Desktop d = Desktop.getDesktop();
-        d.browse(new URI("/Users/cyriellemintombou/Downloads/test.html"));
-        }catch(URISyntaxException e){
-        	
-        }catch(IOException e){
-        	
-        }
-
-
+<<<<<<< HEAD
+<<<<<<< HEAD
+       }
+=======
     }
+>>>>>>> origin/master
+=======
+>>>>>>> 1eead2405a658c43ca4923656a4b93dfe8b07e0c
 
+        
+	}
+        finally {
+            // quoiqu'il arrive, on ferme le fichier
+            
+        }
+}
 }

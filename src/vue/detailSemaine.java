@@ -32,6 +32,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
+import test.Htmltest;
 import controleur.controleurPlanning;
 import modele.Formation;
 import modele.Jour;
@@ -46,6 +47,8 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 	private JPanel conteneur;
 	private JPanel cadreSeances;
 	private String[] tblJours = { "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche" };
+	
+	private JButton exportHTML;
 	
 	private HashMap<String, JLabel> lst_LblJours = new HashMap<String, JLabel>();
 
@@ -100,6 +103,16 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		this.cadreSeances.setBounds((int)(largeurConteneur * 0.01), (int)(hauteurConteneur * 0.05), (int)(largeurConteneur * 0.98), (int)(hauteurConteneur * 0.9));
 		buildSeances();
 
+		this.exportHTML = new JButton("Export HTML");
+		this.exportHTML.setBounds((int)(largeurConteneur * 0.01), (int)(largeurConteneur * 0.01), (int)(largeurConteneur * 0.08), (int)(hauteurConteneur * 0.06));
+		this.exportHTML.setVisible(true);
+		this.exportHTML.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+					Htmltest export = new Htmltest( controleur );			
+			}
+		});
+		this.conteneur.add( this.exportHTML );
+		
 		this.conteneur.add(this.cadreSeances);
 		
 	}

@@ -16,7 +16,7 @@ public class MainTest {
 		
 		controleurPlanning controleur = new controleurPlanning(modele );
 		
-		vueAcceuil2 acc2 = new vueAcceuil2(controleur);
+		vueAcceuil acc2 = new vueAcceuil(controleur);
 		
 		
 		

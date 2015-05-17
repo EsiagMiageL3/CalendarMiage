@@ -122,7 +122,7 @@ public class vuePlanning extends JFrame {
 		/* On ajoute le JScrollPane au ContentPane */
 		this.conteneur.add( this.Jscroll );
 		
-		JLabel settings = new JLabel("\uD83D\uDEE0", JLabel.CENTER);
+		JLabel settings = new JLabel("\u2699", JLabel.CENTER);
 
 		settings.setOpaque(false);
 		settings.setForeground(Color.WHITE);
