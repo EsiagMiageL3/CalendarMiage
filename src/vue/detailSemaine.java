@@ -29,7 +29,7 @@ import java.util.Map;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
-import test.Htmltest;
+//import test.Htmltest;
 import controleur.controleurPlanning;
 import modele.Formation;
 
@@ -103,11 +103,11 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		this.exportHTML = new JButton("Export HTML");
 		this.exportHTML.setBounds((int)(largeurConteneur * 0.01), (int)(largeurConteneur * 0.01), (int)(largeurConteneur * 0.08), (int)(hauteurConteneur * 0.06));
 		this.exportHTML.setVisible(true);
-		this.exportHTML.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-					Htmltest export = new Htmltest( controleur );			
-			}
-		});
+		//this.exportHTML.addActionListener(new ActionListener() {
+			//public void actionPerformed(ActionEvent evt) {
+				//	Htmltest export = new Htmltest( controleur );			
+			//}
+		//});
 		this.conteneur.add( this.exportHTML );
 		
 		this.conteneur.add(this.cadreSeances);
