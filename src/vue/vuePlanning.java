@@ -66,17 +66,15 @@ public class vuePlanning extends JFrame {
 	 * Prend en parametre lannee de debut de la formation pour pouvoir creer dynamiquement les jours
 	 *
 	 */
-<<<<<<< HEAD
-	private void initComponents(int annee) {
-		/* Definition de la taille de la fenetre (egale a celle de l'ecran en l'occurence) */
-=======
 
 	private void initComponents(int annee) {
+		/* Definition de la taille de la fenetre (egale a celle de l'ecran en l'occurence) */
+
 
 
 
 		/* Definition de la taille de la fenetre (egale a celle de lecran en loccurence) */
->>>>>>> origin/master
+
 		this.setSize(getLargeurEcran(), getHauteurEcran());
 
 		/* Creation du panel destine a devenir le futur ContentPane de notre fenetre */
