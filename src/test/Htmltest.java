@@ -46,21 +46,18 @@ public class Htmltest {
 		final String chemin_planning = "D:/test.html";
 	    final File fichier_planning =new File(chemin_planning); 
         try {
-<<<<<<< HEAD
+
 
         	controleur.getModele().addFormation("ESIAG Master", "2014");
         	controleur.getModele().addModule(key, "M1", Color.red, 5);
         	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
 
 
-=======
->>>>>>> origin/master
 
         	//controleur.getModele().addFormation(nom_f, annee_f);
         	//controleur.getModele().addModule(key, abr, Color.red, 5);
         	//controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
 
-<<<<<<< HEAD
 		
 
 	   
@@ -69,8 +66,6 @@ public class Htmltest {
         	controleur.getModele().addFormation(nom_f, "2014");
 
 
-=======
->>>>>>> origin/master
             // Creation du fichier 
         	fichier_planning.createNewFile();
             // creation d'un writer
@@ -227,8 +222,7 @@ public class Htmltest {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
-<<<<<<< HEAD
+
 
         try{
         Desktop d = Desktop.getDesktop();
@@ -254,7 +248,7 @@ public class Htmltest {
         
         
 }
-=======
+
         try{
             Desktop d = Desktop.getDesktop();
             d.browse(new URI("D:/test.html"));
@@ -265,5 +259,5 @@ public class Htmltest {
             }
     }
 
->>>>>>> origin/master
+
 }
