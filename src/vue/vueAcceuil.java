@@ -35,7 +35,7 @@ import vue.vuePlanning;
 /**
  * @author nounoursmoelleux
  */
-public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener, MouseListener {
+public class vueAcceuil extends JFrame implements ActionListener, FocusListener, MouseListener {
 
 	/* Tableau des couleurs disponnibles pour les modules */
 	private Color[] tblCouleurs = {
@@ -93,7 +93,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	 * Contructeur
 	 * @param controleur
 	 */
-	public vueAcceuil2(controleurPlanning controleur) {
+	public vueAcceuil(controleurPlanning controleur) {
 
 		this.controleur = controleur; /* Affectation du parametre a notre instance de controleur */
 

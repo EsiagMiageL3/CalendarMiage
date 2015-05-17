@@ -59,7 +59,6 @@ public class Htmltest {
 
 		
 
-		  final File fichier_planning =new File(chemin_planning);
 	   
         try {
         	controleur.getModele().addFormation(nom_f, "2014");
@@ -237,28 +236,16 @@ public class Htmltest {
         }
         
 
-        try{
-            Desktop d = Desktop.getDesktop();
-            d.browse(new URI("D:/test.html"));
-            }catch(URISyntaxException e){
-            	
-            }catch(IOException e){
-            	
-            }
 
 
 
 
-        try{
-        Desktop d = Desktop.getDesktop();
-        d.browse(new URI("/Users/cyriellemintombou/Downloads/test.html"));
-        }catch(URISyntaxException e){
-        	
-        }catch(IOException e){
-        	
+
+        
+	}
+        finally {
+            // quoiqu'il arrive, on ferme le fichier
+            
         }
-
-
-    }
-
+}
 }
