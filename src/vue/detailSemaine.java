@@ -106,9 +106,12 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		this.exportHTML = new JButton("Export HTML");
 		this.exportHTML.setBounds((int)(largeurConteneur * 0.01), (int)(largeurConteneur * 0.01), (int)(largeurConteneur * 0.08), (int)(hauteurConteneur * 0.06));
 		this.exportHTML.setVisible(true);
+		
 		this.exportHTML.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
+				
 					Htmltest export = new Htmltest( controleur );			
+		
 			}
 		});
 		this.conteneur.add( this.exportHTML );

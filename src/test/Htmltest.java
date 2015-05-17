@@ -8,16 +8,11 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 import javax.swing.*;
 
-import vue.detailSemaine;
 import controleur.controleurPlanning;
 import modele.Seance;
-import modele.modelePlanning;
-import modele.Formation;
 
 public class Htmltest {
 	
@@ -31,55 +26,34 @@ public class Htmltest {
 	
 	public Htmltest( controleurPlanning controleur ){
 		this.controleur = controleur;
+		this.creerHTML();
 	}
 
-
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public void creerHTML() {
 		
 		final String nom_f = "F1";
 		final String annee_f = "2015";
 		final String key = "Module1";
 		final String abr = "M1";
 		
-		final String chemin_planning = "D:/test.html";
+		final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
 	    final File fichier_planning =new File(chemin_planning); 
-        try {
-
-
-        	controleur.getModele().addFormation("ESIAG Master", "2014");
-        	controleur.getModele().addModule(key, "M1", Color.red, 5);
-        	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
-
-
-
-        	//controleur.getModele().addFormation(nom_f, annee_f);
-        	//controleur.getModele().addModule(key, abr, Color.red, 5);
-        	//controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
-
-		
-
-	   
 
         try {
-        	controleur.getModele().addFormation(nom_f, "2014");
-
-
-            // Creation du fichier 
+        	
         	fichier_planning.createNewFile();
             // creation d'un writer
             final FileWriter writer = new FileWriter(fichier_planning);
             try {
                 writer.write("<html><head>"
 			+ "<title>Planning</title>"
-			+ "<link rel=stylesheet href=D:/test.css />"
+			+ "<link rel=stylesheet href = /Users/nounoursmoelleux/test.css>"
 			+ "</head>"
 			+ "<body>"
 			+ "<center><table>"
 			+ "<caption><h1>" 
 			
-			// + controleur.getModele().getFormation().getNomFormation()
+			 + controleur.getModele().getFormation().getNomFormation()
 			 + " 2014-2015 "
 			// + controleur.getModele().getFormation().getDuree()
 			 
@@ -224,39 +198,12 @@ public class Htmltest {
         }
 
 
-        try{
-        Desktop d = Desktop.getDesktop();
-        d.browse(new URI("D:/test.html"));
-        }catch(URISyntaxException e){
-        	
-        }catch(IOException e){
-        	
-
-
-
-
-
-
 
         
-	}
-        finally {
-            // quoiqu'il arrive, on ferme le fichier
-            
-
-        }
         
-        
-}
 
-        try{
-            Desktop d = Desktop.getDesktop();
-            d.browse(new URI("D:/test.html"));
-            }catch(URISyntaxException e){
-            	
-            }catch(IOException e){
-            	
-            }
+
+
     }
 
 
