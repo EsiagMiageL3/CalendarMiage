@@ -17,6 +17,7 @@ import modele.Formation;
 
 public class Htmltest {
 	
+	private controleurPlanning controleur;
 	private static String nom="nom";
 	private static JTextField t;
 	private Formation fm;
@@ -27,6 +28,9 @@ public class Htmltest {
 		this.lst_PnlSeances = lst_PnlSeances;
 	}
 	
+	public Htmltest( controleurPlanning controleur ){
+		this.controleur = controleur;
+	}
 
 
 	public static void main(String[] args) {
