@@ -30,34 +30,34 @@ public class controleurPlanning {
 		}
 		else{
 			System.out.println( "Nom de formation eronnee" );
-			JOptionPane.showMessageDialog(null,"Le nom ou l'annee de la formation ne peut etre vide." , "Nom de formation incorrect", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Le nom ou l annee de la formation ne peut etre vide." , "Nom de formation incorrect", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 	}
 	
 	/*
-	 * MŽthode vŽrifiant si la couleur choisie pour un module a dŽjˆ ŽtŽ attribuŽ ˆ un autre
-	 * Retourne false si la couleur est dŽjˆ prise
+	 * Methode verifiant si la couleur choisie pour un module a deja et attribuer un autre
+	 * Retourne false si la couleur est deja prise
 	 * Retourne true le cas contraire 
 	 */
 	public boolean checkCouleurPrise(Color couleurChoisie){
 		
-		boolean trouvŽ = false;
+		boolean trouve = false;
 		
-		/* On cree l'itŽrateur permettant de parcourir la map */
+		/* On cree l'iterateur permettant de parcourir la map */
 		Iterator it = this.modele.getFormation().getModules().entrySet().iterator();
 		
-		/* Si l'on rencontre la couleur lors du parcours, le booleen trouvŽ passe ˆ true */ 
+		/* Si l'on rencontre la couleur lors du parcours, le booleen trouver passe true */ 
 		while (it.hasNext()) {
 			final Map.Entry pair = (Map.Entry) it.next();
 			if( this.modele.getFormation().getModules().get( (String) pair.getKey() ).couleurModule == couleurChoisie  ){
-				trouvŽ = true;
+				trouve = true;
 			}
 		}
 		
-		/* Si la couleur est dŽjˆ prŽsente, affichage du message d'erreur et renvoie de la valeur False */ 
-		if( trouvŽ ){
-			JOptionPane.showMessageDialog(null, "La couleur est dŽjˆ prise pour un autre module, veuillez en choisir une autre ou modifier celle du module.");
+		/* Si la couleur est deja presente, affichage du message d'erreur et renvoie de la valeur False */ 
+		if( trouve ){
+			JOptionPane.showMessageDialog(null, "La couleur est deja prise pour un autre module, veuillez en choisir une autre ou modifier celle du module.");
 			return false;
 		}
 		else{
@@ -67,26 +67,26 @@ public class controleurPlanning {
 	}
 	
 	/*
-	 * MŽthode vŽrifiant si le nom du nouveau module est celui d'un dŽjˆ existant
-	 * Retourne false si la couleur est dŽjˆ prise
+	 * Methode verifiant si le nom du nouveau module est celui d'un deja existant
+	 * Retourne false si la couleur est deja prise
 	 * Retourne true le cas contraire 
 	 */
 	public boolean checkNomModule(String nomModule){
-		boolean trouvŽ = false;
+		boolean trouve = false;
 		
-		/* On crŽe l'itŽrateur permettant de parcourir la map */
+		/* On cree l'iterateur permettant de parcourir la map */
 		Iterator it = this.modele.getFormation().getModules().entrySet().iterator();
 		
-		/* Si l'on rencontre le nom lors du parcours, le booleen trouvŽ passe ˆ true */ 
+		/* Si l'on rencontre le nom lors du parcours, le booleen trouve passe  true */ 
 		while (it.hasNext()) {
 			final Map.Entry pair = (Map.Entry) it.next();
 			if( this.modele.getFormation().getModules().get( (String) pair.getKey() ).nom_m.equals( nomModule ) ){
-				trouvŽ = true;
+				trouve = true;
 			}
 		}
 		
-		/* Si le nom est dŽjˆ prŽsent, affichage du message d'erreur et renvoie de la valeur False */ 
-		if( trouvŽ ){
+		/* Si le nom est deja present, affichage du message d'erreur et renvoie de la valeur False */ 
+		if( trouve ){
 				return false;
 			
 		}
@@ -106,7 +106,7 @@ public class controleurPlanning {
 	}
 	
 	public boolean supprModule(String key){
-		int reponse = JOptionPane.showConfirmDialog(null,"Vous etes sur le point de supprimer le module " + key + ".\n" + "Les eventuelles seances attribuees ˆ ce module seront Žgalement supprimŽ.\n" + "Souhaitez-vous continuer ?", "Suppression du module " + key, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int reponse = JOptionPane.showConfirmDialog(null,"Vous etes sur le point de supprimer le module " + key + ".\n" + "Les eventuelles seances attribuees a ce module seront egalement supprime.\n" + "Souhaitez-vous continuer ?", "Suppression du module " + key, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
 		if( reponse == JOptionPane.YES_NO_OPTION){
 			this.modele.supprModule(key);
@@ -162,9 +162,9 @@ public class controleurPlanning {
 		    	  	this.modele = null;
 		    	  	this.modele = (modelePlanning) input.readObject();
 			      } catch (ClassNotFoundException e) {
-			    	  JOptionPane.showMessageDialog(null, "Ce fichier ne contient aucune donnŽe de planning !");
+			    	  JOptionPane.showMessageDialog(null, "Ce fichier ne contient aucune donnee de planning !");
 			      } catch (InvalidClassException e) {
-			    	  JOptionPane.showMessageDialog(null, "Ce fichier ne contient pas de donnŽes de planning valides.");
+			    	  JOptionPane.showMessageDialog(null, "Ce fichier ne contient pas de donnees de planning valides.");
 			      } catch (IOException e) {
 			    	  JOptionPane.showMessageDialog(null, "Ouverture du fichier impossible.");
 				}

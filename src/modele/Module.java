@@ -13,11 +13,11 @@ public class Module implements Serializable{
 	public Color couleurModule;
 	public int nb_seances;
 	public int quotasSeances;
-	public Hashtable<String, Seance> lst_Seance = new Hashtable<String, Seance>(); /* Clé = module de la séance */ 
+	public Hashtable<String, Seance> lst_Seance = new Hashtable<String, Seance>(); /* Cl�� = module de la s��ance */ 
 	
 	
 	public Module (){
-		this.nom_m = "Module par défaut";
+		this.nom_m = "Module par defaut";
 		this.abreviation = "MD";
 		this.couleur = "WHITE";
 		this.nb_seances = 0;

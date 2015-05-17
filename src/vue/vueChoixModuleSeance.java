@@ -35,14 +35,14 @@ public class vueChoixModuleSeance extends JPanel implements ItemListener{
 	public vueChoixModuleSeance( controleurPlanning controleur ){
 		this.controleur = controleur;
 		this.initComponents();
-		this.lblSeancesRestantes.setText( "Nombre de séances disponibles pour " + this.cbxModules.getItemAt(0) + ": " +  Integer.toString( this.controleur.getModele().getFormation().getModules().get(  this.cbxModules.getItemAt(0) ).getQuotas() - this.controleur.getModele().getFormation().getModules().get(  this.cbxModules.getItemAt(0) ).getSeances().size() ) );
+		this.lblSeancesRestantes.setText( "Nombre de seeances disponibles pour " + this.cbxModules.getItemAt(0) + ": " +  Integer.toString( this.controleur.getModele().getFormation().getModules().get(  this.cbxModules.getItemAt(0) ).getQuotas() - this.controleur.getModele().getFormation().getModules().get(  this.cbxModules.getItemAt(0) ).getSeances().size() ) );
 		
 		this.setVisible(true);
 	}
 	
 	
 	private void initComponents() {
-				/* DŽfinition de la taille de la fenêtre principale */
+				/* Deefinition de la taille de la feneetre principale */
 				this.setSize((int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width * 0.25), (int)(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width * 0.25));
 
 				this.conteneur = new JPanel() {
@@ -102,7 +102,7 @@ public class vueChoixModuleSeance extends JPanel implements ItemListener{
 				    this.cbxModules.addItemListener(this);
 				this.conteneur.add(this.cbxModules);
 				
-				this.lblDuree = new JLabel("Durée", JLabel.CENTER);
+				this.lblDuree = new JLabel("Dureee", JLabel.CENTER);
 				this.lblDuree.setOpaque( false );
 				this.lblDuree.setForeground( Color.WHITE);
 				this.lblDuree.setHorizontalAlignment( JLabel.CENTER );
@@ -113,7 +113,7 @@ public class vueChoixModuleSeance extends JPanel implements ItemListener{
 				this.txtDuree.setBounds( (int) (hauteurConteneur * 0.31), (int) (hauteurConteneur * 0.32), (int) (largeurConteneur * 0.5), (int) (hauteurConteneur * 0.15) );
 				this.conteneur.add(this.txtDuree);
 				
-				this.infoEnregistrement = new JLabel("La séance sera ajouté à la fermeture de la fenetre", JLabel.CENTER);
+				this.infoEnregistrement = new JLabel("La seeance sera ajoutee ee la fermeture de la fenetre", JLabel.CENTER);
 				this.infoEnregistrement.setHorizontalAlignment( JLabel.CENTER );
 				this.infoEnregistrement.setOpaque( false );
 				this.infoEnregistrement.setForeground( new Color(80, 80, 80) );
@@ -143,7 +143,7 @@ public Color getColorModule(){
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if( this.controleur.getModele().getFormation().getModules().get( e.getItem() ).getSeances() != null){
-		this.lblSeancesRestantes.setText( "Nombre de séances disponibles pour " + e.getItem() + ": " +  Integer.toString( this.controleur.getModele().getFormation().getModules().get( e.getItem() ).getQuotas() - this.controleur.getModele().getFormation().getModules().get( e.getItem() ).getSeances().size() ) );
+		this.lblSeancesRestantes.setText( "Nombre de seeances disponibles pour " + e.getItem() + ": " +  Integer.toString( this.controleur.getModele().getFormation().getModules().get( e.getItem() ).getQuotas() - this.controleur.getModele().getFormation().getModules().get( e.getItem() ).getSeances().size() ) );
 		this.colorModule = this.controleur.getModele().getFormation().getModules().get( e.getItem() ).getCouleur();
 		
 		repaint();
