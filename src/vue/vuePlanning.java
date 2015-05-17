@@ -66,7 +66,11 @@ public class vuePlanning extends JFrame {
 	 * Prend en parametre l'annee de debut de la formation pour pouvoir creer dynamiquement les jours
 	 *
 	 */
+<<<<<<< HEAD
 	private void initComponents(int annee){
+=======
+	private void initComponents(int annee) {
+>>>>>>> origin/master
 
 		/* Definition de la taille de la fenetre (egale a celle de l'ecran en l'occurence) */
 		this.setSize(getLargeurEcran(), getHauteurEcran());
