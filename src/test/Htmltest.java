@@ -34,12 +34,12 @@ public class Htmltest {
 		
 		modelePlanning modele = new modelePlanning(); 
 		controleurPlanning controleur = new controleurPlanning(modele );
-		final String nom_f = "nom";
+		final String nom_f = "Master MIAGE";
 		
 		final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
 	    final File fichier_planning =new File(chemin_planning); 
         try {
-        	controleur.getModele().addFormation(nom_f);
+        	controleur.getModele().addFormation(nom_f, "2014");
             // Creation du fichier 
         	fichier_planning.createNewFile();
             // creation d'un writer
