@@ -32,9 +32,7 @@ import javax.swing.border.MatteBorder;
 
 import vue.vuePlanning;
 
-/**
- * @author nounoursmoelleux
- */
+
 public class vueAcceuil extends JFrame implements ActionListener, FocusListener, MouseListener {
 
 	/* Tableau des couleurs disponnibles pour les modules */
