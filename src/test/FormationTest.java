@@ -1,13 +1,15 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
+import modele.Formation;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class FormationTest {
-
+	private Formation form;
+	
 	@Before
 	public void setUp() throws Exception {
 	}
