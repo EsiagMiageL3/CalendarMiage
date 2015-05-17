@@ -24,8 +24,10 @@ public class Htmltest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+
 		modelePlanning modele = new modelePlanning(); 
 		controleurPlanning controleur = new controleurPlanning(modele );
+<<<<<<< HEAD
 		final String nom_f = "F1";
 		final String key = "Module1";
 		final String abr = "M1";
@@ -36,6 +38,17 @@ public class Htmltest {
         	controleur.getModele().addFormation(nom_f);
         	controleur.getModele().addModule(key, abr, Color.red, 5);
         	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
+=======
+		final String nom_f = "Master MIAGE";
+		
+		//final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
+
+		final String chemin_planning = "/Users/cyriellemintombou/Downloads/test.html";
+
+	    final File fichier_planning =new File(chemin_planning); 
+        try {
+        	controleur.getModele().addFormation(nom_f, "2014");
+>>>>>>> origin/master
             // Creation du fichier 
         	fichier_planning.createNewFile();
             // creation d'un writer
@@ -44,7 +57,17 @@ public class Htmltest {
                 writer.write("<html><head>"
 			+ "<title>Planning</title>"
 
+<<<<<<< HEAD
 			+ "<link rel=stylesheet href=D:/test.css>"
+=======
+
+			+ "<link rel=stylesheet href=/Users/nounoursmoelleux/test.css/>"
+
+			+ "<link rel=stylesheet href=/Users/cyriellemintombou/Downloads/test.css />"
+
+			+ "<h1><center>2014-2015</h1></center>"
+
+>>>>>>> origin/master
 
 			+ "</head>"
 			+ "<body>"
@@ -198,6 +221,7 @@ public class Htmltest {
 
         }
         
+<<<<<<< HEAD
         try{
             Desktop d = Desktop.getDesktop();
             d.browse(new URI("D:/test.html"));
@@ -206,6 +230,20 @@ public class Htmltest {
             }catch(IOException e){
             	
             }
+=======
+
+
+
+        try{
+        Desktop d = Desktop.getDesktop();
+        d.browse(new URI("/Users/cyriellemintombou/Downloads/test.html"));
+        }catch(URISyntaxException e){
+        	
+        }catch(IOException e){
+        	
+        }
+
+>>>>>>> origin/master
     }
 
 }

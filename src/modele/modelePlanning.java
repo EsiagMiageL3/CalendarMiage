@@ -27,8 +27,8 @@ public class modelePlanning implements Serializable{
 		this.nouveauPlanning = planning;
 	}
 	
-	public void addFormation(String nomFormation){
-		this.formationPlanning = new Formation(nomFormation);
+	public void addFormation(String nomFormation, String annee){
+		this.formationPlanning = new Formation(nomFormation, annee);
 	}
 	
 	public void addModule(String key, String abreviation, Color couleur, int nbSeances){

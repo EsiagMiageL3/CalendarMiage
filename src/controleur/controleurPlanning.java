@@ -22,15 +22,15 @@ public class controleurPlanning {
 		this.modele = modele;
 	}
 
-	public boolean nouvelleFormation(JTextField txtFormation){
-		if( !txtFormation.getText().trim().equals( "" ) ){
-			this.modele.addFormation( txtFormation.getText() );
+	public boolean nouvelleFormation(JTextField txtFormation, String anneeFormation){
+		if( !txtFormation.getText().trim().equals( "" ) && anneeFormation != null && !anneeFormation.equals("")  ){
+			this.modele.addFormation( txtFormation.getText(), anneeFormation );
 			JOptionPane.showMessageDialog(null,"Formation creee !");
 			return true;
 		}
 		else{
 			System.out.println( "Nom de formation eronnee" );
-			JOptionPane.showMessageDialog(null,"Le nom de la formation ne peut etre vide." , "Nom de formation incorrect", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Le nom ou l'annee de la formation ne peut etre vide." , "Nom de formation incorrect", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 	}
