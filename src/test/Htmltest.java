@@ -46,7 +46,14 @@ public class Htmltest {
             try {
                 writer.write("<html><head>"
 			+ "<title>Planning</title>"
+<<<<<<< Updated upstream
 			+ "<link rel=stylesheet href=D:/test.css />"
+=======
+
+			+ "<link rel=stylesheet href=/Users/nounoursmoelleux/test.css/>"
+			+ "<h1><center>2014-2015</h1></center>"
+
+>>>>>>> Stashed changes
 			+ "</head>"
 			+ "<body>"
 			+ "<center><table>"
@@ -190,7 +197,13 @@ public class Htmltest {
                 writer.close();
             }
         } catch (Exception e) {
+<<<<<<< Updated upstream
             System.out.println("Impossible de créer le fichier");
+=======
+
+            System.out.println("Impossible de creer le fichier");
+
+>>>>>>> Stashed changes
         }
         
         try{
