@@ -23,10 +23,6 @@ public class Htmltest {
 	
 
 	private controleurPlanning controleur;
-	private static String nom="nom";
-	private static JTextField t;
-	private Formation fm;
-	private detailSemaine d;
 	private static HashMap<String, JPanel> lst_PnlSeances = new HashMap<String, JPanel>();
 	
 	public Htmltest(HashMap<String, JPanel> lst_PnlSeances){
@@ -51,14 +47,24 @@ public class Htmltest {
 		final String key = "Module1";
 		final String abr = "M1";
 		
-		final String chemin_planning = "D:/test.html";
+		final String chemin_planning = "C:/Users/Jordan/Downloads/test.html";
 	    final File fichier_planning =new File(chemin_planning); 
         try {
+<<<<<<< HEAD
 
-        	controleur.getModele().addFormation(nom_f, "2014");
+        	controleur.getModele().addFormation("ESIAG Master", "2014");
+        	controleur.getModele().addModule(key, "M1", Color.red, 5);
+        	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
+
+
+=======
+>>>>>>> origin/master
+
+        	controleur.getModele().addFormation(nom_f, annee_f);
         	controleur.getModele().addModule(key, abr, Color.red, 5);
         	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
 
+<<<<<<< HEAD
 		
 
 	   
@@ -66,6 +72,9 @@ public class Htmltest {
         try {
         	controleur.getModele().addFormation(nom_f, "2014");
 
+
+=======
+>>>>>>> origin/master
             // Creation du fichier 
         	fichier_planning.createNewFile();
             // creation d'un writer
@@ -73,19 +82,7 @@ public class Htmltest {
             try {
                 writer.write("<html><head>"
 			+ "<title>Planning</title>"
-
-
-			+ "<link rel=stylesheet href=D:/test.css>"
-
-
-			+ "<link rel=stylesheet href=/Users/nounoursmoelleux/test.css/>"
-
-			+ "<link rel=stylesheet href=/Users/cyriellemintombou/Downloads/test.css />"
-
-			+ "<h1><center>2014-2015</h1></center>"
-
-
-
+			+ "<link rel=stylesheet href=D:/test.css />"
 			+ "</head>"
 			+ "<body>"
 			+ "<center><table>"
@@ -222,7 +219,6 @@ public class Htmltest {
 				+ "<td></td>"
 				+ "<td></td>"
 			+ "</tr>"
-			+ "</tbody>"
 			+ "</table></center>"
 			+ "</body>"
 			+ "</html>");
@@ -233,11 +229,19 @@ public class Htmltest {
                 writer.close();
             }
         } catch (Exception e) {
-
             System.out.println("Impossible de créer le fichier");
-
         }
         
+<<<<<<< HEAD
+
+        try{
+        Desktop d = Desktop.getDesktop();
+        d.browse(new URI("D:/test.html"));
+        }catch(URISyntaxException e){
+        	
+        }catch(IOException e){
+        	
+
 
 
 
@@ -249,6 +253,21 @@ public class Htmltest {
         finally {
             // quoiqu'il arrive, on ferme le fichier
             
+
         }
+        
+        
 }
+=======
+        try{
+            Desktop d = Desktop.getDesktop();
+            d.browse(new URI("C:/Users/Jordan/Downloads/test.html"));
+            }catch(URISyntaxException e){
+            	
+            }catch(IOException e){
+            	
+            }
+    }
+
+>>>>>>> origin/master
 }

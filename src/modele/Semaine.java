@@ -13,7 +13,7 @@ public class Semaine {
 	
 	private String annee;
 	private int numeroSemaine;
-	private Hashtable<String, Jour> lst_JourSemaine; /* ClŽ = num du jour */
+	private Hashtable<String, Jour> lst_JourSemaine; /* Cl= num du jour */
 	
 	
 	public Semaine(String annee, int numero){
@@ -39,16 +39,16 @@ public class Semaine {
 		/* Instanciation du calendrier */
 		Calendar c = Calendar.getInstance();
 
-		/* Positionnement du calendrier ˆ l'annee passŽe en param�tre */
+		/* Positionnement du calendrier  l'annee passe en paramtre */
 		c.set(Calendar.YEAR, annee);
 		
-		/* Positionnement du calendrier au numŽro de semaine passŽ en param�tre */
+		/* Positionnement du calendrier au numro de semaine pass en paramtre */
 		c.set(Calendar.WEEK_OF_YEAR, numSemaine);
 
 		/* Positionnement du calendrier au jour premier jour de la semaine */
 		c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 
-		/* DŽfinition du format de restitution de la date du jour */
+		/* Dfinition du format de restitution de la date du jour */
 		DateFormat df = new SimpleDateFormat("dd_MM_yyyy");
 		
 		for (int i = 0; i < 7; i++) {
@@ -59,7 +59,7 @@ public class Semaine {
 		   DateFormat formatterMois = new SimpleDateFormat("MMMM"); 
 		   String mois = formatterMois.format( c.getTime() );
 		   
-		   /* CrŽation du jour */
+		   /* Cration du jour */
 		   Jour jourSemaine = new Jour( df.format(c.getTime()), numSemaine, nom, mois );
 		   
 		    

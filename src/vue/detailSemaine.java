@@ -91,7 +91,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 
 		this.conteneur.setLayout(null); /* Affectation d'un layout null au ContentPane afin de positionner les composants comme voulu */
 		this.conteneur.setOpaque(false); /* Le ContentPane sera transparent */
-		this.conteneur.setSize(this.getSize()); /* Taille du conteneur Žgale ˆ celle de la fenetre */
+		this.conteneur.setSize(this.getSize()); /* Taille du conteneur egale ˆ celle de la fenetre */
 		this.setLayout(null);
 		this.add(this.conteneur);
 		//this.setContentPane(this.conteneur); /* Le conteneur devient le ContentPane de la fenetre principale */
