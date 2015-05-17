@@ -16,7 +16,7 @@ import modele.Semaine;
 
 import java.text.*;
 
-public class vuePlanning extends JFrame implements ActionListener {
+public class vuePlanning extends JFrame {
 	
 	/* Represente l'annee du planning */
 	private int annee;
@@ -24,6 +24,13 @@ public class vuePlanning extends JFrame implements ActionListener {
 	private int largeurConteneur, hauteurConteneur; 
 	/* Instance de notre controleur */
 	private controleurPlanning Controleur; 
+	/* JPanel qui deviendra notre ContentPane */
+	private JPanel conteneur;
+	/* JScrollPane qui contiendra notre JPanel contenant le planning */
+	private JScrollPane Jscroll;
+	/* JPanel qui contiendra notre planning (mois, jours, etc...) */
+	private JPanel planning;
+	
 	private JPanel pnlInfos;
 	private JLabel lblDisplayFormation, lblDisplayNbModules, nbJours, lblDisplayNbJours;
 
@@ -38,11 +45,16 @@ public class vuePlanning extends JFrame implements ActionListener {
 	 */
 	public vuePlanning( controleurPlanning Controleur, int annee) {
 		
-		
+		/* Creation des composant de la fenetre */
 		initComponents( annee );
+		
 		this.annee = annee;
 		this.Controleur = Controleur;
+		
+		/* Creation de toutes les semaines de l'annee et de leurs jours */
 		this.createWeeks( annee );
+		
+		/* Affichage de notre fenetre */
 		this.setVisible(true);
 	}
 
@@ -56,7 +68,7 @@ public class vuePlanning extends JFrame implements ActionListener {
 		this.setSize(getLargeurEcran(), getHauteurEcran());
 
 		/* Creation du panel destine a devenir le futur ContentPane de notre fenetre */
-		JPanel conteneur = new JPanel() {
+		this.conteneur = new JPanel() {
 			@Override
 			/* Permet de lui ajouter un degrade de couleur comme decoration de fond */
 			protected void paintComponent(Graphics g) {
@@ -74,27 +86,42 @@ public class vuePlanning extends JFrame implements ActionListener {
 		};
 
 		/* Le conteneur n'aura aucun LayoutManager afin de positionner librement les composant en proportion a la taille de l'ecran ( plus de detail dans le compte rendu ) */
-		conteneur.setLayout(null);
+		this.conteneur.setLayout(null);
 		
 		/* Le JPanel "conteneur" devient le ContentPane de la fenetre */
-		this.setContentPane(conteneur);
+		this.setContentPane( this.conteneur );
 		/* Permet de supprimer la barre de titre avec les boutons de fermeture, réduction et agrandissement de la fenêtre */
 		this.setUndecorated(true);
 		largeurConteneur = this.getWidth(); /* Affection de la largeur du conteneur a la variable */
 		hauteurConteneur = this.getHeight(); /* Affection de la hauteur du conteneur a la variable */
 		
 		/* Creation du JPanel qui contiendra les mois du planning */
-		JPanel planning = new JPanel();
+		this.planning = new JPanel();
 		
 		/* Choix d'un GridLayout de 3 colonnes, le nombre de lignes sera deduit => 3 mois par ligne */
-		planning.setLayout(new GridLayout(0, 3, 10, 10));
+		this.planning.setLayout(new GridLayout(0, 3, 10, 10));
 
 		/* Creation du JScrollPane qui contiendra le JPanel contennant le planning */
-		JScrollPane Jscroll = new JScrollPane();
+		this.Jscroll = new JScrollPane();
 		
 		/* Definition de sa taille et positions en pourcentages de la taille de l'ecran */
-		Jscroll.setBounds((int)(largeurConteneur * 0.01), (int)(hauteurConteneur * 0.05), (int)(largeurConteneur * 0.9), (int)(hauteurConteneur * 0.9));
+		this.Jscroll.setBounds((int)(largeurConteneur * 0.01), (int)(hauteurConteneur * 0.05), (int)(largeurConteneur * 0.9), (int)(hauteurConteneur * 0.9));
 
+		/* Le JPanel contenant le planning devient le ViewportView de notre JScrollPane */
+		this.Jscroll.setViewportView( this.planning );
+		
+		/* Le JScrollPane sera transparent */
+		this.Jscroll.setOpaque(false);
+		
+		/* Le ViewPort sera transparent egalement */
+		this.Jscroll.getViewport().setOpaque(false);
+		
+		/* Pas de bordures*/
+		this.Jscroll.setBorder(null);	
+		
+		/* On ajoute le JScrollPane au ContentPane */
+		this.conteneur.add( this.Jscroll );
+		
 		JLabel settings = new JLabel("\uD83D\uDEE0", JLabel.CENTER);
 
 		settings.setOpaque(false);
@@ -104,14 +131,12 @@ public class vuePlanning extends JFrame implements ActionListener {
 		settings.setFont(new Font("Arial", Font.PLAIN, 40));
 		settings.setHorizontalAlignment(JLabel.CENTER);
 
-		conteneur.add(settings);
+		this.conteneur.add(settings);
 
 		final JPanel sideBar = new JPanel(new GridLayout(10, 1, 20, 0));
 		sideBar.setOpaque(true);
 		sideBar.setBounds((int)(largeurConteneur + 1), 0, (int)(largeurConteneur * 0.15), (int)(hauteurConteneur));
 		sideBar.setBackground(new Color(80, 80, 80));
-
-
 
 		JLabel iconYear = new JLabel("\uD83D\uDCC5", JLabel.CENTER);
 		iconYear.setVisible(true);
@@ -133,9 +158,7 @@ public class vuePlanning extends JFrame implements ActionListener {
 		sideBar.add(iconSave);
 		sideBar.add(iconQuit);
 
-		conteneur.add(sideBar);
-
-
+		this.conteneur.add(sideBar);
 
 		settings.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -153,9 +176,6 @@ public class vuePlanning extends JFrame implements ActionListener {
 							repaint();
 							validate();
 							cancel();
-
-
-
 						}
 					}
 
@@ -166,85 +186,6 @@ public class vuePlanning extends JFrame implements ActionListener {
 
 			}
 		});
-		/*
-		 *  Le Panel du planning devient le Viewport du JScrollPane
-		 *  On l'ajoute au ContentPane
-		 */
-		Jscroll.setViewportView(planning);
-		Jscroll.setOpaque(false);
-		Jscroll.setBackground(new Color(80, 80, 80));
-		Jscroll.getViewport().setOpaque(false);
-		Jscroll.setBorder(null);
-		conteneur.add(Jscroll);
-
-		/*
-		 *  Panel contenant les controles
-		 *  DŽfinition de ses tailles et positions
-		 *  Ajout au ContentPane
-		 */
-		JPanel test = new JPanel();
-		test.setOpaque(false);
-		test.setLayout(null);
-		test.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-		test.setBounds(0, 0, getLargeurEcran(), (int)(getHauteurEcran() * 0.2));
-		//conteneur.add(test);
-
-		JLabel displayAnnee = new JLabel();
-
-		this.pnlInfos = new JPanel();
-
-		this.pnlInfos.setOpaque(false);
-		JLabel lblFormation = new JLabel("Formation du planning", JLabel.CENTER);
-		lblDisplayFormation = new JLabel("...", JLabel.CENTER);
-		JLabel lblNbModules = new JLabel("Nombre de modules", JLabel.CENTER);
-		lblDisplayNbModules = new JLabel("...", JLabel.CENTER);
-
-		this.nbJours = new JLabel("Jours de la formation", JLabel.CENTER);
-		this.lblDisplayNbJours = new JLabel("...", JLabel.CENTER);
-		JLabel test4 = new JLabel("...", JLabel.CENTER);
-		JLabel test5 = new JLabel("...", JLabel.CENTER);
-		this.pnlInfos.add(lblFormation);
-		this.pnlInfos.add(lblDisplayFormation);
-		this.pnlInfos.add(lblNbModules);
-		this.pnlInfos.add(lblDisplayNbModules);
-		this.pnlInfos.add(nbJours);
-		this.pnlInfos.add(lblDisplayNbJours);
-		this.pnlInfos.add(test4);
-		this.pnlInfos.add(test5);
-
-		lblFormation.setBorder(new javax.swing.border.LineBorder(new Color(0, 0, 0), 1, true));
-		lblFormation.setForeground(new Color(255, 255, 255));
-		lblFormation.setBackground(new Color(80, 80, 80));
-		lblFormation.setOpaque(true);
-
-		lblDisplayFormation.setBorder(new javax.swing.border.LineBorder(new Color(0, 0, 0), 1, true));
-		lblDisplayFormation.setForeground(new Color(255, 255, 255));
-		lblDisplayFormation.setBackground(new Color(80, 80, 80));
-		lblDisplayFormation.setOpaque(true);
-
-		lblNbModules.setBorder(new javax.swing.border.LineBorder(new Color(0, 0, 0), 1, true));
-		lblNbModules.setForeground(new Color(255, 255, 255));
-		lblNbModules.setBackground(new Color(80, 80, 80));
-		lblNbModules.setOpaque(true);
-
-		this.nbJours.setBorder(new javax.swing.border.LineBorder(new Color(0, 0, 0), 1, true));
-		this.nbJours.setForeground(new Color(255, 255, 255));
-		this.nbJours.setBackground(new Color(80, 80, 80));
-		this.nbJours.setOpaque(true);
-
-		this.lblDisplayNbJours.setBorder(new javax.swing.border.LineBorder(new Color(0, 0, 0), 1, true));
-		this.lblDisplayNbJours.setForeground(new Color(255, 255, 255));
-		this.lblDisplayNbJours.setBackground(new Color(80, 80, 80));
-		this.lblDisplayNbJours.setOpaque(true);
-
-		this.pnlInfos.setBounds((int)(getLargeurEcran() * 0.05), (int)(test.getHeight() * 0.1), (int) 500, (int)(test.getHeight() * 0.8));
-
-		this.pnlInfos.setLayout(new GridLayout(0, 2, 10, (int)(this.pnlInfos.getHeight() * 0.05)));
-
-		test.add(this.pnlInfos);
-
-		//Anciennne facon de definir les labels
-
 
 		Date vraiDateduJour;
 		SimpleDateFormat format1 = new SimpleDateFormat("dd_MM_yyyy");
@@ -253,15 +194,13 @@ public class vuePlanning extends JFrame implements ActionListener {
 		vraiDateduJour = dateDuJour.getTime();
 		String DateduJour = format1.format(vraiDateduJour);
 		int cptMois = 8;
-
-
-
+		
 		for (int i = 0; i < tbl.length; ++i) {
 			JPanel mois = new JPanel();
-			mois.setPreferredSize(new Dimension((int)(Jscroll.getWidth() * 0.3), (int)(Jscroll.getWidth() * 0.2)));
+			mois.setPreferredSize(new Dimension((int)(this.Jscroll.getWidth() * 0.3), (int)(this.Jscroll.getWidth() * 0.2)));
 			mois.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 			mois.setLayout(new BorderLayout());
-			JLabel nomMois = new JLabel(tbl[i], SwingConstants.CENTER);
+			JLabel nomMois = new JLabel(tbl[i] + " " + annee, SwingConstants.CENTER);
 			nomMois.setFont(new Font("Arial", Font.PLAIN, 12));
 			nomMois.setForeground(Color.WHITE);
 			nomMois.setBackground(Color.BLUE);
@@ -273,8 +212,8 @@ public class vuePlanning extends JFrame implements ActionListener {
 			cadreMois.setLayout(new GridLayout(0, 7, 3, 3));
 			cadreMois.setBackground(Color.WHITE);
 
+			/* Creation des JLabel contenant le nom des jours de la semaine */
 			JLabel Lundi = new JLabel("Lun", SwingConstants.CENTER);
-
 			JLabel Mardi = new JLabel("Mar", SwingConstants.CENTER);
 			JLabel Mercredi = new JLabel("Mer", SwingConstants.CENTER);
 			JLabel Jeudi = new JLabel("Jeu", SwingConstants.CENTER);
@@ -282,6 +221,7 @@ public class vuePlanning extends JFrame implements ActionListener {
 			JLabel Samedi = new JLabel("Sam", SwingConstants.CENTER);
 			JLabel Dimanche = new JLabel("Dim", SwingConstants.CENTER);
 
+			/* Ajout des Jlabels de jours au JPanel contenant les informations du mois */
 			cadreMois.add(Lundi);
 			cadreMois.add(Mardi);
 			cadreMois.add(Mercredi);
@@ -290,7 +230,6 @@ public class vuePlanning extends JFrame implements ActionListener {
 			cadreMois.add(Samedi);
 			cadreMois.add(Dimanche);
 
-			//9 = octobre, decalage au mois superieur
 			GregorianCalendar calendrier = new GregorianCalendar(annee, cptMois, 1);
 
 			int nbJours = calendrier.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
@@ -484,8 +423,4 @@ public class vuePlanning extends JFrame implements ActionListener {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-	}
 }
