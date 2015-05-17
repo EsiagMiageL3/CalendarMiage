@@ -46,37 +46,15 @@ public class Htmltest {
 		modelePlanning modele = new modelePlanning(); 
 		controleurPlanning controleur = new controleurPlanning(modele );
 
-		final String nom_f = "F1";
-		final String annee_f = "2015";
 		final String key = "Module1";
-		final String abr = "M1";
 		
 		final String chemin_planning = "D:/test.html";
 	    final File fichier_planning =new File(chemin_planning); 
         try {
-<<<<<<< HEAD
-        	controleur.getModele().addFormation(nom_f, annee_f);
-        	controleur.getModele().addModule(key, abr, Color.red, 5);
+        	controleur.getModele().addFormation("ESIAG Master", "2014");
+        	controleur.getModele().addModule(key, "M1", Color.red, 5);
         	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
 
-		//final String nom_f = "Master MIAGE";
-		
-		//final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
-
-		//final String chemin_planning = "/Users/cyriellemintombou/Downloads/test.html";
-
-	    //final File fichier_planning =new File(chemin_planning); 
-=======
-        	controleur.getModele().addFormation(nom_f, "2014");
-        	controleur.getModele().addModule(key, abr, Color.red, 5);
-        	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
-
-		
-
-	   
->>>>>>> origin/master
-        try {
-        	controleur.getModele().addFormation(nom_f, "2014");
 
             // Creation du fichier 
         	fichier_planning.createNewFile();
@@ -85,19 +63,7 @@ public class Htmltest {
             try {
                 writer.write("<html><head>"
 			+ "<title>Planning</title>"
-
-
-			+ "<link rel=stylesheet href=D:/test.css>"
-
-
-			+ "<link rel=stylesheet href=/Users/nounoursmoelleux/test.css/>"
-
-			+ "<link rel=stylesheet href=/Users/cyriellemintombou/Downloads/test.css />"
-
-			+ "<h1><center>2014-2015</h1></center>"
-
-
-
+			+ "<link rel=stylesheet href=D:/test.css />"
 			+ "</head>"
 			+ "<body>"
 			+ "<center><table>"
@@ -234,7 +200,6 @@ public class Htmltest {
 				+ "<td></td>"
 				+ "<td></td>"
 			+ "</tr>"
-			+ "</tbody>"
 			+ "</table></center>"
 			+ "</body>"
 			+ "</html>");
@@ -245,30 +210,18 @@ public class Htmltest {
                 writer.close();
             }
         } catch (Exception e) {
-
             System.out.println("Impossible de créer le fichier");
-
         }
         
-
-
-
-
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-       }
-=======
-    }
->>>>>>> origin/master
-=======
->>>>>>> 1eead2405a658c43ca4923656a4b93dfe8b07e0c
-
-        
-	}
-        finally {
-            // quoiqu'il arrive, on ferme le fichier
-            
+        try{
+        Desktop d = Desktop.getDesktop();
+        d.browse(new URI("D:/test.html"));
+        }catch(URISyntaxException e){
+        	
+        }catch(IOException e){
+        	
         }
+        
+        
 }
 }
