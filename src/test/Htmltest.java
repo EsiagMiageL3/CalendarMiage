@@ -73,7 +73,6 @@ public class Htmltest {
 
 		
 
-		  final File fichier_planning =new File(chemin_planning);
 	   
 >>>>>>> origin/master
         try {
@@ -252,32 +251,24 @@ public class Htmltest {
         }
         
 
-        try{
-            Desktop d = Desktop.getDesktop();
-            d.browse(new URI("D:/test.html"));
-            }catch(URISyntaxException e){
-            	
-            }catch(IOException e){
-            	
-            }
 
 
 
 
-        try{
-        Desktop d = Desktop.getDesktop();
-        d.browse(new URI("/Users/cyriellemintombou/Downloads/test.html"));
-        }catch(URISyntaxException e){
-        	
-        }catch(IOException e){
-        	
-        }
-
-
+<<<<<<< HEAD
 <<<<<<< HEAD
        }
 =======
     }
 >>>>>>> origin/master
+=======
+>>>>>>> 1eead2405a658c43ca4923656a4b93dfe8b07e0c
 
+        
+	}
+        finally {
+            // quoiqu'il arrive, on ferme le fichier
+            
+        }
+}
 }
