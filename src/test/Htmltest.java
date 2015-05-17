@@ -32,11 +32,15 @@ public class Htmltest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+
 		modelePlanning modele = new modelePlanning(); 
 		controleurPlanning controleur = new controleurPlanning(modele );
 		final String nom_f = "Master MIAGE";
 		
-		final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
+		//final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
+
+		final String chemin_planning = "/Users/cyriellemintombou/Downloads/test.html";
+
 	    final File fichier_planning =new File(chemin_planning); 
         try {
         	controleur.getModele().addFormation(nom_f, "2014");
@@ -48,7 +52,11 @@ public class Htmltest {
                 writer.write("<html><head>"
 			+ "<title>Planning</title>"
 
+
 			+ "<link rel=stylesheet href=/Users/nounoursmoelleux/test.css/>"
+
+			+ "<link rel=stylesheet href=/Users/cyriellemintombou/Downloads/test.css />"
+
 			+ "<h1><center>2014-2015</h1></center>"
 
 
@@ -202,6 +210,17 @@ public class Htmltest {
 
         }
         
+
+
+
+        try{
+        Desktop d = Desktop.getDesktop();
+        d.browse(new URI("/Users/cyriellemintombou/Downloads/test.html"));
+        }catch(URISyntaxException e){
+        	
+        }catch(IOException e){
+        	
+        }
 
     }
 
