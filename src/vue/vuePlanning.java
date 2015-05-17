@@ -471,13 +471,20 @@ public class vuePlanning extends javax.swing.JFrame implements ActionListener {
 		/* Instanciation de la JDialog qui contiendra l'objet semaine cree precedemment */
 		JDialog dialogSemaine = new JDialog(fenetreParent, "Semaine " + numSemaine, ModalityType.APPLICATION_MODAL);
 
-		dialogSemaine.setModal(true); 						 /* La fenetre de dialogue est modale */
-		dialogSemaine.getContentPane().add(semaine);    	 /* On définit le ContentPane de la fenêtre avec l'instance de la classe detailSemaine */
-		dialogSemaine.setPreferredSize( semaine.getSize() ); /* Définition de la taille de la fenêtre modale par celle de son ContentPane */
-		dialogSemaine.setResizable( false );                 /* La fenêtre ne sera pas réajustable */
-		dialogSemaine.pack(); 							   	 /* Obvious */
-		dialogSemaine.setLocationRelativeTo(null);           /* Permet de centrer la fenêtre */
-		dialogSemaine.setVisible(true);                      /* Obvious */
+		/* La fenetre de dialogue est modale */
+		dialogSemaine.setModal(true); 	
+		/* On définit le ContentPane de la fenêtre avec l'instance de la classe detailSemaine */
+		dialogSemaine.getContentPane().add(semaine);    	 
+		/* Définition de la taille de la fenêtre modale par celle de son ContentPane */
+		dialogSemaine.setPreferredSize( semaine.getSize() ); 
+		 /* La fenêtre ne sera pas réajustable */
+		dialogSemaine.setResizable( false );     
+		/* Obvious */
+		dialogSemaine.pack(); 				
+		/* Permet de centrer la fenêtre */
+		dialogSemaine.setLocationRelativeTo(null);  
+		 /* Obvious */
+		dialogSemaine.setVisible(true);                     
 		
 		/* Action exécutée lors de la fermeture de la fenêtre modale, mise à jour du controleur */
 		this.setControleur( semaine.getControleur() ); 
