@@ -116,7 +116,7 @@ public class vueAcceuil extends JFrame implements ActionListener, FocusListener,
 		this.scrollColors.setVisible( false );
 		this.btnSaveModule.setVisible( true );
 		repaint();
-	}
+	}//
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
