@@ -36,9 +36,10 @@ public class Htmltest {
 		controleurPlanning controleur = new controleurPlanning(modele );
 		final String nom_f = "nom";
 		
-		final String chemin_planning = "D:/test.html";
+		final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
 	    final File fichier_planning =new File(chemin_planning); 
         try {
+        	controleur.getModele().addFormation(nom_f);
             // Creation du fichier 
         	fichier_planning.createNewFile();
             // creation d'un writer
@@ -46,19 +47,18 @@ public class Htmltest {
             try {
                 writer.write("<html><head>"
 			+ "<title>Planning</title>"
-<<<<<<< Updated upstream
-			+ "<link rel=stylesheet href=D:/test.css />"
-=======
 
 			+ "<link rel=stylesheet href=/Users/nounoursmoelleux/test.css/>"
 			+ "<h1><center>2014-2015</h1></center>"
 
->>>>>>> Stashed changes
+
 			+ "</head>"
 			+ "<body>"
 			+ "<center><table>"
-			+ "<caption><h1>"
-			+ controleur.getModele().addFormation()
+			+ "<caption><h1>" 
+			
+			 + controleur.getModele().getFormation().getNomFormation()
+			 
 			+ "</h1></caption>"
 			+ "</br></br></br></br></br></br>"
 			+ "<thead>"
@@ -197,23 +197,12 @@ public class Htmltest {
                 writer.close();
             }
         } catch (Exception e) {
-<<<<<<< Updated upstream
+
             System.out.println("Impossible de créer le fichier");
-=======
 
-            System.out.println("Impossible de creer le fichier");
-
->>>>>>> Stashed changes
         }
         
-        try{
-        Desktop d = Desktop.getDesktop();
-        d.browse(new URI("D:/test.html"));
-        }catch(URISyntaxException e){
-        	
-        }catch(IOException e){
-        	
-        }
+
     }
 
 }
