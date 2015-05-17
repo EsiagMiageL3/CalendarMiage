@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Formation implements Serializable {
 	
 	public String nom_f;
-	//public String anneeFormation;
+	public String anneeFormation;
 	public int duree;
 	public HashMap<String, Module> liste_Modules;
 	public HashMap<String, Semaine> lst_Semaines; /* Cle = Numero de la semaine */
@@ -22,10 +22,12 @@ public class Formation implements Serializable {
 		
 	}
 	
-	public Formation(String nom_f, int duree, ArrayList<Module> liste_modules){
+	public Formation(String nom_f, String annee){
 		this.nom_f = nom_f;
-		this.duree = duree;
-		//this.liste_modules = liste_modules;
+		this.anneeFormation = annee;
+		this.liste_Modules = new HashMap<String, Module>();
+		this.lst_Semaines =  new HashMap<String, Semaine>();
+		
 	}
 	
 	 	public String getNomFormation() {

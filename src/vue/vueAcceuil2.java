@@ -17,19 +17,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import controleur.controleurPlanning;
-import modele.Module;
-import modele.modelePlanning;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -38,11 +33,10 @@ import javax.swing.border.MatteBorder;
 import vue.vuePlanning;
 
 /**
- *
  * @author nounoursmoelleux
  */
 public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener, MouseListener {
-//
+
 	/* Tableau des couleurs disponnibles pour les modules */
 	private Color[] tblCouleurs = {
 		new Color(25, 25, 25), new Color(198, 61, 15), new Color(0, 90, 49), new Color(85, 140, 137), new Color(222, 27, 27), new Color(125, 25, 53), new Color(88, 88, 88), new Color(255, 240, 86), new Color(126, 143, 124),
@@ -69,8 +63,8 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	private JTextField txtFormation; /* Zone de texte permettant de saisir le nom de la formation */
 	private JButton btnSaveFormation; /* Bouton qui sauvegarde la formation */
 
+	@SuppressWarnings("rawtypes")
 	private JComboBox cbxAnneeFormation; /* Label juxtapose a la saisie du nom de la formation */
-	//private JTextField txtFormation; /* Zone de texte permettant de saisir le nom de la formation */
 	
 	private JPanel zoneModules; /* Panel englobant les composants relatifs aux modules */
 
@@ -95,34 +89,33 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	
 	private JButton btnSaveModule; /* Permet d'enregistrer le module */
 
-	/*
-	 * Constructeur
-	 * Prend un controleur en parametre
+	/**
+	 * Contructeur
+	 * @param controleur
 	 */
 	public vueAcceuil2(controleurPlanning controleur) {
 
-		this.controleur = controleur; /* Permet d'enregistrer le module */
+		this.controleur = controleur; /* Affectation du parametre a notre instance de controleur */
 
 		initComponents(); /* Creation des composants de la fenetre */
 
 		this.setVisible(true); /* Affichage de la fenetre */
 
-	    this.txtModule.addMouseListener(this); /* Ajout du Listener de focus a la zone de saisie du nom de module */
-	    this.txtModule.addFocusListener(this);
+	    this.txtModule.addMouseListener(this); /* Pretty obvious */
+	    this.txtModule.addFocusListener(this); /* Pretty obvious */
+	   
 	}
 
 	@Override
 	public void focusLost(FocusEvent e) {
-
 		
 	}
 	
 	@Override
 	public void focusGained(FocusEvent e){
-		
-		//validate();
-		//repaint();
-		
+		this.scrollColors.setVisible( false );
+		this.btnSaveModule.setVisible( true );
+		repaint();
 	}
 	
 	@Override
@@ -139,22 +132,28 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		if (evt.getSource() == this.btnSaveFormation) {
 			
 			/* Cas ou le nom de la formation est incorrect */
-			if( !this.controleur.nouvelleFormation(this.txtFormation) ){
+			if( !this.controleur.nouvelleFormation(this.txtFormation, (String) this.cbxAnneeFormation.getSelectedItem() ) ){
 
 				this.txtFormation.setBorder(new MatteBorder(1, 1, 1, 1, Color.RED));
 				this.txtFormation.setOpaque(true);
 				
+			}else{
+				
+				/* On active les champs de saisies */
+				this.enableSaisies();
+				/* Le bouton permet desormais de modifier le nom de la formation et non d'en creer une nouvelle */
+				this.btnSaveFormation.setText("Modifier"); 
+
 			}
 			
-			this.btnSaveFormation.setText("Modifier"); /* Le bouton permet desormais de modifier le nom de la formation et non d'en crŽer une nouvelle */
-			this.btnSaveModule.setEnabled(true); /* On 	active le bouton permettant d'enregistrer les modules */
-			
+
 		} else if (evt.getSource() == this.btnOpenPlanning) {
 			
 			try {
 				this.controleur.openPlanning(); /* Ouverture de l'explorateur de fichier et ouverture du fichier de planning */
 				
-				this.initSaisie(); /* Remet a zero les anciennes saisies de la fenetre */
+				this.initSaisie( true ); /* Remet a zero les anciennes saisies de la fenetre */
+				this.enableSaisies();
 				this.txtFormation.setText(this.controleur.getModele().getFormation().nom_f); /* Renseigne le nom de la formation extraite du fichier ouvert */
 				repaint();
 				this.lblPath.setText( this.controleur.getChemin() ); /* Renseigne le chemin du fichier ouvert, ˆ droite du bouton d'ouverture de fichier */
@@ -165,7 +164,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 				while (it.hasNext()) {
 					final Map.Entry pair = (Map.Entry) it.next();
 
-					JLabel module = new JLabel("BOUH!", JLabel.CENTER);
+					JLabel module = new JLabel("...", JLabel.CENTER);
 					JLabel supprModule = new JLabel("Supprimer", JLabel.CENTER);
 					module.addMouseListener(new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
@@ -234,11 +233,12 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 			System.exit(0);
 		} else if (evt.getSource() == this.btnSaveModule) {
 			
-			if( !this.txtModule.getText().trim().equals("") ){
+			if( !this.txtModule.getText().trim().equals("") && !this.txtAbrev.getText().trim().equals("") && !this.txtNbSeances.getText().trim().equals("") && this.couleur != null ){
 				
 				if( this.controleur.checkNomModule( this.txtModule.getText().trim() ) ){
 					this.nouveauModule();
-					this.txtModule.setText("");
+					this.btnLoadPlanning.setEnabled( true );
+					this.initSaisie( false );
 				}
 				else{
 					int reponse = JOptionPane.showConfirmDialog(null,"Ce nom de module exite deja.\n" + "Les donnees concernant ce module seront modifies.\n" + "Souhaitez-vous continuer ?", "Module existant", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -286,6 +286,10 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		return this.txtFormation.getText();
 	}
 
+	/**
+	 * Methode permettant de creer les composants de la fenetre
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes", "serial" })
 	private void initComponents() {
 
 		/* DŽfinition de la taille et de la position de la fenetre principale */
@@ -299,8 +303,10 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.btnSaveFormation = new JButton("Enregistrer");
 		this.btnOpenPlanning = new JButton("Ouvrir un fichier");
 		this.btnLoadPlanning = new JButton("Generer le planning");
+		this.btnLoadPlanning.setEnabled( false );
 		this.btnSaveModule = new JButton("Sauvegarder");
 		this.btnSavePlanning = new JButton("Enregistrer sur le disque");
+		this.btnSavePlanning.setEnabled( false );
 
 		this.lblPath = new JLabel("", JLabel.CENTER);
 		this.lblPath.setHorizontalAlignment(JLabel.LEFT);
@@ -317,7 +323,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		
 		/*
 		 * Instanciation du conteneur de la fenetre
-		 * RŽecriture de la mŽthode paint component afin d'y ajouter un dŽgradŽ de couleurs
+		 * Reecriture de la methode paint component afin d'y ajouter un dŽgradŽ de couleurs
 		 */
 		this.conteneur = new JPanel() {@Override
 			protected void paintComponent(Graphics g) {
@@ -430,7 +436,6 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.listeModules.setOpaque(false);
 		this.scrollModules.setViewportView(this.listeModules);
 		this.scrollModules.setOpaque(false);
-		this.scrollModules.setBackground(new Color(80, 80, 80));
 		this.scrollModules.getViewport().setOpaque(false);
 		this.scrollModules.setBorder(null);
 		conteneur.add(this.scrollModules);
@@ -442,6 +447,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 
 		this.txtModule.setBounds((int)(largeurConteneur * 0.27), (int)(hauteurConteneur * 0.46), (int)(largeurConteneur * 0.2), (int)(hauteurConteneur * 0.075));
 		this.txtModule.setOpaque(false);
+		this.txtModule.setEditable( false );
 		this.txtModule.setForeground(Color.BLACK);
 		this.txtModule.addFocusListener(this);
 		this.conteneur.add(this.txtModule);
@@ -453,6 +459,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 
 		this.txtAbrev.setBounds((int)(largeurConteneur * 0.27), (int)(hauteurConteneur * 0.55), (int)(largeurConteneur * 0.2), (int)(hauteurConteneur * 0.075));
 		this.txtAbrev.setOpaque(false);
+		this.txtAbrev.setEditable( false );
 		this.txtAbrev.setForeground(Color.BLACK);
 		this.txtAbrev.addFocusListener(this);
 		this.conteneur.add(this.txtAbrev);
@@ -540,6 +547,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.txtNbSeances.setHorizontalAlignment( JTextField.CENTER );
 		this.txtNbSeances.setBounds((int)(largeurConteneur * 0.27), (int)(hauteurConteneur * 0.73), (int)(hauteurConteneur * 0.075), (int)(hauteurConteneur * 0.075));
 		this.txtNbSeances.setOpaque(false);
+		this.txtNbSeances.setEditable( false );
 		this.txtNbSeances.setForeground(Color.BLACK);
 		this.txtNbSeances.addFocusListener(this);
 		this.conteneur.add(this.txtNbSeances);
@@ -659,12 +667,15 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		}
 	}
 
-	/*
-	 * Reinitialisation des saisie
+	/**
+	 * Reinitialisation des champs de saisies des modules
+	 * 
 	 */
-	public void initSaisie(){
-		this.listeModules.removeAll();
-		this.txtFormation.setText("");
+	public void initSaisie( boolean modules ){
+		if( modules ){
+			this.listeModules.removeAll();
+			this.txtFormation.setText("");
+		}
 		this.txtModule.setText("");
 		this.txtAbrev.setText("");
 		this.txtNbSeances.setText("");
@@ -672,7 +683,17 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		repaint();
 	}
 	
-	
+	/**
+	 * Activation des champs de saisies pour les modules
+	 * 
+	 */
+	public void enableSaisies(){
+		this.txtModule.setEditable( true );
+		this.txtAbrev.setEditable( true );
+		this.txtNbSeances.setEditable( true );
+		this.btnSaveModule.setEnabled( true );
+		this.btnSavePlanning.setEnabled( true );
+	}
 	
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
@@ -698,36 +719,47 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		
 	}
 
+	/**
+	 * Methode permettant d'initialiser le Jpanel contenant les couleurs a choisir pour le module
+	 * 
+	 */
+	public void initColorPane() {
 
-public void initColorPane(){
-	this.pnlCouleur.removeAll();
-	for (int i = 0; i < this.tblCouleurs.length; ++i) {
+		this.pnlCouleur.removeAll();
 
-		final Color couleurEnCour = tblCouleurs[i]; /* La couleur du Panel proposant la couleur prend la valeur du tableau de couleurs */
+		/* On parcourt le tableau contenant les couleurs que l'utilisateur pourra choisir */
+		for (int i = 0; i < this.tblCouleurs.length; ++i) {
 
-		JLabel lblChxCouleur = new JLabel() {@Override
-			protected void paintComponent(Graphics g) {
-				g.setColor(couleurEnCour);
-				g.fillOval(0, 0, (int)(hauteurConteneur * 0.069), (int)(hauteurConteneur * 0.069));
-			}
-		
-		};
-		lblChxCouleur.setPreferredSize( new Dimension((int)(hauteurConteneur * 0.070), (int)(hauteurConteneur * 0.070)));
-		
-		lblChxCouleur.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if( controleur.checkCouleurPrise(couleurEnCour) ){
-					
-					couleur = couleurEnCour;
-					repaint();
+			/* Recuperation de la couleur du tableau a l'indice courant */
+			final Color couleurEnCour = tblCouleurs[i];
+
+			/* Creation du Jlabel representang la couleur courante */
+			JLabel lblChxCouleur = new JLabel() {@Override
+				protected void paintComponent(Graphics g) {
+					g.setColor(couleurEnCour);
+					/* Permemt de le dessiner en tant qu'Oval  */
+					g.fillOval(0, 0, (int)(hauteurConteneur * 0.069), (int)(hauteurConteneur * 0.069));
 				}
 
-			}
-		});
-		
-		pnlCouleur.add(lblChxCouleur);
+			};
+			lblChxCouleur.setPreferredSize(new Dimension((int)(hauteurConteneur * 0.070), (int)(hauteurConteneur * 0.070)));
+
+			/* Au clic sur le Label, la variable couleur change de valeur, et le changement est rendu visuellement possible avec l'appel de repaint()  */
+			lblChxCouleur.addMouseListener(new MouseAdapter() {
+				public void mousePressed(MouseEvent e) {
+					if (controleur.checkCouleurPrise(couleurEnCour)) {
+
+						couleur = couleurEnCour;
+						repaint();
+					}
+
+				}
+			});
+
+			/* On ajoute le label au panel contenant les couleurs */
+			pnlCouleur.add(lblChxCouleur);
+		}
 	}
-}
 
 
 
