@@ -38,33 +38,26 @@ public class Htmltest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-
-		modelePlanning modele = new modelePlanning(); 
-		controleurPlanning controleur = new controleurPlanning(modele );
-
 		final String nom_f = "F1";
 		final String annee_f = "2015";
 		final String key = "Module1";
 		final String abr = "M1";
 		
-		final String chemin_planning = "C:/Users/Jordan/Downloads/test.html";
+		final String chemin_planning = "D:/test.html";
 	    final File fichier_planning =new File(chemin_planning); 
         try {
-<<<<<<< HEAD
+
 
         	controleur.getModele().addFormation("ESIAG Master", "2014");
         	controleur.getModele().addModule(key, "M1", Color.red, 5);
         	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
 
 
-=======
->>>>>>> origin/master
 
-        	controleur.getModele().addFormation(nom_f, annee_f);
-        	controleur.getModele().addModule(key, abr, Color.red, 5);
-        	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
+        	//controleur.getModele().addFormation(nom_f, annee_f);
+        	//controleur.getModele().addModule(key, abr, Color.red, 5);
+        	//controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
 
-<<<<<<< HEAD
 		
 
 	   
@@ -73,8 +66,6 @@ public class Htmltest {
         	controleur.getModele().addFormation(nom_f, "2014");
 
 
-=======
->>>>>>> origin/master
             // Creation du fichier 
         	fichier_planning.createNewFile();
             // creation d'un writer
@@ -88,9 +79,9 @@ public class Htmltest {
 			+ "<center><table>"
 			+ "<caption><h1>" 
 			
-			 + controleur.getModele().getFormation().getNomFormation()
+			// + controleur.getModele().getFormation().getNomFormation()
 			 + " 2014-2015 "
-			 + controleur.getModele().getFormation().getDuree()
+			// + controleur.getModele().getFormation().getDuree()
 			 
 			+ "</h1></caption>"
 			+ "</br></br></br></br></br></br>"
@@ -106,12 +97,12 @@ public class Htmltest {
 			+ "</tr>"
 			+ "<tr>"
 				+ "<th>9h00</th>"
-				+ "<td bgcolor="+controleur.getModele().getFormation().getModules().get(key).getCouleur() +">"
-				+ controleur.getModele().getFormation().getModules().get(key).getAbreviation()
-				+ " "
-				+ controleur.getModele().getFormation().getModules().get(key).getQuotas()
-				+ controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().get("9").getRangSeance()
-				+ "</td>"
+				//+ "<td bgcolor="+controleur.getModele().getFormation().getModules().get(key).getCouleur() +">"
+				//+ controleur.getModele().getFormation().getModules().get(key).getAbreviation()
+			//	+ " "
+				//+ controleur.getModele().getFormation().getModules().get(key).getQuotas()
+				//+ controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().get("9").getRangSeance()
+				//+ "</td>"
 				+ "<td></td>"
 				+ "<td></td>"
 				+ "<td></td>"
@@ -229,10 +220,9 @@ public class Htmltest {
                 writer.close();
             }
         } catch (Exception e) {
-            System.out.println("Impossible de créer le fichier");
+            System.out.println(e);
         }
-        
-<<<<<<< HEAD
+
 
         try{
         Desktop d = Desktop.getDesktop();
@@ -258,10 +248,10 @@ public class Htmltest {
         
         
 }
-=======
+
         try{
             Desktop d = Desktop.getDesktop();
-            d.browse(new URI("C:/Users/Jordan/Downloads/test.html"));
+            d.browse(new URI("D:/test.html"));
             }catch(URISyntaxException e){
             	
             }catch(IOException e){
@@ -269,5 +259,5 @@ public class Htmltest {
             }
     }
 
->>>>>>> origin/master
+
 }
