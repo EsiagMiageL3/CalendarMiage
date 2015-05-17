@@ -186,7 +186,7 @@ public class vuePlanning extends JFrame {
 
 			}
 		});
-
+//
 		Date vraiDateduJour;
 		SimpleDateFormat format1 = new SimpleDateFormat("dd_MM_yyyy");
 
