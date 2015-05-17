@@ -50,11 +50,8 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	};
 
 	private Color couleur; /* Couleur du cercle permettant de choisir la couleur du module */
-	private modelePlanning modele;
 
 	private controleurPlanning controleur; /* Controleur de la vue */
-	private vuePlanning planning;
-	private ArrayList < Module > lstModules;
 	private int largeurConteneur, hauteurConteneur; /* Variables contenant la hauteur et largeur de la fenetre */
 
 	private JPanel conteneur; /* Conteneur de la JFrame, deviendra son ContentPane */
@@ -72,6 +69,9 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 	private JTextField txtFormation; /* Zone de texte permettant de saisir le nom de la formation */
 	private JButton btnSaveFormation; /* Bouton qui sauvegarde la formation */
 
+	private JComboBox cbxAnneeFormation; /* Label juxtapose a la saisie du nom de la formation */
+	//private JTextField txtFormation; /* Zone de texte permettant de saisir le nom de la formation */
+	
 	private JPanel zoneModules; /* Panel englobant les composants relatifs aux modules */
 
 	private JLabel lblModule; /* Label juxtapose a la saisie du nom du module */
@@ -245,7 +245,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 					
 					if( reponse == JOptionPane.YES_NO_OPTION){
 						this.controleur.nouveauModule( this.txtModule.getText(), this.txtAbrev.getText(), couleur, Integer.parseInt(this.txtNbSeances.getText()) );
-						JOptionPane.showMessageDialog(null, "Modifications enregistrŽs.");
+						JOptionPane.showMessageDialog(null, "Modifications enregistres.");
 					}
 					
 				}
@@ -261,12 +261,13 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		} else if (evt.getSource() == this.btnSavePlanning) {
 			try {
 				this.controleur.savePlanning();
-				JOptionPane.showMessageDialog(null, "Modification enregistrŽes sur le disque youpi !");
+				JOptionPane.showMessageDialog(null, "Modification enregistrees sur le disque youpi !");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
-			this.planning = new vuePlanning(this.modele, this.controleur);
+			JOptionPane.showMessageDialog(null, (String) this.cbxAnneeFormation.getSelectedItem());
+			new vuePlanning(this.controleur, Integer.parseInt( (String) this.cbxAnneeFormation.getSelectedItem() ) );
 		}
 
 	}
@@ -312,6 +313,8 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.lblModule = new JLabel("Nom du module", JLabel.CENTER);
 		this.lblTitre = new JLabel("Bienvenue sur votre outil de gestion de planning", JLabel.CENTER);
 
+
+		
 		/*
 		 * Instanciation du conteneur de la fenetre
 		 * RŽecriture de la mŽthode paint component afin d'y ajouter un dŽgradŽ de couleurs
@@ -339,6 +342,7 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		largeurConteneur = this.conteneur.getWidth(); /* Affection de la largeur du conteneur a la variable */
 		hauteurConteneur = this.conteneur.getHeight(); /* Affection de la hauteur du conteneur a la variable */
 
+		
 
 		/*
 		 * Instanciation du Panel de selection de la couleur du module
@@ -399,6 +403,19 @@ public class vueAcceuil2 extends JFrame implements ActionListener, FocusListener
 		this.txtFormation.setForeground(Color.BLACK);
 		this.conteneur.add(this.txtFormation);
 
+		
+		this.cbxAnneeFormation = new JComboBox();
+		this.cbxAnneeFormation.insertItemAt("", 0);
+		this.cbxAnneeFormation.insertItemAt("2014", 1);
+		this.cbxAnneeFormation.insertItemAt("2015", 1);
+		this.cbxAnneeFormation.insertItemAt("2016", 1);
+		this.cbxAnneeFormation.insertItemAt("2017", 1);
+		this.cbxAnneeFormation.insertItemAt("2018", 1);
+		this.cbxAnneeFormation.insertItemAt("2019", 1);
+		this.cbxAnneeFormation.insertItemAt("2020", 1);
+		this.cbxAnneeFormation.setBounds((int)(largeurConteneur * 0.32), (int)(hauteurConteneur * 0.4), (int)(largeurConteneur * 0.2), (int)(hauteurConteneur * 0.075));
+		this.conteneur.add(this.cbxAnneeFormation);
+		
 		this.zoneModules.setBounds((int)(largeurConteneur * 0.1), (int)(hauteurConteneur * 0.45), (int)(largeurConteneur * 0.8), (int)(hauteurConteneur * 0.4));
 		this.zoneModules.setOpaque(false);
 		this.zoneModules.setBorder(new LineBorder(new Color(255, 255, 255), 1, true));
