@@ -27,7 +27,7 @@ public class Htmltest {
 
 		modelePlanning modele = new modelePlanning(); 
 		controleurPlanning controleur = new controleurPlanning(modele );
-<<<<<<< HEAD
+
 		final String nom_f = "F1";
 		final String key = "Module1";
 		final String abr = "M1";
@@ -38,7 +38,7 @@ public class Htmltest {
         	controleur.getModele().addFormation(nom_f);
         	controleur.getModele().addModule(key, abr, Color.red, 5);
         	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
-=======
+
 		final String nom_f = "Master MIAGE";
 		
 		//final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
@@ -48,7 +48,7 @@ public class Htmltest {
 	    final File fichier_planning =new File(chemin_planning); 
         try {
         	controleur.getModele().addFormation(nom_f, "2014");
->>>>>>> origin/master
+
             // Creation du fichier 
         	fichier_planning.createNewFile();
             // creation d'un writer
@@ -57,9 +57,9 @@ public class Htmltest {
                 writer.write("<html><head>"
 			+ "<title>Planning</title>"
 
-<<<<<<< HEAD
+
 			+ "<link rel=stylesheet href=D:/test.css>"
-=======
+
 
 			+ "<link rel=stylesheet href=/Users/nounoursmoelleux/test.css/>"
 
@@ -67,7 +67,7 @@ public class Htmltest {
 
 			+ "<h1><center>2014-2015</h1></center>"
 
->>>>>>> origin/master
+
 
 			+ "</head>"
 			+ "<body>"
@@ -221,7 +221,7 @@ public class Htmltest {
 
         }
         
-<<<<<<< HEAD
+
         try{
             Desktop d = Desktop.getDesktop();
             d.browse(new URI("D:/test.html"));
@@ -230,7 +230,7 @@ public class Htmltest {
             }catch(IOException e){
             	
             }
-=======
+
 
 
 
@@ -243,7 +243,7 @@ public class Htmltest {
         	
         }
 
->>>>>>> origin/master
+
     }
 
 }
