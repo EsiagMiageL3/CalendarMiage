@@ -26,20 +26,14 @@ public class Htmltest {
 	
 	public Htmltest( controleurPlanning controleur ){
 		this.controleur = controleur;
-<<<<<<< HEAD
+
 		this.creerHTML();
 	}
 
+
+
+
 	public void creerHTML() {
-=======
-		creerhtml();
-	}
-
-
-
-	public void creerhtml() {
-		
->>>>>>> origin/master
 		
 		final String nom_f = "F1";
 		final String annee_f = "2015";
@@ -48,17 +42,13 @@ public class Htmltest {
 		
 		final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
 	    final File fichier_planning =new File(chemin_planning); 
-<<<<<<< HEAD
 
-        try {
         	
-=======
+
         try {
        	
-        	controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().put("9", new Seance());
 
             // Creation du fichier 
->>>>>>> origin/master
         	fichier_planning.createNewFile();
             // creation d'un writer
             final FileWriter writer = new FileWriter(fichier_planning);
@@ -73,7 +63,7 @@ public class Htmltest {
 			
 			 + controleur.getModele().getFormation().getNomFormation()
 			 + " 2014-2015 "
-			+ controleur.getModele().getFormation().getDuree()
+			//+ controleur.getModele().getFormation().getDuree()
 			 
 			+ "</h1></caption>"
 			+ "</br></br></br></br></br></br>"
@@ -89,7 +79,8 @@ public class Htmltest {
 			+ "</tr>"
 			+ "<tr>"
 				+ "<th>9h00</th>"
-				+ "<td bgcolor="+controleur.getModele().getFormation().getModules().get(key).getCouleur() +">"
+				+ "<td bgcolor= >"
+				
 				+ controleur.getModele().getFormation().getModules().get(key).getAbreviation()
 				+ " "
 				+ controleur.getModele().getFormation().getModules().get(key).getQuotas()
@@ -214,26 +205,7 @@ public class Htmltest {
         } catch (Exception e) {
             System.out.println(e);
         }
-<<<<<<< HEAD
 
-
-
-        
-        
-
-
-
-=======
-        
-        try{
-            Desktop d = Desktop.getDesktop();
-            d.browse(new URI("D:/test.html"));
-            }catch(URISyntaxException e){
-            	
-            }catch(IOException e){
-            	
-            }
->>>>>>> origin/master
     }
 
 }

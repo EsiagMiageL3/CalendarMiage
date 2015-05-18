@@ -19,8 +19,6 @@ public class MainTest {
 		vueAcceuil acc2 = new vueAcceuil(controleur);
 		
 		
-		
-		
 	}
 }
 
