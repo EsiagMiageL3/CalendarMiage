@@ -11,10 +11,13 @@ import javax.swing.*;
 import org.joda.time.DateTime;
 import org.joda.time.Weeks;
 
+import sun.font.TrueTypeFont;
 import controleur.controleurPlanning;
 import modele.Semaine;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.*;
@@ -23,6 +26,8 @@ public class vuePlanning extends JFrame {
 	
 	/* Represente lannee du planning */
 	private int annee;
+	
+	private boolean agrandit = false;
 	/* Variables contenant la hauteur et largeur de la fenetre */
 	private int largeurConteneur, hauteurConteneur; 
 	/* Instance de notre controleur */
@@ -49,13 +54,20 @@ public class vuePlanning extends JFrame {
 	public vuePlanning( controleurPlanning Controleur, int annee) {
 		
 		/* Creation des composant de la fenetre */
-		initComponents( annee );
+		try {
+			initComponents( annee );
+		} catch (FontFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		this.annee = annee;
 		this.Controleur = Controleur;
 		
 		/* Creation de toutes les semaines de lannee et de leurs jours */
+		if( this.Controleur.getModele().getFormation().getSemaine(1) == null ){
 		this.createWeeks( annee );
+		}
 		
 		/* Affichage de notre fenetre */
 		this.setVisible(true);
@@ -64,19 +76,17 @@ public class vuePlanning extends JFrame {
 	/**
 	 * Creation des different composant de la fenetre
 	 * Prend en parametre lannee de debut de la formation pour pouvoir creer dynamiquement les jours
+	 * @throws IOException 
+	 * @throws FontFormatException 
 	 *
 	 */
-<<<<<<< HEAD
-	private void initComponents(int annee) {
-		/* Definition de la taille de la fenetre (egale a celle de l'ecran en l'occurence) */
-=======
 
-	private void initComponents(int annee) {
+
+	private void initComponents(int annee) throws FontFormatException, IOException {
 
 
 
 		/* Definition de la taille de la fenetre (egale a celle de lecran en loccurence) */
->>>>>>> origin/master
 		this.setSize(getLargeurEcran(), getHauteurEcran());
 
 		/* Creation du panel destine a devenir le futur ContentPane de notre fenetre */
@@ -134,18 +144,26 @@ public class vuePlanning extends JFrame {
 		/* On ajoute le JScrollPane au ContentPane */
 		this.conteneur.add( this.Jscroll );
 		        
-		JLabel settings = new JLabel( "\u2699", JLabel.CENTER);
+		JLabel settings = new JLabel( "\uD83D\uDEE0", JLabel.CENTER);
 
 		settings.setOpaque(false);
 		settings.setForeground(Color.WHITE);
 		settings.setBounds((int)(largeurConteneur * 0.92), (int)(hauteurConteneur * 0.45), (int)(hauteurConteneur * 0.1), (int)(hauteurConteneur * 0.1));
 
-		settings.setFont(new Font("Arial", Font.PLAIN, 42));
+		//
 		settings.setHorizontalAlignment(JLabel.CENTER);
-
+		
+        Font fontRaw = Font.createFont(Font.TRUETYPE_FONT, new File("Police/Symbola.ttf"));
+        Font fontBase = fontRaw.deriveFont(40f);
+        settings.setFont(fontBase);
+        // Font font = new Font(fontBase);
+        
+		//InputStream in = vuePlanning.class.getResourceAsStream("Police/Symbola.ttf");
+		//Font font = Font.createFont(Font.TRUETYPE_FONT, in);
+		
 		this.conteneur.add(settings);
-
-		final JPanel sideBar = new JPanel(new GridLayout(10, 1, 20, 0));
+		
+		final JPanel sideBar = new JPanel(new GridLayout(5, 1, 20, 0));
 		sideBar.setOpaque(true);
 		sideBar.setBounds((int)(largeurConteneur + 1), 0, (int)(largeurConteneur * 0.15), (int)(hauteurConteneur));
 		sideBar.setBackground(new Color(80, 80, 80));
@@ -153,49 +171,71 @@ public class vuePlanning extends JFrame {
 		JLabel iconYear = new JLabel("\uD83D\uDCC5", JLabel.CENTER);
 		iconYear.setVisible(true);
 		iconYear.setOpaque(false);
-		iconYear.setFont(new Font("Symbola", Font.PLAIN, 35));
+		iconYear.setForeground( Color.WHITE );
+		iconYear.setFont(fontBase);
 
 		JLabel iconSave = new JLabel("\uD83D\uDCBE", JLabel.CENTER);
 		iconSave.setVisible(true);
+		iconSave.setForeground( Color.WHITE );
 		iconSave.setOpaque(false);
-		iconSave.setFont(new Font("Arial", Font.PLAIN, 35));
-
+		iconSave.setFont(fontBase);
+		iconSave.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				try {
+					Controleur.savePlanning();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
+		
 		JLabel iconQuit = new JLabel("\u274C", JLabel.CENTER);
 		iconQuit.setVisible(true);
+		iconQuit.setForeground( Color.WHITE );
 		iconQuit.setOpaque(false);
-		iconQuit.setFont(new Font("Arial", Font.PLAIN, 35));
+		iconQuit.setFont(fontBase);
 
-
+		sideBar.add(new JLabel("..."));
 		sideBar.add(iconYear);
 		sideBar.add(iconSave);
 		sideBar.add(iconQuit);
-
+		sideBar.add(new JLabel("..."));
 		this.conteneur.add(sideBar);
-
+		
 		settings.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
+				( (JLabel) e.getSource() ).setVisible( false);
 				TimerTask task = new TimerTask() {
 
 					int i = 0;
 					int positionDepart = sideBar.getX();
+					int positionDepart2 = Jscroll.getX();
+					int positionDepartY = Jscroll.getY();
 					int destination = largeurConteneur - sideBar.getWidth();
 
 					public void run() {
 						if (sideBar.getX() > destination) {
 							i += 1;
 							sideBar.setLocation((positionDepart) - i, 0);
+						    
 						} else {
 							repaint();
 							validate();
 							cancel();
 						}
+						
+						Jscroll.setLocation( positionDepart2 - sideBar.getWidth(), positionDepartY);
+				
+						
+						
 					}
-
+					
 				};
-
+				
 				Timer timer = new Timer();
-				timer.scheduleAtFixedRate(task, 0, 2);
-
+				timer.scheduleAtFixedRate(task, 0, 4);
 			}
 		});
 //

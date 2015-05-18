@@ -1,5 +1,6 @@
 package modele;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -9,7 +10,7 @@ import java.util.Hashtable;
 
 import javax.swing.JOptionPane;
 
-public class Semaine {
+public class Semaine implements Serializable{
 	
 	private String annee;
 	private int numeroSemaine;

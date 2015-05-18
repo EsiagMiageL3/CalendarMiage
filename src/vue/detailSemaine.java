@@ -91,7 +91,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		this.conteneur.setSize(this.getSize()); /* Taille du conteneur egale  celle de la fenetre */
 		this.setLayout(null);
 		this.add(this.conteneur);
-		//this.setContentPane(this.conteneur); /* Le conteneur devient le ContentPane de la fenetre principale */
+		
 		largeurConteneur = this.conteneur.getWidth(); /* Affection de la largeur du conteneur a la variable */
 		hauteurConteneur = this.conteneur.getHeight(); /* Affection de la hauteur du conteneur a la variable */
 		

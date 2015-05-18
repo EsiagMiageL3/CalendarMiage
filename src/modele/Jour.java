@@ -1,13 +1,14 @@
 package modele;
 
 import java.awt.RenderingHints;
+import java.io.Serializable;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Hashtable;
 
 import javax.swing.JOptionPane;
 
-public class Jour {
+public class Jour implements Serializable {
 	private String dateJour, nomJour, numJour, nomMois;
 	private int numSemaine;
 	

@@ -148,6 +148,7 @@ public class vueAcceuil extends JFrame implements ActionListener, FocusListener,
 		} else if (evt.getSource() == this.btnOpenPlanning) {
 			
 			try {
+				this.btnLoadPlanning.setEnabled( true);
 				this.controleur.openPlanning(); /* Ouverture de l'explorateur de fichier et ouverture du fichier de planning */
 				
 				this.initSaisie( true ); /* Remet a zero les anciennes saisies de la fenetre */
