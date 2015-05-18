@@ -79,7 +79,11 @@ public class Htmltest {
 			+ "</tr>"
 			+ "<tr>"
 				+ "<th>9h00</th>"
+<<<<<<< HEAD
 				+ "<td bgcolor= >"
+=======
+				+ "<td bgcolor="+controleur.getModele().getFormation().getModules().get(key).getCouleur() +">"
+>>>>>>> origin/master
 				
 				+ controleur.getModele().getFormation().getModules().get(key).getAbreviation()
 				+ " "
