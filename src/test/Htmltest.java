@@ -40,7 +40,7 @@ public class Htmltest {
 		final String key = "Module1";
 		final String abr = "M1";
 		
-		final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
+		final String chemin_planning = "/Users/cyriellemintombou/Downloads/test.html";
 	    final File fichier_planning =new File(chemin_planning); 
 	    
         try {
@@ -51,14 +51,14 @@ public class Htmltest {
             try {
                 writer.write("<html><head>"
 			+ "<title>Planning</title>"
-			+ "<link rel=stylesheet href = /Users/nounoursmoelleux/test.css>"
+			+ "<link rel=stylesheet href = /Users/cyriellemintombou/Downloads/test.css>"
 			+ "</head>"
 			+ "<body>"
 			+ "<center><table>"
 			+ "<caption><h1>" 
 			
-			 + controleur.getModele().getFormation().getNomFormation()
-			 + " 2014-2015 "
+			 + controleur.getModele().getFormation().getNomFormation() +"  "
+			 + controleur.getModele().getFormation().getAnneeFormation() +"-"+ (Integer.parseInt(controleur.getModele().getFormation().getAnneeFormation())+1)
 			 
 			+ "</h1></caption>"
 			+ "</br></br></br></br></br></br>"
