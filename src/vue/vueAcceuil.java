@@ -141,18 +141,21 @@ public class vueAcceuil extends JFrame implements ActionListener, FocusListener,
 				this.enableSaisies();
 				/* Le bouton permet desormais de modifier le nom de la formation et non d'en creer une nouvelle */
 				this.btnSaveFormation.setText("Modifier"); 
-
+				
 			}
 			
 
 		} else if (evt.getSource() == this.btnOpenPlanning) {
 			
 			try {
+				
 				this.btnLoadPlanning.setEnabled( true);
 				this.controleur.openPlanning(); /* Ouverture de l'explorateur de fichier et ouverture du fichier de planning */
 				
 				this.initSaisie( true ); /* Remet a zero les anciennes saisies de la fenetre */
 				this.enableSaisies();
+				this.cbxAnneeFormation.setSelectedItem( this.controleur.getModele().getFormation().getAnneeFormation() );
+				this.cbxAnneeFormation.setEnabled( false );
 				this.txtFormation.setText(this.controleur.getModele().getFormation().nom_f); /* Renseigne le nom de la formation extraite du fichier ouvert */
 				repaint();
 				this.lblPath.setText( this.controleur.getChemin() ); /* Renseigne le chemin du fichier ouvert,  droite du bouton d'ouverture de fichier */
@@ -265,7 +268,6 @@ public class vueAcceuil extends JFrame implements ActionListener, FocusListener,
 				e.printStackTrace();
 			}
 		} else {
-			JOptionPane.showMessageDialog(null, (String) this.cbxAnneeFormation.getSelectedItem());
 			new vuePlanning(this.controleur, Integer.parseInt( (String) this.cbxAnneeFormation.getSelectedItem() ) );
 		}
 

@@ -66,7 +66,7 @@ public class vuePlanning extends JFrame {
 		
 		/* Creation de toutes les semaines de lannee et de leurs jours */
 		if( this.Controleur.getModele().getFormation().getSemaine(1) == null ){
-		this.createWeeks( annee );
+			this.createWeeks( annee );
 		}
 		
 		/* Affichage de notre fenetre */
@@ -80,24 +80,13 @@ public class vuePlanning extends JFrame {
 	 * @throws FontFormatException 
 	 *
 	 */
-<<<<<<< HEAD
 
 
 	private void initComponents(int annee) throws FontFormatException, IOException {
-=======
-
-	private void initComponents(int annee) {
-		/* Definition de la taille de la fenetre (egale a celle de l'ecran en l'occurence) */
-
->>>>>>> origin/master
 
 
 
 		/* Definition de la taille de la fenetre (egale a celle de lecran en loccurence) */
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 		this.setSize(getLargeurEcran(), getHauteurEcran());
 
 		/* Creation du panel destine a devenir le futur ContentPane de notre fenetre */
@@ -155,7 +144,7 @@ public class vuePlanning extends JFrame {
 		/* On ajoute le JScrollPane au ContentPane */
 		this.conteneur.add( this.Jscroll );
 		        
-		JLabel settings = new JLabel( "\uD83D\uDEE0", JLabel.CENTER);
+		final JLabel settings = new JLabel( "\uD83D\uDEE0", JLabel.CENTER);
 
 		settings.setOpaque(false);
 		settings.setForeground(Color.WHITE);
@@ -174,7 +163,7 @@ public class vuePlanning extends JFrame {
 		
 		this.conteneur.add(settings);
 		
-		final JPanel sideBar = new JPanel(new GridLayout(5, 1, 20, 0));
+		final JPanel sideBar = new JPanel(new GridLayout(6, 1, 20, 0));
 		sideBar.setOpaque(true);
 		sideBar.setBounds((int)(largeurConteneur + 1), 0, (int)(largeurConteneur * 0.15), (int)(hauteurConteneur));
 		sideBar.setBackground(new Color(80, 80, 80));
@@ -189,6 +178,7 @@ public class vuePlanning extends JFrame {
 		iconSave.setVisible(true);
 		iconSave.setForeground( Color.WHITE );
 		iconSave.setOpaque(false);
+		iconSave.setToolTipText( "Enregistrer les modifications" );
 		iconSave.setFont(fontBase);
 		iconSave.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -200,18 +190,65 @@ public class vuePlanning extends JFrame {
 			}
 		});
 		
-		
-		
-		JLabel iconQuit = new JLabel("\u274C", JLabel.CENTER);
+		JLabel iconQuit = new JLabel("\uD83D\uDDD5", JLabel.CENTER);
 		iconQuit.setVisible(true);
+		iconQuit.setToolTipText( "Reduire la barre laterale" );
 		iconQuit.setForeground( Color.WHITE );
+		iconSave.setFont(fontBase);
 		iconQuit.setOpaque(false);
 		iconQuit.setFont(fontBase);
+		iconQuit.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
 
+				TimerTask task = new TimerTask() {
+					
+					int i = 0;
+					int positionDepart = sideBar.getX();
+					int positionDepart2 = Jscroll.getX();
+					int positionDepartY = Jscroll.getY();
+					int destination = largeurConteneur + 2;
+
+					public void run() {
+						if (sideBar.getX() < destination) {
+							i += 1;
+							sideBar.setLocation((positionDepart) + i, 0);
+						    
+						} else {
+							repaint();
+							validate();
+							cancel();
+						}
+						
+						Jscroll.setLocation( positionDepart2 + sideBar.getWidth(), positionDepartY);
+				
+					}
+
+				};
+				
+				Timer timer = new Timer();
+				timer.scheduleAtFixedRate(task, 0, 4);
+				settings.setVisible(true);
+			}
+		});
+
+		JLabel iconExit = new JLabel("\u274C", JLabel.CENTER);
+		iconExit.setVisible(true);
+		iconExit.setToolTipText( "Quitter le programme" );
+		iconExit.setForeground( Color.RED );
+		iconExit.setFont(fontBase);
+		iconExit.setOpaque(false);
+		iconExit.setFont(fontBase);
+		iconExit.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				System.exit(0);
+			}
+		});
+		
 		sideBar.add(new JLabel("..."));
 		sideBar.add(iconYear);
 		sideBar.add(iconSave);
 		sideBar.add(iconQuit);
+		sideBar.add(iconExit);
 		sideBar.add(new JLabel("..."));
 		this.conteneur.add(sideBar);
 		

@@ -192,6 +192,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		     				if( ( (JPanel) e.getSource() ).getComponentCount() != 0 ){
 		     					seanceExist( (JPanel) e.getSource() );
 		     				}
+		     				else{
 		     				
 		     				
 		     				vueChoixModuleSeance chx = new vueChoixModuleSeance(controleur);
@@ -259,6 +260,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		     				validate();
 		     				
 		     		 refreshSeances();
+		     			}
 		     			}
 					});
 					
@@ -462,6 +464,7 @@ public class detailSemaine extends JPanel implements ActionListener, FocusListen
 		 				JLabel moduleSuite = new JLabel( "", JLabel.CENTER );
 		 				moduleSuite.setText( Integer.toString( j ) );
 		 				moduleSuite.setBackground( nomSeance.getCouleurModule() );
+		 				moduleSuite.setForeground( nomSeance.getCouleurModule() );
 		 				moduleSuite.setOpaque(true);
 		 				
 		 				moduleSuite.setName( Integer.toString( nomSeance.getDureeSeance() ) );

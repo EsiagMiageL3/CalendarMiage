@@ -42,15 +42,11 @@ public class Htmltest {
 		
 		final String chemin_planning = "/Users/nounoursmoelleux/test.html/";
 	    final File fichier_planning =new File(chemin_planning); 
-
-        	
-
+	    
         try {
-       	
-
-            // Creation du fichier 
+            /* Creation du fichier */
         	fichier_planning.createNewFile();
-            // creation d'un writer
+            /* Creation d'un writer */
             final FileWriter writer = new FileWriter(fichier_planning);
             try {
                 writer.write("<html><head>"
@@ -63,7 +59,6 @@ public class Htmltest {
 			
 			 + controleur.getModele().getFormation().getNomFormation()
 			 + " 2014-2015 "
-			//+ controleur.getModele().getFormation().getDuree()
 			 
 			+ "</h1></caption>"
 			+ "</br></br></br></br></br></br>"
@@ -79,16 +74,10 @@ public class Htmltest {
 			+ "</tr>"
 			+ "<tr>"
 				+ "<th>9h00</th>"
-<<<<<<< HEAD
-				+ "<td bgcolor= >"
-=======
-				+ "<td bgcolor="+controleur.getModele().getFormation().getModules().get(key).getCouleur() +">"
->>>>>>> origin/master
-				
-				+ controleur.getModele().getFormation().getModules().get(key).getAbreviation()
+
+				+ "<td bgcolor=>"
+
 				+ " "
-				+ controleur.getModele().getFormation().getModules().get(key).getQuotas()
-				+ controleur.getModele().getFormation().getSemaine(34).getLstjours().get("lundi").getListeSeances().get("9").getRangSeance()
 				+ "</td>"
 				+ "<td></td>"
 				+ "<td></td>"

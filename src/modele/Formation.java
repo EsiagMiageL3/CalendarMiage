@@ -34,6 +34,11 @@ public class Formation implements Serializable {
 			return nom_f;
 		}
 	 	
+	 	public String getAnneeFormation() {
+			return this.anneeFormation;
+		}
+	 	
+	 	
 	 	public void addSemaine(String num, Semaine semaine) {
 			this.lst_Semaines.put(num, semaine);
 		} 	 	

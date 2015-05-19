@@ -61,7 +61,6 @@ public class controleurPlanning {
 			return false;
 		}
 		else{
-			JOptionPane.showMessageDialog(null, "OK");
 			return true;
 		}
 	}
